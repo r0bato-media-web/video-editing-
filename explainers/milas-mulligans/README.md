@@ -6,6 +6,7 @@ Two explainer styles, each in 9:16 (1080x1920) and 16:9 (1920x1080), 20 s at 30 
 
 - `Iso-*`: four isometric blocks rise in order, and a dot travels to the next block.
 - `WB-*`: one line drawing per scene, drawn stroke by stroke.
+- `End-*`: a 4.5 s end card for footage reels (the cap draws on, then the scholarship line, "We play for Arian." and the link). The 2025 throwback reel in `../../reels/milas-mulligans-2025` uses it.
 
 The brief, with its Avoid and Done-means lines, is in [`../../briefs/milas-mulligans.md`](../../briefs/milas-mulligans.md).
 
