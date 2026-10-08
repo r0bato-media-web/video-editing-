@@ -1,0 +1,16 @@
+{
+  "name": "milas-mulligans-explainer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Where your mulligan goes: isometric and whiteboard explainer inserts (internal test)",
+  "scripts": {
+    "render:all": "for c in Iso-9x16 Iso-16x9 WB-9x16 WB-16x9; do remotion render src/index.tsx $c out/$c.mp4 --codec=h264 --crf=18; done",
+    "still": "remotion still src/index.tsx"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.533",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.533"
+  }
+}
