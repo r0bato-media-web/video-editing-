@@ -1,4 +1,4 @@
-"""Reel 1 v6: 'Is a hot dog a sandwich?' (Mila's Mulligans 2025 throwback, internal test).
+"""Reel 1 v7: 'Is a hot dog a sandwich?' (Mila's Mulligans 2025 throwback, internal test).
 
 
 Usage: python build_reel1.py <m25_dir> <916|169>
@@ -10,24 +10,32 @@ RAW, TR, OUT = (os.path.join(M, d) for d in ('raw', 'transcripts', 'reel1'))
 W, H = (1080, 1920) if SHAPE == '916' else (1920, 1080)
 
 # clip, in, out, 9:16 centre x, zoom, video-out (freeze from here to `out`, sound keeps playing) or None, hook?
-# v6 (Rob, 8 Oct 2026): the first "Yes" was said off camera -> cut; no blurred frames anywhere;
-# every answer framed on the person whose mouth is moving on that word (checked frame by frame).
+# v7 (Rob, 8 Oct 2026: "still tracking horribly in the vertical"): only stretches where the camera holds still
+# (camera_speed.py under ~75 px/s); the hook is Ava's question from int_darryl, where the camera is steady and she faces it;
+# the navy-jacket answer is dropped (camera swings 140-500 px/s through it).
 CUTS = [
-    ('int_evan_darien', 8.72, 9.50, 1300, 1.0, None, True),          # Ava: is a hot dog
-    ('int_evan_darien', 9.50, 10.74, 1480, 1.0, None, True),         # Ava: a sandwich or not? (she drifts right)
+    ('int_darryl',      15.00, 17.85, 1360, 1.0, None, True),        # Ava: is a hot dog a sandwich or not? (steady, facing camera)
     ('int_ant',         16.96, 17.92, 780, 1.0, None, False),        # No. No. (navy shirt, mouth moving, mic on him)
     ('int_ant',         17.92, 18.40, 1060, 1.0, None, False),       # Yes. (floral shirt)
-    ('int_evan_darien', 11.34, 12.92, 1060, 1.0, 12.36, False),      # I would consider it | hold her last sharp frame: a sandwich.
-    ('int_evan_darien', 16.02, 18.02, 920, 1.0, None, False),        # disagree with that. I don't think so. (navy jacket; both in frame)
-    ('int_darryl',      35.30, 37.59, 860, 1.0, None, False),        # A hot dog in my book is
+    ('int_evan_darien', 11.34, 12.92, 1060, 1.0, 12.06, False),      # I would consider | hold her last still frame: it a sandwich.
+    ('int_darryl',      35.29, 37.59, 860, 1.0, None, False),        # A hot dog in my book is
     ('int_darryl',      37.59, 39.22, 820, 1.15, None, False),       # NOT a sandwich. It's a hot dog. (punch-in)
     ('int_hotdog',      43.60, 45.16, 820, 1.0, None, False),        # No, not a sandwich (trucker cap says all of it; friend in frame)
     ('int_hotdog',      56.64, 57.72, 660, 1.0, None, False),        # No, it's
     ('int_hotdog',      57.72, 58.68, 660, 1.15, None, False),       # DEFINITELY not a sandwich (punch-in)
     ('int_hotdog',      58.68, 58.95, 980, 1.0, None, False),        # No, (driver) -> freeze for FINAL
 ]
+# One vote per person, keyed to the word that casts it: (clip, word start, side)
+VOTES = [
+    ('int_ant', 17.08, 'N'), ('int_ant', 18.10, 'S'),
+    ('int_evan_darien', 12.50, 'S'),
+    ('int_darryl', 37.61, 'N'),
+    ('int_hotdog', 44.12, 'N'),
+    ('int_hotdog', 57.98, 'N'),
+    ('int_hotdog', 58.68, 'N'),
+]
 # Vertical crop centre (fraction of frame height) where the speaker sits low; default 0.42
-YFRAC = {('int_evan_darien', 16.02): 0.66}  # camera still settling, she's low in frame
+YFRAC = {}
 HOLD = 0.8  # freeze on the last frame under the FINAL tally
 # One vote per person, keyed to the word that casts it: (clip, word start, side)
 VOTES = [
@@ -104,6 +112,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             for wi, w in enumerate(ch):
                 st = seg['t0'] + max(w['s'], seg['in']) - seg['in']
                 en = seg['t0'] + min(ch[wi + 1]['s'] if wi + 1 < len(ch) else c_end, seg['out']) - seg['in']
+                en = min(en, seg['t0'] + seg['out'] - seg['in'] - 1 / 30)  # never spill into the next shot
                 if seg['hook']:
                     continue  # the hook carries the question
                 parts = [(r"{\c&HFFC39D&}" + x['w'].strip().upper() + r"{\c&HFFFFFF&}") if k == wi else x['w'].strip().upper()
@@ -114,13 +123,17 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
 def main():
     timeline, t = [], 0.0
+    prev = None
     for clip, a, b, cx, z, vout, hook in CUTS:
+        if prev and prev[0] == clip and abs(a - prev[1]) < 0.05:
+            a = prev[1]  # back-to-back cuts from one clip: start exactly where the last one ended (no repeated frame)
         b = a + round((b - a) * 30) / 30  # whole frames, so picture, captions and tally stay in sync
+        prev = (clip, b)
         timeline.append({'clip': clip, 'in': a, 'out': b, 'cx': cx, 'zoom': z, 'vout': vout, 'hook': hook, 't0': t,
                          'words': words_for(clip, a, b)})
         t += b - a
     total = t + HOLD
-    json.dump(timeline, open(os.path.join(OUT, 'timeline_v6.json'), 'w'), indent=1)
+    json.dump(timeline, open(os.path.join(OUT, 'timeline_v7.json'), 'w'), indent=1)
     inputs, fl = [], []
     for i, seg in enumerate(timeline):
         inputs += ['-ss', f"{seg['in']:.3f}", '-to', f"{seg['out']:.3f}", '-i', os.path.join(RAW, seg['clip'] + '.mp4')]
@@ -146,11 +159,11 @@ def main():
         fl.append(f"[{i}:a:0]aresample=48000,aformat=channel_layouts=stereo,atrim=end={d:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={d - 0.025:.3f}:d=0.025" + (f",apad=pad_dur={HOLD}" if i == len(timeline) - 1 else "") + f"[a{i}]")
     n = len(timeline)
     fl.append(''.join(f"[v{i}][a{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=1[vc][ac]")
-    ass = os.path.join(OUT, f'captions_v6_{SHAPE}.ass')
+    ass = os.path.join(OUT, f'captions_v7_{SHAPE}.ass')
     open(ass, 'w').write(build_ass(timeline, total))
     fl.append(f"[vc]subtitles={ass}[vo]")
     fl.append("[ac]loudnorm=I=-14:TP=-1.5:LRA=11[ao]")
-    out = os.path.join(OUT, f'body_v6_{SHAPE}.mp4')
+    out = os.path.join(OUT, f'body_v7_{SHAPE}.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y'] + inputs + ['-filter_complex', ';'.join(fl),
                     '-map', '[vo]', '-map', '[ao]', '-c:v', 'libx264', '-crf', '18', '-preset', 'medium',
                     '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', out], check=True)
