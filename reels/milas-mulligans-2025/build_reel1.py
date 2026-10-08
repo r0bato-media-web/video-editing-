@@ -1,4 +1,4 @@
-"""Reel 1 v13: 'Is a hot dog a sandwich?' Cuts, static crops, hook, scoreboard tally and captions for the body.
+"""Reel 1 v14: 'Is a hot dog a sandwich?' Cuts, static crops, hook, hot-dog scoreboard and captions for the body.
 
 Usage: python build_reel1.py <m25_dir> <916|169>
 """
@@ -104,31 +104,58 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     hook_end = sum(s['out'] - s['in'] for s in timeline if s['hook'])
     L = [f"Dialogue: 2,{ts(0)},{ts(hook_end)},Hook,,0,0,0,,{{\\fad(0,120)}}IS A HOT DOG\\N{{\\c{YEL}}}A SANDWICH?",
          f"Dialogue: 1,{ts(0.15)},{ts(hook_end)},Tag,,0,0,0,,{{\\fad(150,120)}}THROWBACK · MILA'S MULLIGANS 2025"]
-    # scoreboard: navy panel, two columns, the number that changes pops in yellow and settles to white
+    # scoreboard: a hot dog. Golden bun, the score on the sausage, a mustard squiggle down its length.
+    # The number that changes flashes mustard and settles to white; FINAL turns the winner mustard and dims the loser.
     last = timeline[-1]; mute = mute_for(last)
     final_t = last['t0'] + (mute - last['in']) if mute else total - HOLD
     events = sorted((src_to_out(timeline, c, t), side) for c, t, side in VOTES if src_to_out(timeline, c, t) is not None)
-    pw, ph = (round(760 * k), round(156 * k)); px, py = (W - pw) // 2, (225 if v else 36)
-    cxs, cxn = px + pw // 4, px + 3 * pw // 4
-    t_on = hook_end  # the board is up from the first answer's first frame, at 0-0
-    L.append(f"Dialogue: 3,{ts(t_on)},{ts(total)},Box,,0,0,0,,{{\\pos({px},{py})\\1c{NAVY}\\1a&H18&\\p1}}{rrect(pw, ph, round(26 * k))}")
-    L.append(f"Dialogue: 4,{ts(t_on)},{ts(total)},Box,,0,0,0,,{{\\pos({W // 2 - 1},{py + round(22 * k)})\\1c&HFFFFFF&\\1a&H90&\\shad0\\p1}}m 0 0 l 3 0 l 3 {ph - round(44 * k)} l 0 {ph - round(44 * k)}")
-    L.append(f"Dialogue: 4,{ts(t_on)},{ts(total)},Lbl,,0,0,0,,{{\\pos({cxs},{py + round(20 * k)})\\1a&H30&}}SANDWICH")
-    L.append(f"Dialogue: 4,{ts(t_on)},{ts(total)},Lbl,,0,0,0,,{{\\pos({cxn},{py + round(20 * k)})\\1a&H30&}}NOT A SANDWICH")
+    BUN, BUN_DK, BUN_HI = r"&H5FB3E9&", r"&H3A83C2&", r"&H8ED0F6&"      # #E9B35F, #C2833A, #F6D08E
+    DOG, DOG_HI, DOG_DK, BROWN = r"&H2C43B8&", r"&H5A70E0&", r"&H1A2370&", r"&H10346B&"  # #B8432C, #E0705A, #70231A, #6B3410
+    bw, bh, sw, sh = round(780 * k), round(190 * k), round(880 * k), round(100 * k)
+    py = 225 if v else 30
+    bx, sx, sy = (W - bw) // 2, (W - sw) // 2, py + round(48 * k)
+    cy = sy + sh // 2
+    cxs, cxn = W // 2 - round(sw * 0.24), W // 2 + round(sw * 0.24)
+    t_on = hook_end  # the hot dog is up from the first answer's first frame, at 0-0
+    box = lambda layer, x, y, tags, path, end=None: L.append(
+        f"Dialogue: {layer},{ts(t_on)},{ts(end or total)},Box,,0,0,0,,{{\\pos({x},{y}){tags}\\p1}}{path}")
+    box(3, bx, py + round(9 * k), rf"\1c{BUN_DK}\shad0", rrect(bw, bh, bh // 2))                       # bun underside
+    box(3, bx, py, rf"\1c{BUN}\shad{round(6 * k)}", rrect(bw, bh, bh // 2))                              # bun
+    box(3, bx + round(40 * k), py + round(12 * k), rf"\1c{BUN_HI}\1a&H40&\shad0", rrect(bw - round(80 * k), round(16 * k), round(8 * k)))
+    box(4, sx, sy, rf"\1c{DOG}\shad{round(3 * k)}", rrect(sw, sh, sh // 2))                              # sausage
+    box(4, sx + round(60 * k), sy + round(12 * k), rf"\1c{DOG_HI}\1a&H50&\shad0", rrect(sw - round(120 * k), round(14 * k), round(7 * k)))
+    import math
+    amp, per, x0, x1 = 16 * k, 64 * k, sx + 70 * k, sx + sw - 70 * k
+    pts = [(x0 + i * (x1 - x0) / 120, cy + amp * math.sin((x0 + i * (x1 - x0) / 120) / per * 2 * math.pi)) for i in range(121)]
+    gap = 78 * k  # the mustard breaks around each number so the score reads clean
+    segs, cur = [], []
+    for x, y in pts:
+        if min(abs(x - cxs), abs(x - cxn)) < gap:
+            if len(cur) > 1: segs.append(cur)
+            cur = []
+        else:
+            cur.append((x, y))
+    if len(cur) > 1: segs.append(cur)
+    sq = " ".join("m " + " l ".join(f"{x - sx:.1f} {y - sy:.1f}" for x, y in sg + sg[::-1]) for sg in segs)
+    box(5, sx, sy, rf"\1a&HFF&\3c{YEL}\bord{round(6 * k)}\shad0", sq)                                    # mustard
+    for cx, lbl in ((cxs, "SANDWICH"), (cxn, "NOT A SANDWICH")):
+        L.append(f"Dialogue: 6,{ts(t_on)},{ts(total)},Lbl,,0,0,0,,{{\\an8\\pos({cx},{py + round(13 * k)})\\1c{BROWN}\\fs{round(30 * k)}\\fsp3\\fnInter Display Black}}{lbl}")
+    num = lambda t0, t1, cx, tags, val: L.append(
+        f"Dialogue: 7,{ts(t0)},{ts(t1)},Num,,0,0,0,,{{\\an5\\pos({cx},{cy})\\3c{DOG_DK}\\bord{round(5 * k)}\\fs{round(96 * k)}{tags}}}{val}")
     s = n = 0
     for cx in (cxs, cxn):
-        L.append(f"Dialogue: 5,{ts(t_on)},{ts(events[0][0])},Num,,0,0,0,,{{\\pos({cx},{py + ph - round(6 * k)})}}0")
+        num(t_on, events[0][0], cx, "", 0)
     for i, (t, side) in enumerate(events):
         s += side == 'S'; n += side == 'N'
-        nxt = events[i + 1][0] if i + 1 < len(events) else total
-        bump = rf"\1c{YEL}\fscx150\fscy150\t(0,160,\fscx100\fscy100)\t(260,520,\1c&HFFFFFF&)"
+        nxt = events[i + 1][0] if i + 1 < len(events) else final_t
+        bump = rf"\1c{YEL}\fscx155\fscy155\frz-8\t(0,170,\fscx100\fscy100\frz0)\t(280,560,\1c&HFFFFFF&)"
         for cx, val, sd in ((cxs, s, 'S'), (cxn, n, 'N')):
-            L.append(f"Dialogue: 5,{ts(t)},{ts(nxt)},Num,,0,0,0,,{{\\pos({cx},{py + ph - round(6 * k)})" + (bump if side == sd else '') + f"}}{val}")
-    # FINAL: yellow tag under the board, the winning number turns yellow, the losing side dims
-    win_x = cxn if n >= s else cxs; lose_x = cxs if n >= s else cxn
-    L.append(f"Dialogue: 6,{ts(final_t)},{ts(total)},Final,,0,0,0,,{{\\pos({W // 2},{py + ph + round(22 * k)})\\fscx60\\fscy60\\t(0,140,\\fscx108\\fscy108)\\t(140,220,\\fscx100\\fscy100)}}FINAL")
-    L.append(f"Dialogue: 6,{ts(final_t)},{ts(total)},Num,,0,0,0,,{{\\pos({win_x},{py + ph - round(6 * k)})\\1c{YEL}\\t(0,140,\\fscx125\\fscy125)\\t(140,260,\\fscx100\\fscy100)}}{max(n, s)}")
-    L.append(f"Dialogue: 6,{ts(final_t)},{ts(total)},Box,,0,0,0,,{{\\pos({px if lose_x == cxs else W // 2 + 2},{py})\\1c{NAVY}\\1a&H50&\\shad0\\p1}}{rrect(pw // 2 - 2, ph, round(26 * k))}")
+            num(t, nxt, cx, bump if side == sd else "", val)
+    # FINAL: mustard tag under the bun, winner's number mustard, loser's number dimmed
+    win = (cxn, n) if n >= s else (cxs, s); lose = (cxs, s) if n >= s else (cxn, n)
+    L.append(f"Dialogue: 8,{ts(final_t)},{ts(total)},Final,,0,0,0,,{{\\pos({W // 2},{py + bh + round(22 * k)})\\fscx60\\fscy60\\t(0,140,\\fscx108\\fscy108)\\t(140,220,\\fscx100\\fscy100)}}FINAL")
+    num(final_t, total, win[0], rf"\1c{YEL}\t(0,140,\fscx130\fscy130)\t(140,260,\fscx100\fscy100)", win[1])
+    num(final_t, total, lose[0], r"\1a&H90&\3a&H90&", lose[1])
     # word-timed captions: whole phrases, up to four words / 15 letters, the spoken word in yellow, each new pair pops in
     for seg in timeline:
         m = mute_for(seg)
@@ -169,7 +196,7 @@ def main():
                          'words': words_for(clip, a, b)})
         t += b - a
     total = t + HOLD
-    json.dump(timeline, open(os.path.join(OUT, 'timeline_v13.json'), 'w'), indent=1)
+    json.dump(timeline, open(os.path.join(OUT, 'timeline_v14.json'), 'w'), indent=1)
     inputs, fl = [], []
     for i, seg in enumerate(timeline):
         inputs += ['-ss', f"{seg['in']:.3f}", '-to', f"{seg['out']:.3f}", '-i', os.path.join(RAW, seg['clip'] + '.mp4')]
@@ -195,11 +222,11 @@ def main():
         fl.append(f"[{i}:a:0]aresample=48000,aformat=channel_layouts=stereo,atrim=end={d:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={d - 0.025:.3f}:d=0.025" + (f",afade=t=out:st={mute_for(seg) - seg['in'] - 0.03:.3f}:d=0.04" if mute_for(seg) else "") + f"[a{i}]")
     n = len(timeline)
     fl.append(''.join(f"[v{i}][a{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=1[vc][ac]")
-    ass = os.path.join(OUT, f'captions_v13_{SHAPE}.ass')
+    ass = os.path.join(OUT, f'captions_v14_{SHAPE}.ass')
     open(ass, 'w').write(build_ass(timeline, total))
     fl.append(f"[vc]subtitles={ass}[vo]")
     fl.append("[ac]loudnorm=I=-14:TP=-1.5:LRA=11[ao]")
-    out = os.path.join(OUT, f'body_v13_{SHAPE}.mp4')
+    out = os.path.join(OUT, f'body_v14_{SHAPE}.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y'] + inputs + ['-filter_complex', ';'.join(fl),
                     '-map', '[vo]', '-map', '[ao]', '-c:v', 'libx264', '-crf', '18', '-preset', 'medium',
                     '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', out], check=True)
