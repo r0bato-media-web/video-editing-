@@ -1,6 +1,7 @@
-"""Reel 1 v14: 'Is a hot dog a sandwich?' Cuts, static crops, hook, hot-dog scoreboard and captions for the body.
+"""Reel 1 v15: 'Is a hot dog a sandwich?' punched up. v4 starts cut 4 on 'disagree' (Rob OK, 7 Oct 2026).
 
-Usage: python build_reel1.py <m25_dir> <916|169>
+
+Usage: python build_reel1_v2.py <m25_dir> <916|169>
 """
 import json, os, subprocess, sys
 
@@ -22,7 +23,7 @@ CUTS = [
     ('int_hotdog',      43.60, 45.16, 820, 1.0, None, False),        # No, not a sandwich (trucker cap says all of it; friend in frame)
     ('int_hotdog',      56.64, 57.16, 660, 1.0, None, False),        # No, (trucker cap; her mouth, mic on her)
     ('int_hotdog',      57.16, 57.72, 980, 1.0, None, False),        # it's (driver: mic moves to her, her mouth moves)
-    ('int_hotdog',      57.72, 59.70, 980, 1.15, None, False),       # DEFINITELY not a sandwich (driver punch-in), plays on live under FINAL, sound faded
+    ('int_hotdog',      57.72, 60.45, 980, 1.15, None, False),       # DEFINITELY not a sandwich (driver punch-in), plays on live under FINAL, sound faded
 ]
 MUTE = {('int_hotdog', 57.72): 58.95}  # fade after the driver's closing "No" (her mouth, her voice); the interviewer's "all right" (58.98) is never heard
 HOLD = 0.0
@@ -151,11 +152,20 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         bump = rf"\1c{YEL}\fscx155\fscy155\frz-8\t(0,170,\fscx100\fscy100\frz0)\t(280,560,\1c&HFFFFFF&)"
         for cx, val, sd in ((cxs, s, 'S'), (cxn, n, 'N')):
             num(t, nxt, cx, bump if side == sd else "", val)
-    # FINAL: mustard tag under the bun, winner's number mustard, loser's number dimmed
+    # FINAL (Rob, 8 Oct 2026: "the final should pop up at the end BEFORE the end card"): the picture dims and a big
+    # result card pops in the middle, one line after another, held on the driver's live shot until the dissolve.
+    # The hot dog stays up top with the winner's number in mustard and the loser's dimmed.
     win = (cxn, n) if n >= s else (cxs, s); lose = (cxs, s) if n >= s else (cxn, n)
-    L.append(f"Dialogue: 8,{ts(final_t)},{ts(total)},Final,,0,0,0,,{{\\pos({W // 2},{py + bh + round(22 * k)})\\fscx60\\fscy60\\t(0,140,\\fscx108\\fscy108)\\t(140,220,\\fscx100\\fscy100)}}FINAL")
     num(final_t, total, win[0], rf"\1c{YEL}\t(0,140,\fscx130\fscy130)\t(140,260,\fscx100\fscy100)", win[1])
     num(final_t, total, lose[0], r"\1a&H90&\3a&H90&", lose[1])
+    hc = round(H * 0.58)  # below the end card's cap, so the two never overlap in the dissolve
+    L.append(f"Dialogue: 9,{ts(final_t)},{ts(total)},Box,,0,0,0,,{{\\pos(0,0)\\1c&H000000&\\1a&H68&\\shad0\\fad(150,0)\\p1}}m 0 0 l {W} 0 l {W} {H} l 0 {H}")
+    def pop(delay):
+        return rf"\fscx0\fscy0\t({delay},{delay + 150},\fscx112\fscy112)\t({delay + 150},{delay + 250},\fscx100\fscy100)"
+    L.append(f"Dialogue: 10,{ts(final_t)},{ts(total)},Final,,0,0,0,,{{\\an5\\pos({W // 2},{hc - round(240 * k)})\\fs{round(104 * k)}{pop(0)}}}FINAL")
+    L.append(f"Dialogue: 10,{ts(final_t)},{ts(total)},Cap,,0,0,0,,{{\\an5\\pos({W // 2},{hc - round(60 * k)})\\fs{round(100 * k)}\\bord{round(8 * k)}{pop(120)}}}"
+             + ("NOT A SANDWICH" if n >= s else "SANDWICH"))
+    L.append(f"Dialogue: 10,{ts(final_t)},{ts(total)},Num,,0,0,0,,{{\\an5\\pos({W // 2},{hc + round(160 * k)})\\fs{round(250 * k)}\\1c{YEL}\\3c{DOG_DK}\\bord{round(12 * k)}\\shad{round(6 * k)}{pop(240)}}}{max(n, s)}–{min(n, s)}")
     # word-timed captions: whole phrases, up to four words / 15 letters, the spoken word in yellow, each new pair pops in
     for seg in timeline:
         m = mute_for(seg)
@@ -196,7 +206,7 @@ def main():
                          'words': words_for(clip, a, b)})
         t += b - a
     total = t + HOLD
-    json.dump(timeline, open(os.path.join(OUT, 'timeline_v14.json'), 'w'), indent=1)
+    json.dump(timeline, open(os.path.join(OUT, 'timeline_v15.json'), 'w'), indent=1)
     inputs, fl = [], []
     for i, seg in enumerate(timeline):
         inputs += ['-ss', f"{seg['in']:.3f}", '-to', f"{seg['out']:.3f}", '-i', os.path.join(RAW, seg['clip'] + '.mp4')]
@@ -222,11 +232,11 @@ def main():
         fl.append(f"[{i}:a:0]aresample=48000,aformat=channel_layouts=stereo,atrim=end={d:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={d - 0.025:.3f}:d=0.025" + (f",afade=t=out:st={mute_for(seg) - seg['in'] - 0.03:.3f}:d=0.04" if mute_for(seg) else "") + f"[a{i}]")
     n = len(timeline)
     fl.append(''.join(f"[v{i}][a{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=1[vc][ac]")
-    ass = os.path.join(OUT, f'captions_v14_{SHAPE}.ass')
+    ass = os.path.join(OUT, f'captions_v15_{SHAPE}.ass')
     open(ass, 'w').write(build_ass(timeline, total))
     fl.append(f"[vc]subtitles={ass}[vo]")
     fl.append("[ac]loudnorm=I=-14:TP=-1.5:LRA=11[ao]")
-    out = os.path.join(OUT, f'body_v14_{SHAPE}.mp4')
+    out = os.path.join(OUT, f'body_v15_{SHAPE}.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y'] + inputs + ['-filter_complex', ';'.join(fl),
                     '-map', '[vo]', '-map', '[ao]', '-c:v', 'libx264', '-crf', '18', '-preset', 'medium',
                     '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', out], check=True)
