@@ -1,4 +1,4 @@
-"""Reel 1 v15: 'Is a hot dog a sandwich?' punched up. v4 starts cut 4 on 'disagree' (Rob OK, 7 Oct 2026).
+"""Reel 1 v16: 'Is a hot dog a sandwich?' punched up. v4 starts cut 4 on 'disagree' (Rob OK, 7 Oct 2026).
 
 
 Usage: python build_reel1_v2.py <m25_dir> <916|169>
@@ -20,7 +20,8 @@ CUTS = [
     ('int_ant',         17.93, 18.40, 1390, 1.0, None, False),       # Yes. (white shirt, far right: his mouth on the word, a third voice)
     ('int_darryl',      35.29, 37.59, 860, 1.0, None, False),        # A hot dog in my book is
     ('int_darryl',      37.59, 39.22, 820, 1.15, None, False),       # NOT a sandwich. It's a hot dog. (punch-in)
-    ('int_hotdog',      43.60, 45.16, 820, 1.0, None, False),        # No, not a sandwich (trucker cap says all of it; friend in frame)
+    ('int_hotdog',      43.60, 44.06, 1000, 1.0, None, False),       # No, (black-cap friend: her voice, ~188 Hz)
+    ('int_hotdog',      44.06, 45.16, 760, 1.0, None, False),        # not a sandwich (trucker cap, first cart: a lower voice)
     ('int_hotdog',      56.64, 57.16, 660, 1.0, None, False),        # No, (trucker cap; her mouth, mic on her)
     ('int_hotdog',      57.16, 57.72, 980, 1.0, None, False),        # it's (driver: mic moves to her, her mouth moves)
     ('int_hotdog',      57.72, 60.45, 980, 1.15, None, False),       # DEFINITELY not a sandwich (driver punch-in), plays on live under FINAL, sound faded
@@ -41,6 +42,7 @@ VOTES = [
     ('int_ant', 17.60, 'N'),   # floral shirt
     ('int_ant', 18.10, 'S'),   # white shirt (four golfers, four answers: "split answers")
     ('int_darryl', 37.61, 'N'),
+    ('int_hotdog', 43.64, 'N'),   # black-cap friend, first cart
     ('int_hotdog', 44.12, 'N'),   # trucker cap, first cart
     ('int_hotdog', 56.68, 'N'),   # trucker cap, second cart: "No,"
     ('int_hotdog', 57.98, 'N'),   # driver: "definitely NOT a sandwich"
@@ -206,7 +208,7 @@ def main():
                          'words': words_for(clip, a, b)})
         t += b - a
     total = t + HOLD
-    json.dump(timeline, open(os.path.join(OUT, 'timeline_v15.json'), 'w'), indent=1)
+    json.dump(timeline, open(os.path.join(OUT, 'timeline_v16.json'), 'w'), indent=1)
     inputs, fl = [], []
     for i, seg in enumerate(timeline):
         inputs += ['-ss', f"{seg['in']:.3f}", '-to', f"{seg['out']:.3f}", '-i', os.path.join(RAW, seg['clip'] + '.mp4')]
@@ -232,11 +234,11 @@ def main():
         fl.append(f"[{i}:a:0]aresample=48000,aformat=channel_layouts=stereo,atrim=end={d:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={d - 0.025:.3f}:d=0.025" + (f",afade=t=out:st={mute_for(seg) - seg['in'] - 0.03:.3f}:d=0.04" if mute_for(seg) else "") + f"[a{i}]")
     n = len(timeline)
     fl.append(''.join(f"[v{i}][a{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=1[vc][ac]")
-    ass = os.path.join(OUT, f'captions_v15_{SHAPE}.ass')
+    ass = os.path.join(OUT, f'captions_v16_{SHAPE}.ass')
     open(ass, 'w').write(build_ass(timeline, total))
     fl.append(f"[vc]subtitles={ass}[vo]")
     fl.append("[ac]loudnorm=I=-14:TP=-1.5:LRA=11[ao]")
-    out = os.path.join(OUT, f'body_v15_{SHAPE}.mp4')
+    out = os.path.join(OUT, f'body_v16_{SHAPE}.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y'] + inputs + ['-filter_complex', ';'.join(fl),
                     '-map', '[vo]', '-map', '[ao]', '-c:v', 'libx264', '-crf', '18', '-preset', 'medium',
                     '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', out], check=True)
