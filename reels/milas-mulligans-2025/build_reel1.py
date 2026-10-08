@@ -1,4 +1,4 @@
-"""Reel 1 v11: 'Is a hot dog a sandwich?' Cuts, static crops, hook, scoreboard tally and captions for the body.
+"""Reel 1 v12: 'Is a hot dog a sandwich?' Cuts, static crops, hook, scoreboard tally and captions for the body.
 
 Usage: python build_reel1.py <m25_dir> <916|169>
 """
@@ -22,7 +22,7 @@ CUTS = [
     ('int_hotdog',      43.60, 45.16, 820, 1.0, None, False),        # No, not a sandwich (trucker cap says all of it; friend in frame)
     ('int_hotdog',      56.64, 57.16, 660, 1.0, None, False),        # No, (trucker cap; her mouth, mic on her)
     ('int_hotdog',      57.16, 57.72, 980, 1.0, None, False),        # it's (driver: mic moves to her, her mouth moves)
-    ('int_hotdog',      57.72, 59.30, 980, 1.15, None, False),       # DEFINITELY not a sandwich (driver punch-in), plays on live under FINAL, sound faded
+    ('int_hotdog',      57.72, 59.70, 980, 1.15, None, False),       # DEFINITELY not a sandwich (driver punch-in), plays on live under FINAL, sound faded
 ]
 MUTE = {('int_hotdog', 57.72): 58.68}  # fade after the driver's "sandwich"; the low-confidence "No," and the interviewer's "all right" are never heard
 HOLD = 0.0
@@ -169,7 +169,7 @@ def main():
                          'words': words_for(clip, a, b)})
         t += b - a
     total = t + HOLD
-    json.dump(timeline, open(os.path.join(OUT, 'timeline_v11.json'), 'w'), indent=1)
+    json.dump(timeline, open(os.path.join(OUT, 'timeline_v12.json'), 'w'), indent=1)
     inputs, fl = [], []
     for i, seg in enumerate(timeline):
         inputs += ['-ss', f"{seg['in']:.3f}", '-to', f"{seg['out']:.3f}", '-i', os.path.join(RAW, seg['clip'] + '.mp4')]
@@ -195,11 +195,11 @@ def main():
         fl.append(f"[{i}:a:0]aresample=48000,aformat=channel_layouts=stereo,atrim=end={d:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={d - 0.025:.3f}:d=0.025" + (f",afade=t=out:st={mute_for(seg) - seg['in'] - 0.03:.3f}:d=0.04" if mute_for(seg) else "") + f"[a{i}]")
     n = len(timeline)
     fl.append(''.join(f"[v{i}][a{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=1[vc][ac]")
-    ass = os.path.join(OUT, f'captions_v11_{SHAPE}.ass')
+    ass = os.path.join(OUT, f'captions_v12_{SHAPE}.ass')
     open(ass, 'w').write(build_ass(timeline, total))
     fl.append(f"[vc]subtitles={ass}[vo]")
     fl.append("[ac]loudnorm=I=-14:TP=-1.5:LRA=11[ao]")
-    out = os.path.join(OUT, f'body_v11_{SHAPE}.mp4')
+    out = os.path.join(OUT, f'body_v12_{SHAPE}.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y'] + inputs + ['-filter_complex', ';'.join(fl),
                     '-map', '[vo]', '-map', '[ao]', '-c:v', 'libx264', '-crf', '18', '-preset', 'medium',
                     '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', out], check=True)
