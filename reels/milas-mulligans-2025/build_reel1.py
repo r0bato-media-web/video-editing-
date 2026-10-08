@@ -1,5 +1,4 @@
-"""Reel 1 v7: 'Is a hot dog a sandwich?' (Mila's Mulligans 2025 throwback, internal test).
-
+"""Reel 1 v8: 'Is a hot dog a sandwich?' Cuts, static crops, hook, tally and captions for the body.
 
 Usage: python build_reel1.py <m25_dir> <916|169>
 """
@@ -9,26 +8,32 @@ M, SHAPE = sys.argv[1], sys.argv[2]
 RAW, TR, OUT = (os.path.join(M, d) for d in ('raw', 'transcripts', 'reel1'))
 W, H = (1080, 1920) if SHAPE == '916' else (1920, 1080)
 
-# clip, in, out, 9:16 centre x, zoom, video-out (freeze from here to `out`, sound keeps playing) or None, hook?
-# v7 (Rob, 8 Oct 2026: "still tracking horribly in the vertical"): only stretches where the camera holds still
-# (camera_speed.py under ~75 px/s); the hook is Ava's question from int_darryl, where the camera is steady and she faces it;
-# the navy-jacket answer is dropped (camera swings 140-500 px/s through it).
+# clip, in, out, 9:16 centre x, zoom, unused, hook?
+# v8 (Rob, 8 Oct 2026: "video froze at 5 seconds"): no frozen frames anywhere. The sunglasses answer is cut (it needed a
+# hold to hide a camera pan); the ending plays the driver's shot on live under FINAL with the interviewer's next words muted.
 CUTS = [
     ('int_darryl',      15.00, 17.85, 1360, 1.0, None, True),        # Ava: is a hot dog a sandwich or not? (steady, facing camera)
     ('int_ant',         16.96, 17.92, 780, 1.0, None, False),        # No. No. (navy shirt, mouth moving, mic on him)
     ('int_ant',         17.92, 18.40, 1060, 1.0, None, False),       # Yes. (floral shirt)
-    ('int_evan_darien', 11.34, 12.92, 1060, 1.0, 12.06, False),      # I would consider | hold her last still frame: it a sandwich.
     ('int_darryl',      35.29, 37.59, 860, 1.0, None, False),        # A hot dog in my book is
     ('int_darryl',      37.59, 39.22, 820, 1.15, None, False),       # NOT a sandwich. It's a hot dog. (punch-in)
     ('int_hotdog',      43.60, 45.16, 820, 1.0, None, False),        # No, not a sandwich (trucker cap says all of it; friend in frame)
     ('int_hotdog',      56.64, 57.72, 660, 1.0, None, False),        # No, it's
     ('int_hotdog',      57.72, 58.68, 660, 1.15, None, False),       # DEFINITELY not a sandwich (punch-in)
-    ('int_hotdog',      58.68, 58.95, 980, 1.0, None, False),        # No, (driver) -> freeze for FINAL
+    ('int_hotdog',      58.68, 59.48, 980, 1.15, None, False),       # No, (driver) then her shot plays on under FINAL, sound muted
 ]
+MUTE = {('int_hotdog', 58.68): 58.93}  # mute from here (the interviewer's "all right" follows the driver's "No")
+HOLD = 0.0
+
+
+def mute_for(seg):
+    for (c, i), m in MUTE.items():
+        if c == seg['clip'] and abs(i - seg['in']) < 0.05:
+            return m
+    return None
 # One vote per person, keyed to the word that casts it: (clip, word start, side)
 VOTES = [
     ('int_ant', 17.08, 'N'), ('int_ant', 18.10, 'S'),
-    ('int_evan_darien', 12.50, 'S'),
     ('int_darryl', 37.61, 'N'),
     ('int_hotdog', 44.12, 'N'),
     ('int_hotdog', 57.98, 'N'),
@@ -36,7 +41,6 @@ VOTES = [
 ]
 # Vertical crop centre (fraction of frame height) where the speaker sits low; default 0.42
 YFRAC = {}
-HOLD = 0.8  # freeze on the last frame under the FINAL tally
 # One vote per person, keyed to the word that casts it: (clip, word start, side)
 VOTES = [
     ('int_ant', 17.08, 'N'), ('int_ant', 18.10, 'S'),
@@ -89,26 +93,29 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     L = [f"Dialogue: 2,{ts(0)},{ts(hook_end)},Hook,,0,0,0,,{{\\fad(0,120)}}IS A HOT DOG\\NA SANDWICH?",
          f"Dialogue: 1,{ts(0)},{ts(hook_end)},Tag,,0,0,{(330 + 300) if SHAPE == '916' else 380},,THROWBACK · MILA'S MULLIGANS 2025"]
     # tally: changes on each vote word; shown from first vote to end of footage
+    last = timeline[-1]; mute = mute_for(last)
+    final_t = last['t0'] + (mute - last['in']) if mute else total - HOLD
     events = sorted((src_to_out(timeline, c, t), side) for c, t, side in VOTES if src_to_out(timeline, c, t) is not None)
     s = n = 0
     for i, (t, side) in enumerate(events):
         s += side == 'S'; n += side == 'N'
-        nxt = events[i + 1][0] if i + 1 < len(events) else total - HOLD
+        nxt = events[i + 1][0] if i + 1 < len(events) else final_t
         pop = r"{\t(0,90,\fscx118\fscy118)\t(90,200,\fscx100\fscy100)}"
         txt_s = (pop if side == 'S' else '') + f"SANDWICH {s}"
         txt_n = (pop if side == 'N' else '') + f"NOT A SANDWICH {n}"
         L.append(f"Dialogue: 1,{ts(t)},{ts(nxt)},Tally,,0,0,0,,{txt_s}{{\\r}}  |  {txt_n}")
-    L.append(f"Dialogue: 1,{ts(total - HOLD)},{ts(total)},Final,,0,0,0,,{{\\fad(80,0)}}FINAL: NOT A SANDWICH {n}-{s}")
+    L.append(f"Dialogue: 1,{ts(final_t)},{ts(total)},Final,,0,0,0,,{{\\fad(80,0)}}FINAL: NOT A SANDWICH {n}-{s}")
     # word-timed captions (3-word chunks), active word light blue
     for seg in timeline:
-        ws = seg['words']; chunks, cur = [], []
+        m = mute_for(seg)
+        ws = [w for w in seg['words'] if not m or w['s'] < m]; chunks, cur = [], []
         for w in ws:
             cur.append(w)
             if len(cur) == 3 or w['w'].strip().endswith(('.', '?', '!', ',')):
                 chunks.append(cur); cur = []
         if cur: chunks.append(cur)
         for ci, ch in enumerate(chunks):
-            c_end = chunks[ci + 1][0]['s'] if ci + 1 < len(chunks) else seg['out']
+            c_end = chunks[ci + 1][0]['s'] if ci + 1 < len(chunks) else (m or seg['out'])
             for wi, w in enumerate(ch):
                 st = seg['t0'] + max(w['s'], seg['in']) - seg['in']
                 en = seg['t0'] + min(ch[wi + 1]['s'] if wi + 1 < len(ch) else c_end, seg['out']) - seg['in']
@@ -133,7 +140,7 @@ def main():
                          'words': words_for(clip, a, b)})
         t += b - a
     total = t + HOLD
-    json.dump(timeline, open(os.path.join(OUT, 'timeline_v7.json'), 'w'), indent=1)
+    json.dump(timeline, open(os.path.join(OUT, 'timeline_v8.json'), 'w'), indent=1)
     inputs, fl = [], []
     for i, seg in enumerate(timeline):
         inputs += ['-ss', f"{seg['in']:.3f}", '-to', f"{seg['out']:.3f}", '-i', os.path.join(RAW, seg['clip'] + '.mp4')]
@@ -154,16 +161,16 @@ def main():
         chain = f"[{i}:v:0]crop={cw}:{ch}:{x}:{y},scale={W}:{H}:flags=lanczos,fps=30,setsar=1,trim=end_frame={nf},setpts=PTS-STARTPTS"
         if held:
             chain += f",tpad=stop_mode=clone:stop_duration={held / 30:.4f}"
-        fl.append(chain + (f",tpad=stop_mode=clone:stop_duration={HOLD}" if i == len(timeline) - 1 else "") + f",format=yuv420p[v{i}]")
+        fl.append(chain + f",format=yuv420p[v{i}]")
         d = seg['out'] - seg['in']
-        fl.append(f"[{i}:a:0]aresample=48000,aformat=channel_layouts=stereo,atrim=end={d:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={d - 0.025:.3f}:d=0.025" + (f",apad=pad_dur={HOLD}" if i == len(timeline) - 1 else "") + f"[a{i}]")
+        fl.append(f"[{i}:a:0]aresample=48000,aformat=channel_layouts=stereo,atrim=end={d:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={d - 0.025:.3f}:d=0.025" + (f",afade=t=out:st={mute_for(seg) - seg['in'] - 0.03:.3f}:d=0.04" if mute_for(seg) else "") + f"[a{i}]")
     n = len(timeline)
     fl.append(''.join(f"[v{i}][a{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=1[vc][ac]")
-    ass = os.path.join(OUT, f'captions_v7_{SHAPE}.ass')
+    ass = os.path.join(OUT, f'captions_v8_{SHAPE}.ass')
     open(ass, 'w').write(build_ass(timeline, total))
     fl.append(f"[vc]subtitles={ass}[vo]")
     fl.append("[ac]loudnorm=I=-14:TP=-1.5:LRA=11[ao]")
-    out = os.path.join(OUT, f'body_v7_{SHAPE}.mp4')
+    out = os.path.join(OUT, f'body_v8_{SHAPE}.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y'] + inputs + ['-filter_complex', ';'.join(fl),
                     '-map', '[vo]', '-map', '[ao]', '-c:v', 'libx264', '-crf', '18', '-preset', 'medium',
                     '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', out], check=True)
