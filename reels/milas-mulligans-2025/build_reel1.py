@@ -1,4 +1,4 @@
-"""Reel 1 v9: 'Is a hot dog a sandwich?' Cuts, static crops, hook, scoreboard tally and captions for the body.
+"""Reel 1 v10: 'Is a hot dog a sandwich?' Cuts, static crops, hook, scoreboard tally and captions for the body.
 
 Usage: python build_reel1.py <m25_dir> <916|169>
 """
@@ -13,6 +13,7 @@ W, H = (1080, 1920) if SHAPE == '916' else (1920, 1080)
 # hold to hide a camera pan); the ending plays the driver's shot on live under FINAL with the interviewer's next words muted.
 CUTS = [
     ('int_darryl',      15.00, 17.85, 1360, 1.0, None, True),        # Ava: is a hot dog a sandwich or not? (steady, facing camera)
+    ('int_ant',         16.00, 16.56, 560, 1.0, None, False),        # Yes. (pink shirt, white cap: mic on him, mouth open on the word)
     ('int_ant',         16.96, 17.92, 780, 1.0, None, False),        # No. No. (navy shirt, mouth moving, mic on him)
     ('int_ant',         17.92, 18.40, 1060, 1.0, None, False),       # Yes. (floral shirt)
     ('int_darryl',      35.29, 37.59, 860, 1.0, None, False),        # A hot dog in my book is
@@ -33,7 +34,9 @@ def mute_for(seg):
     return None
 # One vote per person, keyed to the word that casts it: (clip, word start, side)
 VOTES = [
-    ('int_ant', 17.08, 'N'), ('int_ant', 18.10, 'S'),
+    ('int_ant', 16.18, 'S'),   # pink shirt
+    ('int_ant', 17.08, 'N'),   # navy shirt (says No twice, one vote)
+    ('int_ant', 18.10, 'S'),   # floral shirt; the white-shirt guy never gets the mic
     ('int_darryl', 37.61, 'N'),
     ('int_hotdog', 44.12, 'N'),   # trucker cap, first cart
     ('int_hotdog', 56.68, 'N'),   # trucker cap, second cart: "No,"
@@ -164,7 +167,7 @@ def main():
                          'words': words_for(clip, a, b)})
         t += b - a
     total = t + HOLD
-    json.dump(timeline, open(os.path.join(OUT, 'timeline_v9.json'), 'w'), indent=1)
+    json.dump(timeline, open(os.path.join(OUT, 'timeline_v10.json'), 'w'), indent=1)
     inputs, fl = [], []
     for i, seg in enumerate(timeline):
         inputs += ['-ss', f"{seg['in']:.3f}", '-to', f"{seg['out']:.3f}", '-i', os.path.join(RAW, seg['clip'] + '.mp4')]
@@ -190,11 +193,11 @@ def main():
         fl.append(f"[{i}:a:0]aresample=48000,aformat=channel_layouts=stereo,atrim=end={d:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={d - 0.025:.3f}:d=0.025" + (f",afade=t=out:st={mute_for(seg) - seg['in'] - 0.03:.3f}:d=0.04" if mute_for(seg) else "") + f"[a{i}]")
     n = len(timeline)
     fl.append(''.join(f"[v{i}][a{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=1[vc][ac]")
-    ass = os.path.join(OUT, f'captions_v9_{SHAPE}.ass')
+    ass = os.path.join(OUT, f'captions_v10_{SHAPE}.ass')
     open(ass, 'w').write(build_ass(timeline, total))
     fl.append(f"[vc]subtitles={ass}[vo]")
     fl.append("[ac]loudnorm=I=-14:TP=-1.5:LRA=11[ao]")
-    out = os.path.join(OUT, f'body_v9_{SHAPE}.mp4')
+    out = os.path.join(OUT, f'body_v10_{SHAPE}.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y'] + inputs + ['-filter_complex', ';'.join(fl),
                     '-map', '[vo]', '-map', '[ao]', '-c:v', 'libx264', '-crf', '18', '-preset', 'medium',
                     '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', out], check=True)
