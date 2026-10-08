@@ -1,4 +1,4 @@
-"""Join body + end card, two-pass loudnorm to -14 LUFS, write R0BATO metadata, make a chat preview.
+"""Join body + end card, two-pass loudnorm to -14 LUFS, write R0BATO metadata, make a chat preview (audio copied from the final: a second AAC encode put a click on the first frame).
 Usage: python finish_reel1.py <reel1_dir> <version>"""
 import json, os, subprocess, sys
 D, V = sys.argv[1], sys.argv[2]
@@ -28,10 +28,11 @@ for sh, tag, pw, ph in (('916', '9x16', 540, 960), ('169', '16x9', 960, 540)):
           f":measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
     md = sum((['-metadata', f'{k}={v}'] for k, v in META.items()), []) + ['-metadata', 'copyright=']
     final = os.path.join(D, 'finals', name + '.mp4')
-    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', joined, '-af', ln + ',aresample=48000', '-c:v', 'copy',
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', joined, '-af', ln + ',aresample=192000,alimiter=limit=0.79:attack=1:release=50:level=false,aresample=48000',  # true-peak safety: 4x oversampled limiter at -2 dBFS
+                    '-c:v', 'copy',
                     '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart'] + md + [final], check=True)
     prev = os.path.join(D, 'previews', f'{name}_{V}_preview.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', final, '-vf', f'scale={pw}:{ph}:flags=lanczos', '-c:v', 'libx264',
-                    '-crf', '23', '-preset', 'medium', '-c:a', 'aac', '-b:a', '96k', '-movflags', '+faststart'] + md + [prev], check=True)
+                    '-crf', '23', '-preset', 'medium', '-c:a', 'copy', '-movflags', '+faststart'] + md + [prev], check=True)
     os.remove(joined)
     print(final); print(prev)
