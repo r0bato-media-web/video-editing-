@@ -1,7 +1,7 @@
-"""Reel 1 v16: 'Is a hot dog a sandwich?' punched up. v4 starts cut 4 on 'disagree' (Rob OK, 7 Oct 2026).
+"""Reel 1 v16: 'Is a hot dog a sandwich?' Cuts, static crops, hook, hot-dog scoreboard, FINAL card and captions.
 
-
-Usage: python build_reel1_v2.py <m25_dir> <916|169>
+Usage: python build_reel1.py <m25_dir> 916
+(The reel ships vertical only; Rob, 14 Oct 2026. Passing 169 still renders a horizontal body if one is ever asked for.)
 """
 import json, os, subprocess, sys
 

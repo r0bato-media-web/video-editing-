@@ -70,7 +70,7 @@ Say plainly that the cut and render happen on the Mac, in the toolkit.
 
 ## Working with Rob on a cut
 - **Show, don't describe.** Every round, send small previews into the chat (540x960 or 960x540, about 3 MB). Full files go to the job folder; the bridge can't carry them.
-- **Both shapes.** If a piece might post vertically, build 16:9 and 9:16. No 16:9 frame over a blurred copy in a vertical unless there is truly no other way.
+- **Shapes come from Step 1, not a default.** Build only the shapes Rob names for the job (Rob, 14 Oct 2026, on the Mila's hot dog reel: "why is there a horizontal version?"). Reels are 9:16 only unless he asks for more. When a job does need 16:9 too, no 16:9 frame over a blurred copy in a vertical unless there is truly no other way.
 - **Frame tight and keep the talker in frame.** Faces or the object fill the frame, eyes near the upper third. Never move away from someone as they start the line that sets the moment up.
 - **Crops on street interviews and run-and-gun footage** (Rob, 7 Oct 2026, Mila's Mulligans "Is a hot dog a sandwich?" reel: "the camera track is rather aggressive" and "not focused on the woman answering the question"):
   - **Never make a crop follow the camera's own move.** Use one static crop per cut, with one crop centre that holds the speaker through any drift for the whole cut. Check the first and last frame of the cut.
