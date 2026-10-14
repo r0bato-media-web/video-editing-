@@ -5,7 +5,7 @@
 - **Client / account:** Mila's Mulligans, a charity golf tournament in memory of Arian Walker Hannon-Kohler. Rob runs its social.
 - **What we're making:** a 20 s explainer of where the money goes, in two styles (isometric blocks, whiteboard line drawings).
 - **Shapes and counts:** 9:16 and 16:9 for each style, 4 files.
-- **Platforms and whose account:** Instagram Reel (9:16) and Facebook (16:9) on the Mila's Mulligans accounts. Not connected to Metricool yet.
+- **Platforms and whose account:** Instagram Reel (9:16) and Facebook (16:9) on the Mila's Mulligans accounts. Metricool: Instagram @milasmulligans is connected (brand 7278866, since 6 Oct 2026); Facebook is not. Write-up in [`milas-mulligans-metricool.md`](milas-mulligans-metricool.md).
 - **Footage or source material:** none. Text and drawings only.
 - **Length per piece:** 20 s.
 - **Client cut or internal test:** internal test, 6 Oct 2026.
