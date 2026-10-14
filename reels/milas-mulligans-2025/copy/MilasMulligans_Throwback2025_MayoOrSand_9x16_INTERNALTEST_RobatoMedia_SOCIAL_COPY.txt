@@ -1,6 +1,6 @@
 ANGLE: Every group chat has one dumb question that splits the room. Ten golfers at Mila's Mulligans 2025 got this one and finished dead even, and one of them has already eaten the sand. The reader is the person who'll argue about it with their foursome.
 HATER TEST: The first draft opened on "We asked golfers a question" and then recapped what the clip already shows. The new opening is the result (5-5), and the line worth sending is the golfer who's done the sand before.
-VERSION: v2, 14 Oct 2026 (body 22.4 s + end card, 26.5 s, 9:16). Three shaky cuts stabilized; mayo jar and sand castle on the hook, scoreboard and FINAL. INTERNAL TEST. Not approved for posting.
+VERSION: v3, 14 Oct 2026 (body 22.8 s + end card, 26.9 s, 9:16). Three shaky cuts stabilized; mayo jar and sand castle on the hook, scoreboard and FINAL; an elote pops in on "elotes"; the "mayonnaise is disgusting" answer now plays to the end of the word. INTERNAL TEST. Not approved for posting.
 
 INSTAGRAM
 Jar of mayo or a handful of sand. Ten golfers, 5-5. ⛳️
@@ -25,7 +25,7 @@ SOURCES (internal, don't post)
 - Ten golfers, 5-5: VOTES in build_reel2.py. Each answer checked by mic position and mouth on the word (contact sheets, 14 Oct 2026). Mayo: frankie 42.22, frankie 15.28, ant 7.64, ant 9.48, jasmin_bf 36.48. Sand: interview3 19.10, frankie 18.30, ant 8.84, ant 10.12, darryl 8.12.
 - Not counted: interview3 20.12 "Mayo all the way" (the interviewer teasing; the golfer replies "No, I can't slug mayo like that"), interview3 31.22 "Mayo." (-47 dB, off the mic, nobody on camera says it).
 - "One golfer has already eaten the sand and would do it again": transcripts/darryl.json 7.36-10.88, "I've done a handful of sand already when I was younger, so handful of sand all day every day".
-- Mayo jar and sand castle graphics: drawn for this reel in build_reel2.py (make_icons), flat shapes in the reel's colors, no clip art, no brand. The jar's label reads MAYO.
+- Mayo jar, sand castle and elote graphics: drawn for this reel in build_reel2.py (make_icons), flat shapes in the reel's colors, no clip art, no brand. The jar's label reads MAYO. The elote illustrates transcripts/frankie.json 11.74-12.98, "I love elotes", and is on screen from that word to the end of the sentence (15.78).
 - Every burned-in caption word: the transcripts above, clipped to each cut. "Elotes" is spelled as the dish is spelled. No names on screen.
 - Whitetail Golf Club, Bath PA: approved "one week out" flyer (Drive, 02 INTERNAL).
 - Every dollar funds the Arian Walker Hannon-Kohler Memorial Scholarship: milas-mulligans-captions skill, Event facts; the same line is on the approved end card.
@@ -34,4 +34,4 @@ SOURCES (internal, don't post)
 
 ON CAMERA: the ten golfers who answer, the interviewer, and people in the background, at the 2025 tournament, filmed by Tony. Release status: not checked. Ask the client whether their event sign-up covers social video.
 
-APPROVAL: Mayo or sand? v2 9:16 · no calendar row yet · Approver: ________
+APPROVAL: Mayo or sand? v3 9:16 · no calendar row yet · Approver: ________

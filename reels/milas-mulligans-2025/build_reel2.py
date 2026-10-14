@@ -28,7 +28,7 @@ CUTS = [
     ('frankie',   41.62, 43.50, 1020, False, False),   # blue polo: Oh, jar of mayonnaise. All day. I love mayonnaise. (camera starts to swing at 43.4; stabilizing made it worse, 120 vs 100 px/s)
     ('interview3', 17.80, 19.40, 520, False, True),    # floral shirt, glasses: Oh, man, definitely a handful of sand. (handheld wobble: stabilized)
     ('frankie',   11.70, 15.86, 940, False, False),    # black shirt: I love elotes, so I'm going to go with a jar full of mayonnaise.
-    ('frankie',   17.14, 19.66, 1200, False, False),   # blue shirt, beard: handful of sand because mayonnaise is disgusting.
+    ('frankie',   17.14, 20.10, 1200, False, False),   # blue shirt, beard: handful of sand because mayonnaise is disgusting. (v3: out after the word's tail at 19.80 and his hand wave; Rob: "cut off too early")
     ('ant',        7.50,  8.30, 720, False, False),    # pink shirt: Mayonnaise. (mic at his mouth)
     ('ant',        8.30,  9.35, 880, False, False),    # navy shirt: Handful of sand.
     ('ant',        9.35, 10.00, 1150, False, True),    # floral shirt: Mayonnaise. (camera starts to pan: stabilized)
@@ -37,6 +37,9 @@ CUTS = [
     ('darryl',     7.30, 12.20, 1000, False, False),   # Darryl: I've done a handful of sand already when I was younger, so handful of sand all day every day
 ]
 STAB_ZOOM = 1.06   # punch-in on stabilized cuts, so the locked frame never shows an edge
+# picture inserts (v3, Rob, 14 Oct 2026: "No fun pic of Elote?"): (icon, clip, on the word that names it, end of the
+# sentence, height, centre x, centre y). The elote pops in on "elotes" and stays to "...jar full of mayonnaise."
+INSERTS = [('elote', 'frankie', 12.42, 15.78, 400, 860, 960)]
 # Darryl's shot plays on live under FINAL; the sound fades after "every day", so "wash it out with more booze" is never heard.
 MUTE = {('darryl', 7.30): 10.86}
 # One vote per person, on the word that casts it: (clip, word start, side). Count: MAYO 5, SAND 5.
@@ -177,7 +180,35 @@ def make_icons(out_dir, s=4):
     cas = cas.crop((0, 0, size[0], round((156 + pad) * s)))                                       # flat bottom on the sand line
     full = Image.new('RGBA', size, (0, 0, 0, 0)); full.alpha_composite(cas)
     finish(full, 'icon_castle.png')
-    return {k: os.path.join(out_dir, f'icon_{k}.png') for k in ('jar', 'castle')}
+
+    # elote (v3, Rob, 14 Oct 2026: "No fun pic of Elote?"): grilled corn on a stick with mayo, cotija and chili,
+    # drawn upright and tipped 18 degrees for fun
+    el = Image.new('RGBA', size, (0, 0, 0, 0)); d = ImageDraw.Draw(el)
+    d.rounded_rectangle(P(64, 108, 76, 150), radius=4 * s, fill=(222, 190, 140, 255))            # stick
+    leaf = lambda pts, col: d.polygon([tuple(P(*pt)) for pt in pts], fill=col)
+    leaf(((68, 134), (50, 122), (30, 86), (34, 74), (48, 104), (66, 120)), (104, 159, 56, 255))   # husk leaves, pointed
+    leaf(((72, 134), (90, 122), (110, 86), (106, 74), (92, 104), (74, 120)), (85, 139, 47, 255))
+    cob = Image.new('L', size, 0)
+    ImageDraw.Draw(cob).rounded_rectangle(P(42, 4, 98, 128), radius=27 * s, fill=255)
+    top = Image.new('RGBA', size, (0, 0, 0, 0)); t_ = ImageDraw.Draw(top)
+    t_.rectangle(P(0, 0, 140, 156), fill=(246, 201, 69, 255))                                    # cob colour
+    for row in range(11):
+        for col in range(5):
+            x, y = 40 + col * 12.5 + (6 if row % 2 else 0), 6 + row * 11
+            t_.rounded_rectangle(P(x, y, x + 9, y + 8), radius=3 * s, fill=(255, 216, 102, 255))   # kernels
+    for ch in range(3):                                                                           # grill marks
+        t_.line([tuple(P(40, 32 + ch * 34)), tuple(P(100, 24 + ch * 34))], fill=(201, 135, 40, 200), width=round(3 * s))
+    zig = [(46 + (i % 2) * 48, 12 + i * 13) for i in range(9)]
+    t_.line([tuple(P(*pt)) for pt in zig], fill=(255, 251, 236, 255), width=round(5 * s), joint='curve')  # mayo drizzle
+    for x, y in ((52, 20), (80, 34), (60, 52), (84, 66), (52, 80), (74, 94), (58, 108), (82, 46), (66, 30)):
+        t_.rectangle(P(x, y, x + 4, y + 4), fill=(250, 250, 245, 255))                            # cotija
+    for x, y in ((56, 40), (76, 58), (64, 86), (84, 100), (50, 64), (72, 18)):
+        t_.ellipse(P(x, y, x + 3, y + 3), fill=(192, 57, 43, 255))                                # chili
+    top.putalpha(cob)                                                                             # everything stays on the cob
+    el.alpha_composite(top)
+    el = el.rotate(-18, resample=Image.BICUBIC, center=(size[0] / 2, size[1] / 2))
+    finish(el, 'icon_elote.png')
+    return {k: os.path.join(out_dir, f'icon_{k}.png') for k in ('jar', 'castle', 'elote')}
 
 
 def stabilize(clip, a, b):
@@ -207,6 +238,9 @@ def icon_overlays(timeline, final_t, total, events, icons, first_input):
     places.append(('castle', 220, 680, 705, 0.30, hook_end, [0.30], 0.30, hook_end - 0.12))    # under the hook, right
     places.append(('jar', 250, 170, 1280, final_t + 0.36, total, [final_t + 0.36], final_t + 0.36, None))
     places.append(('castle', 250, 910, 1280, final_t + 0.48, total, [final_t + 0.48], final_t + 0.48, None))
+    for ic, clip, w_on, w_end, hgt, x, y in INSERTS:
+        a, b = src_to_out(timeline, clip, w_on), src_to_out(timeline, clip, w_end)
+        places.append((ic, hgt, x, y, a, b + 0.08, [a], a, b - 0.07))
     inputs, chains = [], []
     for k, (ic, hgt, x, y, t0, t1, pts, fi, fo) in enumerate(places):
         inputs += ['-loop', '1', '-framerate', '30', '-t', f'{total:.3f}', '-i', icons[ic]]
@@ -351,6 +385,9 @@ def main():
     for c, tt, side in VOTES:
         v = voice_db(c, word_at(c, tt)); vdb.append(v)
         hits.append((src_to_out(timeline, c, tt), 'pop', round(v - POP_UNDER_VOICE - pop_db, 1), round(v, 1)))
+    for ic, clip, w_on, *_ in INSERTS:   # a pop on each picture insert, 6 dB under the word that brings it in
+        v = voice_db(clip, word_at(clip, w_on))
+        hits.append((src_to_out(timeline, clip, w_on), 'pop', round(v - POP_UNDER_VOICE - pop_db, 1), round(v, 1)))
     loud = max(vdb)
     hits += [(final_t - 0.15, 'boom', round(loud - boom_db, 1), round(loud, 1)),
              (final_t, 'pop', round(loud - POP_UNDER_VOICE - pop_db, 1), round(loud, 1))]
