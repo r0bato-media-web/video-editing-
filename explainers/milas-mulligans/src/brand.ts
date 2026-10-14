@@ -28,7 +28,6 @@ export const steps = [
 ];
 
 export const titleText = 'Where your mulligan goes';
-export const endText = 'We play for Arian.';
 export const endUrl = 'milasmulligans.com';
 
 export const FPS = 30;

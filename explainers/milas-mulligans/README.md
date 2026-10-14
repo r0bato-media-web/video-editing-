@@ -6,6 +6,7 @@ Two explainer styles, each in 9:16 (1080x1920) and 16:9 (1920x1080), 20 s at 30 
 
 - `Iso-*`: four isometric blocks rise in order, and a dot travels to the next block.
 - `WB-*`: one line drawing per scene, drawn stroke by stroke.
+- Both end on the link alone (v2, 14 Oct 2026: "We play for Arian." cut, per Rob; the last step already names the scholarship).
 - `End-*`: a 4.5 s end card for footage reels (the cap draws on, then the scholarship line and the link; "We play for Arian." was taken off it, Rob, 14 Oct 2026). The 2025 throwback reel in `../../reels/milas-mulligans-2025` uses it.
 
 The brief, with its Avoid and Done-means lines, is in [`../../briefs/milas-mulligans.md`](../../briefs/milas-mulligans.md).
@@ -27,4 +28,3 @@ In a container without Remotion's own Chrome download, add
 - Colours are sampled from the approved "one week out" flyer, because the client logo folder on Drive is empty. Swap in logo-file colours in `src/brand.ts` when available.
 - Fonts are stand-ins: Caladea for the flyer serif, Inter for the sans.
 - Remotion's license terms for company use are unchecked. Check remotion.dev/license before client delivery.
-- Confirm the family is comfortable with "We play for Arian." on a memorial piece.

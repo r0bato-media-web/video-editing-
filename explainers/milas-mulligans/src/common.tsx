@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
-import {brand, fonts, titleText, endText, endUrl} from './brand';
+import {brand, fonts, titleText, endUrl} from './brand';
 
 export const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 
@@ -41,14 +41,13 @@ export const TitleCard: React.FC = () => {
   );
 };
 
+// Ends on the link only; the last step already names the scholarship. No "We play for Arian." (Rob, 14 Oct 2026).
 export const EndCard: React.FC = () => {
   const f = useCurrentFrame();
   const t = useType();
-  const o1 = interpolate(f, [0, 12], [0, 1], clamp);
-  const o2 = interpolate(f, [10, 22], [0, 1], clamp);
+  const o2 = interpolate(f, [0, 12], [0, 1], clamp);
   return (
     <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', gap: 36, flexDirection: 'column'}}>
-      <div style={{fontFamily: fonts.serif, fontSize: t.title * 1.2, color: brand.navy, opacity: o1}}>{endText}</div>
       <div
         style={{
           fontFamily: fonts.sans,

@@ -19,7 +19,7 @@
 | Every dollar goes to the scholarship | milas-mulligans-captions skill, Event facts | 6 Oct 2026 |
 | Whitetail Golf Club, Bath PA | Approved flyer | 6 Oct 2026 |
 | milasmulligans.com | Approved flyer | 6 Oct 2026 |
-| ~~We play for Arian.~~ | milas-mulligans-captions skill example caption | Cut from the hot dog reel's end card and captions (Rob, 14 Oct 2026); the explainers still carry it, so family sign-off is still needed there |
+| ~~We play for Arian.~~ | milas-mulligans-captions skill example caption | Cut everywhere: the hot dog reel's end card and captions, and the explainers' end card and captions (Rob, 14 Oct 2026) |
 
 Not used, because the sources disagree or are missing: lunch time (flyer says 1:00 PM, the skill and the event sign say 1:30), "Est. 2022" (seen only on merch), amount raised, player count, next year's date.
 
