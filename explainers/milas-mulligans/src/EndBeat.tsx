@@ -1,9 +1,10 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
-import {brand, fonts, endText, endUrl} from './brand';
+import {brand, fonts, endUrl} from './brand';
 import {clamp} from './common';
 
-// 4.5 s payoff after a footage reel: the scholarship cap draws on, then the line, then the link.
+// 4.5 s payoff after a footage reel: the scholarship cap draws on, then the scholarship line, then the link.
+// No "We play for Arian." here (Rob, 14 Oct 2026: not needed at the end).
 const CAP = [
   'M200 90 L340 150 L200 210 L60 150 Z',
   'M120 180 V250 Q200 290 280 250 V180',
@@ -17,8 +18,7 @@ export const EndBeat: React.FC = () => {
   const size = v ? 520 : 380;
   const per = 30 / CAP.length;
   const l1 = interpolate(f, [24, 34], [0, 1], clamp);
-  const l2 = interpolate(f, [60, 70], [0, 1], clamp);
-  const l3 = interpolate(f, [78, 88], [0, 1], clamp);
+  const l3 = interpolate(f, [60, 70], [0, 1], clamp);
   return (
     <AbsoluteFill style={{background: brand.paper, alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
       <svg viewBox="0 0 400 400" width={size} height={size} style={{marginTop: v ? -120 : -40}}>
@@ -35,8 +35,7 @@ export const EndBeat: React.FC = () => {
         <br />
         <span style={{fontWeight: 800, color: brand.navy}}>Arian Walker Hannon-Kohler Memorial Scholarship</span>
       </div>
-      <div style={{fontFamily: fonts.serif, fontSize: v ? 96 : 76, color: brand.navy, opacity: l2, marginTop: v ? 50 : 24}}>{endText}</div>
-      <div style={{fontFamily: fonts.sans, fontWeight: 800, fontSize: v ? 52 : 44, color: brand.white, background: brand.navy, padding: '14px 36px', borderRadius: 8, opacity: l3, marginTop: v ? 30 : 18}}>
+      <div style={{fontFamily: fonts.sans, fontWeight: 800, fontSize: v ? 52 : 44, color: brand.white, background: brand.navy, padding: '14px 36px', borderRadius: 8, opacity: l3, marginTop: v ? 60 : 30}}>
         {endUrl}
       </div>
     </AbsoluteFill>
