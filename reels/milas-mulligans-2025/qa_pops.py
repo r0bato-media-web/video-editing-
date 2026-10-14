@@ -2,14 +2,12 @@
 build_reel2.py writes mix_dry_<v>.wav (voices only) and mix_wet_<v>.wav (voices + effects) before loudness; wet minus
 dry is the effects alone. For each hit in sfx_<v>.json: loudest 50 ms of the effect vs loudest 50 ms of the voice in
 the 0.4 s from the hit. Usage: python qa_pops.py <reel2_dir> <version>"""
-import json, os, sys, wave
+import json, os, subprocess, sys
 import numpy as np
 D, V = sys.argv[1], sys.argv[2]
 
 
 def load(p):
-    w = wave.open(p) if p.endswith('.s16.wav') else None
-    import subprocess
     raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', p, '-ac', '1', '-ar', '48000', '-f', 'f32le', '-'], capture_output=True, check=True).stdout
     return np.frombuffer(raw, np.float32)
 
