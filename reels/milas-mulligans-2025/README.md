@@ -73,32 +73,37 @@ Camera motion: `camera_speed.py <m25> <clip> <in> <out>` measures camera speed o
 
 # Reel 2: "Mayo or sand?"
 
-Internal test v1, 14 Oct 2026. Not approved for posting.
+Internal test v2, 14 Oct 2026. Not approved for posting.
 
 A 26.5 s vertical reel (22.4 s body + the same 4.5 s end card): ten golfers from Mila's Mulligans 2025 answer "would you rather eat a jar full of mayonnaise or a handful of sand?", a two-pill scoreboard (MAYO, SAND) counts the votes, and the FINAL card calls it: IT'S A TIE, 5-5. Darryl's "handful of sand all day every day" casts the tying vote and plays on live under FINAL, with the sound faded before "wash it out with more booze".
+
+v2 (Rob, 14 Oct 2026: "you can stabilize them", "add jar of mayo or sand or sand castle, dress this up"):
+- The three shaky cuts are stabilized with vidstab in tripod mode, locked to each cut's first frame, with a 6% punch-in (`stabilize`, `STAB_ZOOM`). Stabilizing the blue-polo cut too made it worse (120 against 100 px/s), so that one stays as shot.
+- A mayo jar and a sand castle, drawn in `make_icons` (flat shapes in the reel's colors, ink outline, soft shadow; no clip art, no brand), sit in the scoreboard and pop when their side scores, pop in under the hook, and flank the 5-5 on the FINAL card. The pills are navy with a white edge so the icons read.
 
 ## Build
 
 ```
 # footage: list.tsv names are ant, darryl, frankie, interview3, jasmin_bf (Drive "2025 Milas Mulls" / TONY CONTENT)
 ./dl.sh <scratch>                         # then audio + transcripts as for reel 1
-python build_reel2.py <m25_dir> v1        # -> <m25>/reel2/body_v1_916.mp4, timeline, captions, sfx_v1.json
+python build_reel2.py <m25_dir> v2        # -> <m25>/reel2/body_v2_916.mp4, timeline, captions, sfx_v2.json, mix_dry/wet_v2.wav
 cp <End-9x16 render> <m25>/reel2/end_9x16.mp4
-python finish_reel2.py <m25_dir> v1       # -> reel2/finals/ and reel2/previews/, -14 LUFS, metadata, copyright blank
+python finish_reel2.py <m25_dir> v2       # -> reel2/finals/ and reel2/previews/, -14 LUFS, metadata, copyright blank
+python qa_pops.py <m25>/reel2 v2          # every sound effect against the voice it lands on, in the real mix
 ```
 
-Pops sit 6 dB under the voice they land on: `build_reel2.py` measures each vote word's loudest 50 ms in the source and sets the gain from it (`sfx_v1.json` logs both). Sounds are still the `make_sfx.py` stand-ins until `cute_pop.wav` and `vine_boom.wav` from the kit are reachable.
+Pops sit about 6 dB under the voice they land on: `build_reel2.py` sets each gain from the vote word's loudest 50 ms in the source, and `qa_pops.py` measures the result in the mix (wet minus dry is the effects alone). Sounds are still the `make_sfx.py` stand-ins until `cute_pop.wav` and `vine_boom.wav` from the kit are reachable.
 
 Votes, checked by mic position and mouth on the word: Mayo, frankie 42.22 (blue polo), frankie 15.28 (black shirt), ant 7.64 (pink), ant 9.48 (floral), jasmin_bf 36.48 (grey polo). Sand, interview3 19.10 (floral shirt, glasses), frankie 18.30 (blue shirt, beard), ant 8.84 (navy), ant 10.12 (white), darryl 8.12. Not counted: interview3 20.12 "Mayo all the way" (the interviewer teasing, on-mic level; the golfer answers "No, I can't slug mayo like that") and interview3 31.22 "Mayo." (-47 dB, off the mic, nobody on camera says it). Copy: `copy/MilasMulligans_Throwback2025_MayoOrSand_9x16_INTERNALTEST_RobatoMedia_SOCIAL_COPY.txt`.
 
-## Done means (v1)
+## Done means (v2)
 
-- [x] Frames every 0.25 s plus first and last frame of all 11 cuts (`qa_dense.py`, 111 frames); the course cuts again at 300 px wide. Every speaker's whole face is in frame on their answer.
-- [x] All 11 cuts line up with the source within 1 ms (`sync_check.py`).
+- [x] Frames every 0.25 s plus first and last frame of all 11 cuts (`qa_dense.py`, 111 frames); hook, scoreboard and FINAL at 540 px wide; first and last frame of each stabilized cut pulled by frame index. Every speaker's whole face is in frame on their answer, no icon covers text or a face, no stabilization edge shows.
+- [x] Cuts land on their planned frames (frame-difference check: 88, 144, 192, 317, 393, 417, 448, 468, 485, 525), and all 11 cuts' audio lines up with the source within 1 ms (`sync_check.py`).
+- [x] Apparent motion, output px/s max: stabilized cuts 63 (interview3), 80 (ant floral), 60 (ant white), down from 184, 161 and 341. Highest left is the blue-polo cut at 100, in its last 0.1 s after the word.
 - [x] -14.1 LUFS integrated, true peak -2.0 dBFS; no black frames; `freezedetect` finds nothing before the end card; the only silence of 0.4 s or more is the end card.
-- [x] 1080x1920, 30 fps, H.264 + AAC 48 kHz stereo; metadata read back with "INTERNAL TEST v1 - not for posting" and no copyright tag.
-- [x] Sidecar written, unslop check 0 strong.
-- [ ] Apparent motion: three cuts run over reel 1's limit (output px/s, max/mean): interview3 floral glasses 184/75 (handheld wobble), ant floral 161/100 and ant white 341/220 (the camera starts to pan). Rob to choose: stabilize with `stab.py` on the Mac, trim tighter, or drop the white-shirt answer (which makes it 5-4 Mayo).
-- [ ] Pop levels set from the source voice, not yet measured in the final mix (v1 audio minus a no-SFX render).
+- [x] `qa_pops.py`: every vote pop 6.0 to 8.2 dB under its voice; the boom at the voice's level; the FINAL pop 6 dB under the reel's loudest answer, in silence after the fade.
+- [x] 1080x1920, 30 fps, H.264 + AAC 48 kHz stereo; metadata read back with "INTERNAL TEST v2 - not for posting" and no copyright tag.
+- [x] Sidecar updated to v2, unslop check 0 strong; copy in Drive 02 INTERNAL / MilasMulligans_MayoOrSand_v2_INTERNALTEST_14Oct2026.
 - [ ] Swap in `cute_pop.wav` / `vine_boom.wav`.
-- [ ] Rob's review of the v1 preview.
+- [ ] Rob's review of the v2 preview.
