@@ -1,4 +1,5 @@
-"""Reel 1 v16: 'Is a hot dog a sandwich?' Cuts, static crops, hook, hot-dog scoreboard, FINAL card and captions.
+"""Reel 1 v17: 'Is a hot dog a sandwich?' Cuts, static crops, hook, hot-dog scoreboard, FINAL card and captions,
+and sound: a pop on every scoreboard change, a boom under the FINAL reveal (Rob, 14 Oct 2026).
 
 Usage: python build_reel1.py <m25_dir> 916
 (The reel ships vertical only; Rob, 14 Oct 2026. Passing 169 still renders a horizontal body if one is ever asked for.)
@@ -6,7 +7,7 @@ Usage: python build_reel1.py <m25_dir> 916
 import json, os, subprocess, sys
 
 M, SHAPE = sys.argv[1], sys.argv[2]
-RAW, TR, OUT = (os.path.join(M, d) for d in ('raw', 'transcripts', 'reel1'))
+RAW, TR, OUT, SFX = (os.path.join(M, d) for d in ('raw', 'transcripts', 'reel1', 'sfx'))
 W, H = (1080, 1920) if SHAPE == '916' else (1920, 1080)
 
 # clip, in, out, 9:16 centre x, zoom, unused, hook?
@@ -208,7 +209,7 @@ def main():
                          'words': words_for(clip, a, b)})
         t += b - a
     total = t + HOLD
-    json.dump(timeline, open(os.path.join(OUT, 'timeline_v16.json'), 'w'), indent=1)
+    json.dump(timeline, open(os.path.join(OUT, 'timeline_v17.json'), 'w'), indent=1)
     inputs, fl = [], []
     for i, seg in enumerate(timeline):
         inputs += ['-ss', f"{seg['in']:.3f}", '-to', f"{seg['out']:.3f}", '-i', os.path.join(RAW, seg['clip'] + '.mp4')]
@@ -233,12 +234,27 @@ def main():
         d = seg['out'] - seg['in']
         fl.append(f"[{i}:a:0]aresample=48000,aformat=channel_layouts=stereo,atrim=end={d:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.015,afade=t=out:st={d - 0.025:.3f}:d=0.025" + (f",afade=t=out:st={mute_for(seg) - seg['in'] - 0.03:.3f}:d=0.04" if mute_for(seg) else "") + f"[a{i}]")
     n = len(timeline)
-    fl.append(''.join(f"[v{i}][a{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=1[vc][ac]")
-    ass = os.path.join(OUT, f'captions_v16_{SHAPE}.ass')
+    fl.append(''.join(f"[v{i}][a{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=1[vc][dry]")
+    # Sound. Each pop sits 6 dB under the voice it lands on, so the answer word stays clear (the first mix at a flat -5 dB
+    # was up to 13 dB over the quiet course answers). Reveal: boom 0.15 s ahead of FINAL at the reel's loudest voice level,
+    # plus a pop 6 dB under it. Gains measured from the v16 final around each hit, 14 Oct 2026.
+    POP_DB = [-12.3, -24.2, -22.2, -19.1, -11.4, -14.2, -13.2, -17.6, -13.8]
+    # Times come from the same VOTES and FINAL timing the captions use, so each sound lands on its graphic's first frame.
+    last = timeline[-1]; mute = mute_for(last)
+    final_t = last['t0'] + (mute - last['in']) if mute else total - HOLD
+    hits = [(src_to_out(timeline, c, t), 'pop', db) for (c, t, _), db in zip(VOTES, POP_DB) if src_to_out(timeline, c, t) is not None]
+    hits += [(final_t - 0.15, 'boom', -8.5), (final_t, 'pop', -17.2)]
+    for j, (at, snd, db) in enumerate(hits):
+        inputs += ['-i', os.path.join(SFX, snd + '.wav')]
+        ms = round(at * 1000)
+        fl.append(f"[{n + j}:a]volume={db}dB,adelay={ms}|{ms}[s{j}]")
+    fl.append('[dry]' + ''.join(f'[s{j}]' for j in range(len(hits))) + f"amix=inputs={len(hits) + 1}:normalize=0:duration=first[ac]")
+    json.dump([{'t': round(a, 3), 'sound': s_, 'dB': d} for a, s_, d in hits], open(os.path.join(OUT, 'sfx_v17.json'), 'w'), indent=1)
+    ass = os.path.join(OUT, f'captions_v17_{SHAPE}.ass')
     open(ass, 'w').write(build_ass(timeline, total))
     fl.append(f"[vc]subtitles={ass}[vo]")
     fl.append("[ac]loudnorm=I=-14:TP=-1.5:LRA=11[ao]")
-    out = os.path.join(OUT, f'body_v16_{SHAPE}.mp4')
+    out = os.path.join(OUT, f'body_v17_{SHAPE}.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y'] + inputs + ['-filter_complex', ';'.join(fl),
                     '-map', '[vo]', '-map', '[ao]', '-c:v', 'libx264', '-crf', '18', '-preset', 'medium',
                     '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', out], check=True)
