@@ -40,7 +40,7 @@ W, H = 1080, 1920
 CUTS = [
     ('random_guy',       1.70,  4.50, 1560, True,  None),                      # interviewer: how much do you think the 50-50 is going to get up to today?
     ('frankie',         32.58, 36.98, 1010, False, (575, '$575', 34.50)),      # navy polo, cap: 50-50 is going to be 5-75.
-    ('interview2',      15.40, 16.76,  870, False, (675, '$675', 15.54)),      # navy polo, green cap: 675 dollars.
+    ('interview2',      14.40, 16.76,  870, False, (675, '$675', 14.60)),      # navy polo, green cap: Six hundred and seventy-five dollars. (v3: starts on "Six", see WORD_FIX)
     ('frankie',         20.05, 23.05, 1080, False, (700, '$700', 21.72)),      # blue polo, pointing: I think the 50-50 is going to hit 700 bucks.
     ('frankie',         25.00, 30.30,  940, False, (725, '$725', 29.42)),      # black polo, beard: a little bit north of that just to be safe. 7.25.
     ('jasmin_bf',       18.55, 24.38,  650, False, (855, '$855', 21.08)),      # grey polo: My guess is the 50-50 is going to get up to $855.
@@ -49,12 +49,18 @@ CUTS = [
     ('jasmin_dad',      10.96, 15.40,  340, False, None),                      # same golfer: And that's a great prize today for anybody who's involved in the 50-50. (v2: steps left to x 120 on "involved" and back while the tree behind holds still; own static crop from the sentence break)
     ('jasmin_dad',      26.18, 27.40,  900, False, (2300, '$2,300', 26.56)),   # light-blue cap, teal glasses: 2,300.
     ('interview3',       8.95, 10.72,  530, False, (2500, '$2–3K', 9.94)),     # floral shirt, glasses: Couple, two, 3,000.
-    ('angel',           83.25, 87.05, 1410, False, (5000, '$5,000', 84.84)),   # pink floral shirt: maybe five grand, hopefully.
-    ('evan_darien_int', 38.40, 42.64, 1000, False, (7000, '$7,000', 41.52)),   # white top, sunglasses: I hope it gets up to, I don't know, $7,000.
+    ('angel',           81.35, 87.05, 1300, False, (5000, '$5,000', 84.84)),   # pink floral shirt: If everybody plays, I'm hoping it reaches maybe five grand, hopefully.
+    ('evan_darien_int', 36.86, 42.64, 1000, False, (7000, '$7,000', 41.52)),   # white top, sunglasses: Oh my God, that's a good question. I hope it gets up to, I don't know, $7,000. (219 Hz, the same golfer's guess is 229; interviewer 254)
     ('evan_darien_int', 43.55, 49.40,  700, False, (11000, '$11,000', 45.90)), # navy jacket: And I'm going to go with $11,000.
 ]
 # The last shot plays on live under the question; its sound fades after the laugh, before the interviewer's "Show me the money."
 MUTE = {('evan_darien_int', 43.55): 47.30}
+# Words the transcript got wrong (v3, Rob, 15 Oct 2026: "The start of the second answer was cut off too"). The
+# interview2 transcript squeezed "Six hundred and seventy-five dollars" into "675" at 15.54, so v1/v2 started the cut
+# after "Six hundred and". Re-transcribed with medium.en and small.en (both: six hundred and seventy-five dollars); the
+# voice starts at 14.50 (pitch), so "Six" starts there. Replaces every transcript word starting in [a, b).
+WORD_FIX = {'interview2': (14.0, 17.0, [('Six', 14.50, 14.74), ('hundred', 14.74, 15.20), ('and', 15.20, 15.58),
+                                        ('seventy-five', 15.58, 16.10), ('dollars.', 16.10, 16.56)])}
 # caption text for numbers as whisper wrote them, so the caption reads like the ticket
 SAY = {'5-75.': '575', '7.25.': '725'}
 YFRAC = 0.42
@@ -87,7 +93,10 @@ def mute_for(seg):
 def all_words(clip):
     """Transcript words with whisper's split numbers joined back up ("5" + "-75." -> "5-75.", "$11" + ",000." -> "$11,000.")."""
     out = []
-    for s in json.load(open(os.path.join(TR, clip + '.json'))):
+    fa, fb, fix = WORD_FIX.get(clip, (0, 0, []))
+    src = [w for s in json.load(open(os.path.join(TR, clip + '.json'))) for w in s['words'] if not fa <= w['s'] < fb]
+    src = sorted(src + [{'w': ' ' + t, 's': a, 'e': b} for t, a, b in fix], key=lambda w: w['s'])
+    for s in [{'words': src}]:
         for w in s['words']:
             t = w['w'].strip()
             if out and t[:1] in '-,.' and t[1:2].isdigit() and out[-1]['w'].strip()[-1:].isdigit():

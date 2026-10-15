@@ -75,6 +75,8 @@ Camera motion: `camera_speed.py <m25> <clip> <in> <out>` measures camera speed o
 
 Internal final v3, approved by Rob 15 Oct 2026 ("Ok this cut is good"). Not approved for posting: that needs the client's OK and Rob's go per post. Filed in Drive MilasMulligans_FINALS_14Oct2026 / 04_MayoOrSand_v3.
 
+v4, 15 Oct 2026 (Rob: "you cut off people's answers too early"), needs Rob's look before it replaces v3: the floral-shirt golfer's answer runs on through "I ain't doing that." (150 Hz, the golfer's voice; the interviewer is 229 Hz) to just before the interviewer's "Mayo all the way" (out 20.09, was 19.40). Every other cut was checked at both ends: the rest end on the last word of the turn and start on its first word. Two lines stay out on purpose: the blue polo's "Best condiment in the world" (the camera swings away at 300-376 px/s as it's said) and Darryl's "wash it out with more booze" (muted under FINAL since v1). v4 checks: 27.6 s, -14.1 LUFS, true peak -2.0 dBFS, sync within 1 ms, no black frames, no freeze before the end card, 111 frames every 0.25 s.
+
 A 26.9 s vertical reel (22.8 s body + the same 4.5 s end card): ten golfers from Mila's Mulligans 2025 answer "would you rather eat a jar full of mayonnaise or a handful of sand?", a two-pill scoreboard (MAYO, SAND) counts the votes, and the FINAL card calls it: IT'S A TIE, 5-5. Darryl's "handful of sand all day every day" casts the tying vote and plays on live under FINAL, with the sound faded before "wash it out with more booze".
 
 v2 (Rob, 14 Oct 2026: "you can stabilize them", "add jar of mayo or sand or sand castle, dress this up"):
@@ -115,29 +117,32 @@ Votes, checked by mic position and mouth on the word: Mayo, frankie 42.22 (blue 
 
 # Reel 3: "Guess the 50-50"
 
-Internal test v2, 15 Oct 2026. Not approved for posting.
+Internal test v3, 15 Oct 2026. Not approved for posting.
 
-A 55.8 s vertical reel (51.7 s body + the same end card). The interviewer asks how much the 50-50 will reach, then twelve golfers from Mila's Mulligans 2025 answer, lowest to highest: $575, $675, $700, $725, $855, $1,150, $2,000, $2,300, $2-3K, $5,000, $7,000, $11,000. A drawn raffle ticket at the top shows "GUESS #n" and "$ ?", and the number pops in on the first word of the guess, with a pin on a log-scale number line ($500 to $10K) that stays for the rest of the reel. The real 2025 total isn't on file, so there is no reveal (Rob, 15 Oct 2026: "Make a third video now"). It ends on the last golfer's live shot, dimmed and muted after the laugh, with "12 GUESSES", "$575 TO $11,000", "WHAT DID IT HIT?" and "COMMENT YOUR GUESS", then the end card.
+A 60.2 s vertical reel (56.1 s body + the same end card). The interviewer asks how much the 50-50 will reach, then twelve golfers from Mila's Mulligans 2025 answer, lowest to highest: $575, $675, $700, $725, $855, $1,150, $2,000, $2,300, $2-3K, $5,000, $7,000, $11,000. A drawn raffle ticket at the top shows "GUESS #n" and "$ ?", and the number pops in on the first word of the guess, with a pin on a log-scale number line ($500 to $10K) that stays for the rest of the reel. The real 2025 total isn't on file, so there is no reveal (Rob, 15 Oct 2026: "Make a third video now"). It ends on the last golfer's live shot, dimmed and muted after the laugh, with "12 GUESSES", "$575 TO $11,000", "WHAT DID IT HIT?" and "COMMENT YOUR GUESS", then the end card.
 
 - **Who said what.** Every guess was checked by mic position and mouth on the number at full resolution, and by voice pitch in the jasmin_dad group (blue cap 198 Hz, backwards cap 142 Hz, teal glasses 198 Hz with a different face and glasses, interviewer 262 Hz). One guess per person. The interviewer's repeats are never used ("675.", "21-50", "Two, 3,000.", "Last person said 675", "Show me the money").
 - **Dropped for camera motion.** jasmin_dad "21-50" (pan up to 226 px/s through the answer; vidstab tripod mode left 146 to 827 px/s) and "I say 1,500" (125-150 px/s on the word; two stabilizing tries each jumped 200+ px/s on "500", so it stopped there).
 - **Out points: the end of the person's turn** (v2, Rob, 15 Oct 2026: "you cut off people's answers too early"). v1 cut at the first dip in level after the number, which dropped the rest of what people said: "Book it.", "That's my guess." and the $2,000 golfer's "And that's a great prize today for anybody who's involved in the 50-50." Each answer now runs through the rest of the sentence, any sign-off or laugh, to just before the interviewer's next word (checked by mic, mouth and pitch on every tail). The $2,000 golfer steps left during the extra sentence (the tree behind holds still, so it's the person, not the camera), so that answer is two static crops split at the sentence break after "$1,000 each."
 - **Lesson:** the number is not the end of the answer. Listen past it to the end of the turn before choosing the out point.
+- **In points: the start of the person's turn** (v3, Rob, 15 Oct 2026: "The start of the second answer was cut off too"). The interview2 transcript squeezed "Six hundred and seventy-five dollars" into "675" at 15.54, so the cut began after "Six hundred and". `WORD_FIX` replaces those words with a medium.en / small.en re-transcription (both agree) timed from the voice onset at 14.50, and the cut starts at 14.40. Every guess was re-transcribed with medium.en to check its words and start: no other guess lost words, but two started mid-turn and now start on the golfer's first word: $5,000 at "If everybody plays," (81.35, crop moved to x 1300 so the golfer stays in frame through it) and $7,000 at "Oh my God, that's a good question." (36.86, the golfer's own voice by pitch). A start is clipped when the person is already talking at the cut; a clean start after a pause ("I'm going to go a little bit north...") is not.
+- **Lesson:** check the level and the pitch in the second before an in point, not only the transcript. Speech the transcript missed is still speech.
 - **Numbers in the transcript.** Whisper splits spoken numbers ("5" + "-75.", "$11" + ",000."). `all_words` joins them back, the ticket, pin and pop land on the joined word's first frame (the same frame its caption appears), and "5-75" / "7.25" are captioned 575 / 725 like the ticket.
 
 ## Build
 
 ```
-python build_reel3.py <m25_dir> v2        # -> <m25>/reel3/body_v2_916.mp4, timeline, captions, sfx_v2.json, mix_dry/wet_v2.wav
+python build_reel3.py <m25_dir> v3        # -> <m25>/reel3/body_v3_916.mp4, timeline, captions, sfx_v3.json, mix_dry/wet_v3.wav
 cp <End-9x16 render> <m25>/reel3/end_9x16.mp4
-python finish_reel3.py <m25_dir> v2       # -> reel3/finals/ and reel3/previews/, -14 LUFS, metadata, copyright blank
-python qa_pops.py <m25>/reel3 v2
+python finish_reel3.py <m25_dir> v3       # -> reel3/finals/ and reel3/previews/, -14 LUFS, metadata, copyright blank
+python qa_pops.py <m25>/reel3 v3
 ```
 
 Clip names are the list.tsv names; random_guy, interview2, jasmin_dad, angel and evan_darien_int read their audio from `<m25>/audio2/`. Copy: `copy/MilasMulligans_Throwback2025_Guess5050_9x16_INTERNALTEST_RobatoMedia_SOCIAL_COPY.txt`.
 
-## Done means (v2)
+## Done means (v3)
 
+- [x] v3: every cut's in point checked by level and pitch in the second before it, plus a medium.en re-transcription of every guess; the $675, $5,000 and $7,000 answers start on the golfer's first word. 241 frames every 0.25 s across the whole final, every speaker in frame; audio of all 14 cuts within 1 ms; -14.0 LUFS, true peak -1.9 dBFS on the final and the preview; no black frames, no freeze before the end card (56.13 s); every guess pop 6.0 to 7.8 dB under its voice.
 - [x] v2: every cut's tail listened through to the next speaker; the tails added are the golfer's own words or laugh (mic, mouth, pitch); the $2,000 golfer in frame through the step (two static crops, 470 then 340, split at the sentence break).
 - [x] v2: 223 frames every 0.25 s across the whole final; audio of all 14 cuts within 1 ms of the source; -14.1 LUFS, true peak -1.6 dBFS on the final and the preview; no black frames, no freeze before the end card (51.70 s); every guess pop 6.0 to 7.8 dB under its voice.
 - [x] v1 checks, kept for the record: frames every 0.25 s across the whole final (190 frames, 180 px) plus key frames at 360 px: every speaker in frame on their guess, the ticket and number line clear of faces, captions clear of the Reels caption area, the question held about 1.5 s on live footage before the end card dissolve.
@@ -149,5 +154,5 @@ Clip names are the list.tsv names; random_guy, interview2, jasmin_dad, angel and
 - [x] 1080x1920, 30 fps, H.264 + AAC 48 kHz stereo; metadata read back with "INTERNAL TEST v1 - not for posting" and no copyright tag.
 - [x] Sidecar with every guess's source and timecode, unslop check 0 strong.
 - [ ] Swap in `cute_pop.wav` / `vine_boom.wav`.
-- [ ] Rob's review of the v2 preview.
+- [ ] Rob's review of the v3 preview.
 - [ ] A reveal ending, once the client gives the 2025 total in writing.

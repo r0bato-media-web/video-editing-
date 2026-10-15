@@ -26,7 +26,7 @@ W, H = 1080, 1920
 CUTS = [
     ('darryl',     3.70,  6.62, 1330, True,  False),   # interviewer: would you rather eat a jar full of mayonnaise or a handful of sand?
     ('frankie',   41.62, 43.50, 1020, False, False),   # blue polo: Oh, jar of mayonnaise. All day. I love mayonnaise. (camera starts to swing at 43.4; stabilizing made it worse, 120 vs 100 px/s)
-    ('interview3', 17.80, 19.40, 520, False, True),    # floral shirt, glasses: Oh, man, definitely a handful of sand. (handheld wobble: stabilized)
+    ('interview3', 17.80, 20.09, 520, False, True),    # floral shirt, glasses: Oh, man, definitely a handful of sand. I ain't doing that. (handheld wobble: stabilized; v4: runs to the end of the golfer's turn, 150 Hz vs the interviewer's 229, before the interviewer's "Mayo all the way")
     ('frankie',   11.70, 15.86, 940, False, False),    # black shirt: I love elotes, so I'm going to go with a jar full of mayonnaise.
     ('frankie',   17.14, 20.10, 1200, False, False),   # blue shirt, beard: handful of sand because mayonnaise is disgusting. (v3: out after the word's tail at 19.80 and his hand wave; Rob: "cut off too early")
     ('ant',        7.50,  8.30, 720, False, False),    # pink shirt: Mayonnaise. (mic at his mouth)
