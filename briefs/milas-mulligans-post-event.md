@@ -8,7 +8,7 @@ Internal. Written 14 Oct 2026. The 2026 tournament (Sat 22 Aug, Whitetail Golf C
 |---|---|---|---|
 | 1 | Hot dog reel v18 (9:16) | Internal final, approved by Rob 14 Oct | Client OK, then a slot |
 | 2 | "Where your mulligan goes" explainers v2 (isometric, whiteboard; 9:16 and 16:9) | Internal finals, approved by Rob 14 Oct | Pick one style for Instagram, run the other on Facebook |
-| 3 | Mayo or sand? reel v1 (9:16) | Built 14 Oct, internal test | Rob's review, then the SFX kit swap |
+| 3 | Mayo or sand? reel v3 (9:16) | Internal final, approved by Rob 15 Oct | Client OK, then a slot. Swap in the SFX kit (`cute_pop.wav`, `vine_boom.wav`) when it's reachable, and Rob listens again |
 | 4 | Guess the 50-50 reel | Plan below, footage found | The real 2025 50-50 total and where it's written down |
 | 5 | "Couldn't ask for a better day" | Idea | Rob's yes; B-roll picked and checked for steadiness |
 | 6 | 2026 thank-you photo carousel | Idea | Check the 30 Aug post first so it doesn't repeat; client OK on the photos |

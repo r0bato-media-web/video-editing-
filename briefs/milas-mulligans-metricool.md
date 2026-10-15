@@ -58,7 +58,7 @@ None of these are scheduled. Each needs Rob's OK for that post, and the client's
 |---|---|---|
 | Wed 21 Oct, 10 am | Hot dog reel v18 | Strongest finished piece. Talking reel, so it gets the Instagram music bed |
 | Fri 23 Oct, 10 am | Where your mulligan goes, one style, 9:16 | Silent explainer. The other style goes to Facebook once it's connected |
-| Wed 28 Oct, 10 am | Mayo or sand? | After Rob's review of v1 and the SFX kit swap |
+| Wed 28 Oct, 10 am | Mayo or sand? v3 | Internal final, approved by Rob 15 Oct. Talking reel, so it gets the Instagram music bed. SFX kit swap still to do |
 | When the total is in | Guess the 50-50 | Needs the real 2025 total and its source |
 
 One post a week after that, on Wednesday or Friday at 10 am, keeps the account alive until next year's date is out.
@@ -67,7 +67,7 @@ One post a week after that, on Wednesday or Friday at 10 am, keeps the account a
 
 - Talking reels on Instagram get an instrumental from Instagram's library in `instagramData.audioConfiguration`, `audioVolume` 10, `videoVolume` 100 (the r0bato-video rule from 28 Sep 2026). Search a term first, then set the numeric id of an instrumental. After it posts, check the sound label on the live Reel and have Rob listen.
 - The silent explainers can take a music bed too. That's Rob's call per post.
-- Captions come from each piece's `_SOCIAL_COPY.txt`. The hot dog and explainer sidecars are in Drive, MilasMulligans_FINALS_14Oct2026. The Mayo or sand? sidecar is in `reels/milas-mulligans-2025/copy/`.
+- Captions come from each piece's `_SOCIAL_COPY.txt`. All four sidecars are in Drive, MilasMulligans_FINALS_14Oct2026 (Mayo or sand? in `04_MayoOrSand_v3`), and the Mayo or sand? one is also in `reels/milas-mulligans-2025/copy/`.
 - Facebook can't take music through Metricool.
 
 ## What Rob needs to do

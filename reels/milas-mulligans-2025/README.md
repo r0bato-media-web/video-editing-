@@ -73,7 +73,7 @@ Camera motion: `camera_speed.py <m25> <clip> <in> <out>` measures camera speed o
 
 # Reel 2: "Mayo or sand?"
 
-Internal test v3, 14 Oct 2026. Not approved for posting.
+Internal final v3, approved by Rob 15 Oct 2026 ("Ok this cut is good"). Not approved for posting: that needs the client's OK and Rob's go per post. Filed in Drive MilasMulligans_FINALS_14Oct2026 / 04_MayoOrSand_v3.
 
 A 26.9 s vertical reel (22.8 s body + the same 4.5 s end card): ten golfers from Mila's Mulligans 2025 answer "would you rather eat a jar full of mayonnaise or a handful of sand?", a two-pill scoreboard (MAYO, SAND) counts the votes, and the FINAL card calls it: IT'S A TIE, 5-5. Darryl's "handful of sand all day every day" casts the tying vote and plays on live under FINAL, with the sound faded before "wash it out with more booze".
 
