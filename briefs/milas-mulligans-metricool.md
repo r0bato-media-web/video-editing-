@@ -59,7 +59,7 @@ None of these are scheduled. Each needs Rob's OK for that post, and the client's
 | Wed 21 Oct, 10 am | Hot dog reel v18 | Strongest finished piece. Talking reel, so it gets the Instagram music bed |
 | Fri 23 Oct, 10 am | Where your mulligan goes, one style, 9:16 | Silent explainer. The other style goes to Facebook once it's connected |
 | Wed 28 Oct, 10 am | Mayo or sand? v3 | Internal final, approved by Rob 15 Oct. Talking reel, so it gets the Instagram music bed. SFX kit swap still to do |
-| When the total is in | Guess the 50-50 | Needs the real 2025 total and its source |
+| After Mayo or sand? | Guess the 50-50 v1 | Built 15 Oct with no reveal, so it can go before the total is known. Rob's review first. Don't answer "what did it hit?" in the comments without the client's written number |
 
 One post a week after that, on Wednesday or Friday at 10 am, keeps the account alive until next year's date is out.
 

@@ -112,3 +112,39 @@ Votes, checked by mic position and mouth on the word: Mayo, frankie 42.22 (blue 
 - [x] Sidecar updated to v3, unslop check 0 strong; copy in Drive 02 INTERNAL / MilasMulligans_MayoOrSand_v3_INTERNALTEST_14Oct2026.
 - [ ] Swap in `cute_pop.wav` / `vine_boom.wav`.
 - [ ] Rob's review of the v3 preview.
+
+# Reel 3: "Guess the 50-50"
+
+Internal test v1, 15 Oct 2026. Not approved for posting.
+
+A 47.5 s vertical reel (43.5 s body + the same end card). The interviewer asks how much the 50-50 will reach, then twelve golfers from Mila's Mulligans 2025 answer, lowest to highest: $575, $675, $700, $725, $855, $1,150, $2,000, $2,300, $2-3K, $5,000, $7,000, $11,000. A drawn raffle ticket at the top shows "GUESS #n" and "$ ?", and the number pops in on the first word of the guess, with a pin on a log-scale number line ($500 to $10K) that stays for the rest of the reel. The real 2025 total isn't on file, so there is no reveal (Rob, 15 Oct 2026: "Make a third video now"). It ends on the last golfer's live shot, dimmed and muted after her laugh, with "12 GUESSES", "$575 TO $11,000", "WHAT DID IT HIT?" and "COMMENT YOUR GUESS", then the end card.
+
+- **Who said what.** Every guess was checked by mic position and mouth on the number at full resolution, and by voice pitch in the jasmin_dad group (blue cap 198 Hz, backwards cap 142 Hz, teal glasses 198 Hz with a different face and glasses, interviewer 262 Hz). One guess per person. The interviewer's repeats are never used ("675.", "21-50", "Two, 3,000.", "Last person said 675", "Show me the money").
+- **Dropped for camera motion.** jasmin_dad "21-50" (pan up to 226 px/s through the answer; vidstab tripod mode left 146 to 827 px/s) and "I say 1,500" (125-150 px/s on the word; two stabilizing tries each jumped 200+ px/s on "500", so it stopped there).
+- **Out points from the audio.** Each cut ends where the level after the last word falls to the room tone, measured in 50 ms windows, not at the transcript's word end.
+- **Numbers in the transcript.** Whisper splits spoken numbers ("5" + "-75.", "$11" + ",000."). `all_words` joins them back, the ticket, pin and pop land on the joined word's first frame (the same frame its caption appears), and "5-75" / "7.25" are captioned 575 / 725 like the ticket.
+
+## Build
+
+```
+python build_reel3.py <m25_dir> v1        # -> <m25>/reel3/body_v1_916.mp4, timeline, captions, sfx_v1.json, mix_dry/wet_v1.wav
+cp <End-9x16 render> <m25>/reel3/end_9x16.mp4
+python finish_reel3.py <m25_dir> v1       # -> reel3/finals/ and reel3/previews/, -14 LUFS, metadata, copyright blank
+python qa_pops.py <m25>/reel3 v1
+```
+
+Clip names are the list.tsv names; random_guy, interview2, jasmin_dad, angel and evan_darien_int read their audio from `<m25>/audio2/`. Copy: `copy/MilasMulligans_Throwback2025_Guess5050_9x16_INTERNALTEST_RobatoMedia_SOCIAL_COPY.txt`.
+
+## Done means (v1)
+
+- [x] Frames every 0.25 s across the whole final (190 frames, 180 px) plus key frames at 360 px: every speaker in frame on their guess, the ticket and number line clear of faces, captions clear of the Reels caption area, the question held about 1.5 s on live footage before the end card dissolve.
+- [x] Each ticket number, its pin, its pop and its caption land on the same frame (first word of the number); v1's first pass popped up to 2 s after the caption and was fixed before sending.
+- [x] Audio of all 13 cuts lines up with the source within 1 ms (`sync_check.py`).
+- [x] -14.0 LUFS integrated, true peak -1.9 dBFS on the final and the preview; no black frames; `freezedetect` finds nothing before the end card (43.47 s). Silence of 0.4 s or more starts at 42.59 s: the last 0.9 s of the muted question shot, then the end card.
+- [x] `qa_pops.py`: every guess pop 6.0 to 7.8 dB under its voice (v1's first pass measured the whole joined number and put three pops level with or over the voice; now measured over the 0.4 s from the hit); boom at the loudest guess's level, question pop 6 dB under it.
+- [x] Source camera motion under about 50 px/s on every cut used (`camera_speed.py`); the two cuts over it were dropped, not stabilized.
+- [x] 1080x1920, 30 fps, H.264 + AAC 48 kHz stereo; metadata read back with "INTERNAL TEST v1 - not for posting" and no copyright tag.
+- [x] Sidecar with every guess's source and timecode, unslop check 0 strong.
+- [ ] Swap in `cute_pop.wav` / `vine_boom.wav`.
+- [ ] Rob's review of the v1 preview.
+- [ ] A reveal ending, once the client gives the 2025 total in writing.

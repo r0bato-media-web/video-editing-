@@ -1,0 +1,49 @@
+ANGLE: Everybody at a charity golf day has a number in their head for the 50-50. Twelve golfers said theirs out loud at Mila's Mulligans 2025, and the guesses ran from $575 to $11,000. The reader is the person who's sure they'd have been closest.
+HATER TEST: The first draft opened on "We asked golfers to guess the 50-50," which only says what the clip shows. The new opening is the spread, and the line worth sending is the golfer who went "a little bit north of that just to be safe" and landed at $725.
+VERSION: v1, 15 Oct 2026 (body 43.5 s + end card, 47.5 s, 9:16). Twelve guesses, lowest to highest, on a raffle ticket with a pin for each guess on a number line. No total is revealed, because the real 2025 number isn't on file. It ends on "What did it hit?" INTERNAL TEST. Not approved for posting.
+
+INSTAGRAM
+$575 or $11,000? Twelve golfers guessed the 2025 50-50 and nobody landed in the same place. ⛳️
+
+One went "a little bit north of that just to be safe." Another went straight to eleven grand.
+
+Every dollar from this charity golf tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship. 💚
+
+What do you think it hit? Comment your guess, then send this to your foursome ⬇️ milasmulligans.com (link in bio)
+
+#MilasMulligans #GolfForACause #CharityGolf #LehighValley #BathPA
+Pinned comment: Guesses go here. How much did the 2025 50-50 hit?
+
+FACEBOOK (not connected to Metricool, posts by hand)
+How much did the 2025 50-50 hit? We asked twelve golfers at Mila's Mulligans and got everything from $575 to $11,000.
+
+Every dollar from the tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship. Put your guess in the comments. milasmulligans.com
+
+REPLYING TO COMMENTS: don't post the real total, or say who came closest, until the client gives the number in writing (their own post, a sign or an email). Then it goes in a reply or a follow-up post, with that source added below.
+
+SOURCES (internal, don't post)
+- "GUESS THE 50-50" hook card and the question under it: random_guy 1.72-4.38, the interviewer, "how much do you think the 50-50 is going to get up to today?"
+- "THROWBACK · MILA'S MULLIGANS 2025" tag: footage from Drive "2025 Milas Mulls" / TONY CONTENT, 2025 camera clips.
+- The twelve guesses, one per person, each checked by mic position and mouth on the number (contact sheets and full-res zooms, 15 Oct 2026), and by voice pitch in the jasmin_dad group:
+  $575 frankie 32.70-36.50 "50-50 is going to be 5-75"
+  $675 interview2 15.54-16.56 "675 dollars"
+  $700 frankie 20.14-22.46 "I think the 50-50 is going to hit 700 bucks"
+  $725 frankie 25.06-29.86 "I'm going to go a little bit north of that just to be safe. I'm going to say 7.25"
+  $855 jasmin_bf 18.66-22.40 "My guess is the 50-50 is going to get up to $855"
+  $1,150 random_guy 5.50-9.60 "I would say 1,150"
+  $2,000 jasmin_dad 8.10-10.86 "I think it's going to be a split of $2,000, $1,000 each"
+  $2,300 jasmin_dad 26.26-26.94 "2,300"
+  $2-3K interview3 9.06-10.28 "Couple, two, 3,000" (a range, shown as $2-3K, pinned at $2,500)
+  $5,000 angel 83.38-86.50 "I'm hoping it reaches maybe five grand, hopefully"
+  $7,000 evan_darien_int 38.52-41.96 "I hope it gets up to, I don't know, $7,000"
+  $11,000 evan_darien_int 43.66-46.58 "And I'm going to go with $11,000"
+- "12 GUESSES" and "$575 TO $11,000" on the end question: the list above.
+- Every burned-in caption word: the transcripts above, clipped to each cut. "5-75" and "7.25" are captioned 575 and 725, the way the ticket shows them. No names on screen.
+- Raffle ticket and number line: drawn for this reel in build_reel3.py, in the reel's colors, no clip art, no brand.
+- Every dollar funds the Arian Walker Hannon-Kohler Memorial Scholarship: milas-mulligans-captions skill, Event facts; the same line is on the approved end card.
+- milasmulligans.com: approved flyer.
+- Left out on purpose: the real 2025 total and any winner (no written source), Angel's "There's about 80 golfers" (no source for the field size), the interviewer's repeats of guesses and her "Show me the money" (muted under the question), and two guesses where the camera swings through the answer ("21-50" and "I say 1,500", jasmin_dad).
+
+ON CAMERA: the twelve golfers who guess, the interviewers, and people in the background, at the 2025 tournament, filmed by Tony. Release status: not checked. Ask the client whether their event sign-up covers social video.
+
+APPROVAL: Guess the 50-50 v1 9:16 · no calendar row yet · Approver: ________
