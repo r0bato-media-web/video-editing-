@@ -78,8 +78,10 @@ button.primary { background: var(--navy); border-color: var(--navy); color: #fff
 button:disabled { opacity: .55; cursor: not-allowed; }
 .review { border-top: 2px solid var(--line); padding-top: 16px; display: grid; gap: 12px; }
 form.rv { display: grid; gap: 10px; }
-.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-@media (max-width: 520px) { .row2 { grid-template-columns: minmax(0, 1fr); } }
+.notehead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+button.stamp { font-variant-numeric: tabular-nums; }
+button.ts { padding: 0 6px; border-radius: 5px; font-size: 13px; font-variant-numeric: tabular-nums; background: var(--mustard); border-color: var(--mustard); color: var(--navy); }
+.hint { font-size: 12px; color: var(--muted); margin: 0; }
 label { display: grid; gap: 4px; font-size: 13px; font-weight: 600; }
 input[type=text], textarea { font: inherit; font-weight: 400; font-size: 14px; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; width: 100%; }
 textarea { min-height: 84px; resize: vertical; }
@@ -167,8 +169,9 @@ footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; }
   REELS.forEach(function (r) {
     jump.appendChild(el('a', { href: '#' + r.id, text: r.title }));
     var frame = el('div', { class: 'frame' });
+    var v = null;
     if (r.video) {
-      var v = el('video', { controls: '', playsinline: '', preload: 'metadata', src: r.video, 'aria-label': r.title + ' reel' });
+      v = el('video', { controls: '', playsinline: '', preload: 'metadata', src: r.video, 'aria-label': r.title + ' reel' });
       frame.appendChild(v);
     } else {
       frame.appendChild(el('div', { class: 'pending', text: 'Video loading soon' }));
@@ -186,25 +189,32 @@ footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; }
     var nm = savedName();
     var nameIn = el('input', { type: 'text', id: r.id + '-name', autocomplete: 'name', required: '' });
     nameIn.value = nm.name || '';
-    var orgIn = el('input', { type: 'text', id: r.id + '-org', autocomplete: 'organization' });
-    orgIn.value = nm.org || '';
     var fs = el('fieldset', null, [el('legend', { text: 'Your call' })]);
     ['approved', 'small', 'changes'].forEach(function (k) {
       var inp = el('input', { type: 'radio', name: r.id + '-decision', value: k, id: r.id + '-' + k });
       fs.appendChild(el('label', { class: 'choice', for: r.id + '-' + k }, [inp, el('span', { text: LABEL[k] })]));
     });
-    var notes = el('textarea', { id: r.id + '-notes', placeholder: 'What should change? Times help, like "at 0:12, the caption..."' });
+    var notes = el('textarea', { id: r.id + '-notes', placeholder: 'What should change? Pause the video and tap the time button to mark the moment.' });
+    var stamp = el('button', { type: 'button', class: 'stamp', text: 'Add time 0:00' });
+    if (v) v.addEventListener('timeupdate', function () { stamp.textContent = 'Add time ' + mmss(v.currentTime); });
+    stamp.addEventListener('click', function () {
+      var t = v ? mmss(v.currentTime) : '0:00';
+      var a = notes.selectionStart != null ? notes.selectionStart : notes.value.length;
+      var pre = notes.value.slice(0, a), post = notes.value.slice(a);
+      var ins = (pre && !/\s$/.test(pre) ? '\n' : '') + t + ' ';
+      notes.value = pre + ins + post;
+      notes.focus(); notes.selectionStart = notes.selectionEnd = (pre + ins).length;
+    });
     var submit = el('button', { type: 'submit', class: 'primary', text: 'Submit review' });
     var status = el('p', { class: 'status', role: 'status' });
-    form.appendChild(el('div', { class: 'row2' }, [
-      el('label', { for: r.id + '-name' }, [document.createTextNode('Your name'), nameIn]),
-      el('label', { for: r.id + '-org' }, [document.createTextNode('Role or organization (optional)'), orgIn])
-    ]));
+    form.appendChild(el('label', { for: r.id + '-name' }, [document.createTextNode('Your name'), nameIn]));
     form.appendChild(fs);
-    form.appendChild(el('label', { for: r.id + '-notes' }, [document.createTextNode('Notes'), notes]));
+    form.appendChild(el('div', { class: 'notehead' }, [el('label', { for: r.id + '-notes', text: 'Notes' }), stamp]));
+    form.appendChild(notes);
+    form.appendChild(el('p', { class: 'hint', text: 'Times in a note, like 0:12, become buttons that jump the video to that moment.' }));
     form.appendChild(el('div', null, [submit]));
     form.appendChild(status);
-    form.addEventListener('submit', function (e) { e.preventDefault(); submitReview(r, form, nameIn, orgIn, notes, submit, status); });
+    form.addEventListener('submit', function (e) { e.preventDefault(); submitReview(r, form, nameIn, notes, submit, status); });
 
     var list = el('div', { class: 'list' }, [el('p', { class: 'empty', text: 'No reviews yet. Be the first.' })]);
     var side = el('div', { class: 'side' }, [
@@ -216,12 +226,33 @@ footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; }
       el('section', { class: 'review', 'aria-label': 'Review ' + r.title }, [el('h3', { text: 'Leave your review' }), form, el('h3', { text: 'Reviews so far' }), list])
     ]);
     reelsEl.appendChild(el('article', { class: 'reel', id: r.id }, [player, side]));
-    refs[r.id] = { submit: submit, status: status, list: list, saveBtn: saveBtn };
+    refs[r.id] = { submit: submit, status: status, list: list, saveBtn: saveBtn, video: v };
   });
   reelsEl.style.display = 'grid'; reelsEl.style.gap = '28px';
 
   function fmt(ts) {
-    try { return new Date(ts).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; }
+    try { return new Date(ts).toLocaleString([], { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; }
+  }
+
+  function mmss(t) { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + ('0' + (t % 60)).slice(-2); }
+
+  function noteWithTimes(text, video) {
+    var p = el('p'), re = /\b(\d{1,2}):([0-5]\d)\b/g, last = 0, m;
+    while ((m = re.exec(text))) {
+      p.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var secs = (+m[1]) * 60 + (+m[2]);
+      if (video) {
+        var b = el('button', { type: 'button', class: 'ts', text: m[0], 'aria-label': 'Play from ' + m[0] });
+        b.addEventListener('click', (function (s) { return function () {
+          video.currentTime = s; var pr = video.play(); if (pr && pr.catch) pr.catch(function () {});
+          video.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }; })(secs));
+        p.appendChild(b);
+      } else p.appendChild(document.createTextNode(m[0]));
+      last = re.lastIndex;
+    }
+    p.appendChild(document.createTextNode(text.slice(last)));
+    return p;
   }
 
   function render(docs) {
@@ -229,37 +260,37 @@ footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; }
       var rows = [];
       docs.forEach(function (d) {
         var x = d.reels && d.reels[r.id];
-        if (x && x.decision) rows.push({ name: d.name, org: d.org, decision: x.decision, notes: x.notes, at: x.at });
+        if (x && x.decision) rows.push({ name: d.name, decision: x.decision, notes: x.notes, at: x.at });
       });
       rows.sort(function (a, b) { return (b.at || 0) - (a.at || 0); });
       var list = refs[r.id].list; list.textContent = '';
       if (!rows.length) { list.appendChild(el('p', { class: 'empty', text: 'No reviews yet. Be the first.' })); return; }
       rows.forEach(function (x) {
         var who = el('div', { class: 'who' }, [
-          el('span', { text: (x.name || 'Someone') + (x.org ? ', ' + x.org : '') }),
+          el('span', { text: x.name || 'Someone' }),
           el('span', { class: 'chip ' + x.decision, text: LABEL[x.decision] || x.decision }),
           el('span', { class: 'when', text: fmt(x.at) })
         ]);
-        list.appendChild(el('div', { class: 'entry' }, [who, x.notes ? el('p', { text: x.notes }) : null]));
+        list.appendChild(el('div', { class: 'entry' }, [who, x.notes ? noteWithTimes(x.notes, refs[r.id].video) : null]));
       });
     });
   }
 
-  function submitReview(r, form, nameIn, orgIn, notes, submit, status) {
+  function submitReview(r, form, nameIn, notes, submit, status) {
     status.className = 'status'; status.textContent = '';
-    var name = nameIn.value.trim(), org = orgIn.value.trim();
+    var name = nameIn.value.trim();
     var pick = form.querySelector('input[type=radio]:checked');
     if (!name) { status.className = 'status err'; status.textContent = 'Add your name so we know who signed off.'; nameIn.focus(); return; }
     if (!pick) { status.className = 'status err'; status.textContent = 'Pick Approved, Approved with small changes, or Needs changes.'; return; }
     if (!me.db || !me.uid) { status.className = 'status err'; status.textContent = 'Reviews can only be saved by signed-in people with Contributor access. Ask Rob to share it with you as a Contributor.'; return; }
-    rememberName({ name: name, org: org });
+    rememberName({ name: name });
     submit.disabled = true; submit.textContent = 'Saving';
     var ref = me.db.doc('reviews/' + me.uid);
     ref.get().then(function (snap) {
       var cur = (snap.exists && snap.data()) ? JSON.parse(JSON.stringify(snap.data())) : {};
       var reels = cur.reels || {};
       reels[r.id] = { decision: pick.value, notes: notes.value.trim(), at: Date.now() };
-      return ref.set({ name: name, org: org, reels: reels, updatedAt: Date.now() });
+      return ref.set({ name: name, reels: reels, updatedAt: Date.now() });
     }).then(function () {
       status.className = 'status ok'; status.textContent = 'Saved. Thank you. Submitting again replaces your review for this reel.';
     }, function (e) {
