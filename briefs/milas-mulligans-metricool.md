@@ -56,7 +56,7 @@ None of these are scheduled. Each needs Rob's OK for that post, and the client's
 
 | Slot | Piece | Note |
 |---|---|---|
-| Wed 21 Oct, 10 am | Hot dog reel v18 (v19 if Rob approves it) | Strongest finished piece. Talking reel, so it gets the Instagram music bed |
+| Wed 21 Oct, 10 am | Hot dog reel v19 | Strongest finished piece. Talking reel, so it gets the Instagram music bed |
 | Fri 23 Oct, 10 am | Where your mulligan goes, one style, 9:16 | Silent explainer. The other style goes to Facebook once it's connected |
 | Wed 28 Oct, 10 am | Mayo or sand? v3 | Internal final, approved by Rob 15 Oct. Talking reel, so it gets the Instagram music bed. SFX kit swap still to do |
 | After Mayo or sand? | Guess the 50-50 v1 | Built 15 Oct with no reveal, so it can go before the total is known. Rob's review first. Don't answer "what did it hit?" in the comments without the client's written number |

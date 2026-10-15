@@ -6,7 +6,7 @@ Internal. Written 14 Oct 2026. The 2026 tournament (Sat 22 Aug, Whitetail Golf C
 
 | # | Piece | State | What it needs |
 |---|---|---|---|
-| 1 | Hot dog reel v18 (9:16); v19 adds Darryl's "A hot dog is in a casing, bro." | v18 internal final, approved by Rob 14 Oct; v19 needs Rob's look | Rob picks v18 or v19, client OK, then a slot |
+| 1 | Hot dog reel v19 (9:16), with Darryl's "A hot dog is in a casing, bro." | Internal final, approved by Rob 15 Oct ("v19 is good") | Client OK, then a slot |
 | 2 | "Where your mulligan goes" explainers v2 (isometric, whiteboard; 9:16 and 16:9) | Internal finals, approved by Rob 14 Oct | Pick one style for Instagram, run the other on Facebook |
 | 3 | Mayo or sand? reel v3 (9:16), v4 adds one line | v3 internal final, approved by Rob 15 Oct; v4 (15 Oct) keeps the floral-shirt golfer's "I ain't doing that." and needs Rob's look | Client OK, then a slot. Swap in the SFX kit (`cute_pop.wav`, `vine_boom.wav`) when it's reachable, and Rob listens again |
 | 4 | Guess the 50-50 reel v3 (9:16) | Built 15 Oct, v3 with full answers start to end, internal test, no reveal: ends on "What did it hit?" (Rob, 15 Oct: "Make a third video now") | Rob's review. A reveal version needs the real 2025 total and where it's written down |

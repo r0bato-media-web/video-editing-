@@ -1,6 +1,6 @@
 # Mila's Mulligans 2025 throwback: "Is a hot dog a sandwich?"
 
-Internal test v19, 15 Oct 2026. Not approved for posting. v18 was the internal final; v19 needs Rob's look before it replaces v18.
+Internal test v19, 15 Oct 2026: the internal final (Rob, 15 Oct 2026: "v19 is good"). Not approved for posting: needs the client's OK and Rob's go per post.
 
 A 22.0 s vertical reel (9:16 only; Rob, 14 Oct 2026: no horizontal version): golfers from Mila's Mulligans 2025 answer the question, a live tally counts the votes, and the end card (`End-*` in `explainers/milas-mulligans`) says where the money goes. Footage: the "2025 Milas Mulls" Drive folder, captured by Tony. Footage and renders stay out of git.
 
