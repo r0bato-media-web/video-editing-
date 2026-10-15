@@ -18,7 +18,10 @@ Left out on purpose:
   angel 87.18 "Last person said 675...", evan_darien_int 47.60 "Show me the money." Not guesses, and the piece
   never ends on the interviewer.
 - angel 74.17 "There's about 80 golfers": a guess at the field size with no source.
-Out points are set from the audio (level in 50 ms windows after the last word), not from the transcript.
+Out points (v2, Rob, 15 Oct 2026: "you cut off people's answers too early"): each answer runs to the end of
+that person's turn, the rest of the sentence, a sign-off ("Book it.", "That's my guess.") or a laugh, and stops
+just before the interviewer's next word. v1 cut at the first dip in level after the number, which dropped
+"That's my guess." and the $2,000 golfer's "And that's a great prize today for anybody who's involved in the 50-50."
 
 Usage: python build_reel3.py <m25_dir> [version]        (9:16 only)
 """
@@ -36,17 +39,18 @@ W, H = 1080, 1920
 # the same frame its caption appears (v1 popped on the last word, up to 2 s after the caption).
 CUTS = [
     ('random_guy',       1.70,  4.50, 1560, True,  None),                      # interviewer: how much do you think the 50-50 is going to get up to today?
-    ('frankie',         32.58, 36.80, 1010, False, (575, '$575', 34.50)),      # navy polo, cap: 50-50 is going to be 5-75.
-    ('interview2',      15.40, 16.66,  870, False, (675, '$675', 15.54)),      # navy polo, green cap: 675 dollars.
-    ('frankie',         20.05, 22.62, 1080, False, (700, '$700', 21.72)),      # blue polo, pointing: I think the 50-50 is going to hit 700 bucks.
-    ('frankie',         25.00, 30.10,  940, False, (725, '$725', 29.42)),      # black polo, beard: a little bit north of that just to be safe. 7.25.
-    ('jasmin_bf',       18.55, 22.70,  650, False, (855, '$855', 21.08)),      # grey polo: My guess is the 50-50 is going to get up to $855.
-    ('random_guy',       5.40,  9.97,  590, False, (1150, '$1,150', 8.54)),    # floral shirt, grey cap: I would say 1,150.
-    ('jasmin_dad',       8.05, 10.94,  470, False, (2000, '$2,000', 9.32)),    # blue cap, dark glasses: a split of $2,000, $1,000 each.
+    ('frankie',         32.58, 36.98, 1010, False, (575, '$575', 34.50)),      # navy polo, cap: 50-50 is going to be 5-75.
+    ('interview2',      15.40, 16.76,  870, False, (675, '$675', 15.54)),      # navy polo, green cap: 675 dollars.
+    ('frankie',         20.05, 23.05, 1080, False, (700, '$700', 21.72)),      # blue polo, pointing: I think the 50-50 is going to hit 700 bucks.
+    ('frankie',         25.00, 30.30,  940, False, (725, '$725', 29.42)),      # black polo, beard: a little bit north of that just to be safe. 7.25.
+    ('jasmin_bf',       18.55, 24.38,  650, False, (855, '$855', 21.08)),      # grey polo: My guess is the 50-50 is going to get up to $855.
+    ('random_guy',       5.40, 10.16,  590, False, (1150, '$1,150', 8.54)),    # floral shirt, grey cap: I would say 1,150.
+    ('jasmin_dad',       8.05, 10.96,  470, False, (2000, '$2,000', 9.32)),    # blue cap, dark glasses: I think it's going to be a split of $2,000, $1,000 each.
+    ('jasmin_dad',      10.96, 15.40,  340, False, None),                      # same golfer: And that's a great prize today for anybody who's involved in the 50-50. (v2: steps left to x 120 on "involved" and back while the tree behind holds still; own static crop from the sentence break)
     ('jasmin_dad',      26.18, 27.40,  900, False, (2300, '$2,300', 26.56)),   # light-blue cap, teal glasses: 2,300.
-    ('interview3',       8.95, 10.40,  530, False, (2500, '$2–3K', 9.94)),     # floral shirt, glasses: Couple, two, 3,000.
-    ('angel',           83.25, 86.70, 1410, False, (5000, '$5,000', 84.84)),   # pink floral shirt: maybe five grand, hopefully.
-    ('evan_darien_int', 38.40, 42.28, 1000, False, (7000, '$7,000', 41.52)),   # white top, sunglasses: I hope it gets up to, I don't know, $7,000.
+    ('interview3',       8.95, 10.72,  530, False, (2500, '$2–3K', 9.94)),     # floral shirt, glasses: Couple, two, 3,000.
+    ('angel',           83.25, 87.05, 1410, False, (5000, '$5,000', 84.84)),   # pink floral shirt: maybe five grand, hopefully.
+    ('evan_darien_int', 38.40, 42.64, 1000, False, (7000, '$7,000', 41.52)),   # white top, sunglasses: I hope it gets up to, I don't know, $7,000.
     ('evan_darien_int', 43.55, 49.40,  700, False, (11000, '$11,000', 45.90)), # navy jacket: And I'm going to go with $11,000.
 ]
 # The last shot plays on live under the question; its sound fades after the laugh, before the interviewer's "Show me the money."
@@ -275,9 +279,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
 
 def main():
-    timeline, t = [], 0.0
+    timeline, t, prev = [], 0.0, None
     for clip, a, b, cx, hook, guess in CUTS:
+        if prev and prev[0] == clip and abs(a - prev[1]) < 0.05:
+            a = prev[1]   # a reframe within one answer continues from the frame the last cut ended on
         b = a + round((b - a) * 30) / 30
+        prev = (clip, b)
         timeline.append({'clip': clip, 'in': a, 'out': b, 'cx': cx, 'hook': hook, 'guess': guess, 't0': t, 'words': words_for(clip, a, b)})
         t += b - a
     total = t

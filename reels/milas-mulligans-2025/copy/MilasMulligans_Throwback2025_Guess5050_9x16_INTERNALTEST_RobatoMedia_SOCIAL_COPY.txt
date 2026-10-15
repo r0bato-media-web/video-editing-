@@ -1,6 +1,6 @@
 ANGLE: Everybody at a charity golf day has a number in their head for the 50-50. Twelve golfers said theirs out loud at Mila's Mulligans 2025, and the guesses ran from $575 to $11,000. The reader is the person who's sure they'd have been closest.
 HATER TEST: The first draft opened on "We asked golfers to guess the 50-50," which only says what the clip shows. The new opening is the spread, and the line worth sending is the golfer who went "a little bit north of that just to be safe" and landed at $725.
-VERSION: v1, 15 Oct 2026 (body 43.5 s + end card, 47.5 s, 9:16). Twelve guesses, lowest to highest, on a raffle ticket with a pin for each guess on a number line. No total is revealed, because the real 2025 number isn't on file. It ends on "What did it hit?" INTERNAL TEST. Not approved for posting.
+VERSION: v2, 15 Oct 2026 (body 51.7 s + end card, 55.8 s, 9:16). v2 lets every answer run to the end of the person's turn (Rob: "you cut off people's answers too early"). Twelve guesses, lowest to highest, on a raffle ticket with a pin for each guess on a number line. No total is revealed, because the real 2025 number isn't on file. It ends on "What did it hit?" INTERNAL TEST. Not approved for posting.
 
 INSTAGRAM
 $575 or $11,000? Twelve golfers guessed the 2025 50-50 and nobody landed in the same place. ⛳️
@@ -27,11 +27,11 @@ SOURCES (internal, don't post)
 - The twelve guesses, one per person, each checked by mic position and mouth on the number (contact sheets and full-res zooms, 15 Oct 2026), and by voice pitch in the jasmin_dad group:
   $575 frankie 32.70-36.50 "50-50 is going to be 5-75"
   $675 interview2 15.54-16.56 "675 dollars"
-  $700 frankie 20.14-22.46 "I think the 50-50 is going to hit 700 bucks"
+  $700 frankie 20.14-22.46 "I think the 50-50 is going to hit 700 bucks", then "Book it." 22.70-22.98 (said by the blue polo or the black polo next to him, both in frame; the pitch doesn't settle it, so the caption names no one)
   $725 frankie 25.06-29.86 "I'm going to go a little bit north of that just to be safe. I'm going to say 7.25"
-  $855 jasmin_bf 18.66-22.40 "My guess is the 50-50 is going to get up to $855"
+  $855 jasmin_bf 18.66-24.14 "My guess is the 50-50 is going to get up to $855. That's my guess."
   $1,150 random_guy 5.50-9.60 "I would say 1,150"
-  $2,000 jasmin_dad 8.10-10.86 "I think it's going to be a split of $2,000, $1,000 each"
+  $2,000 jasmin_dad 8.10-15.06 "I think it's going to be a split of $2,000, $1,000 each. And that's a great prize today for anybody who's involved in the 50-50."
   $2,300 jasmin_dad 26.26-26.94 "2,300"
   $2-3K interview3 9.06-10.28 "Couple, two, 3,000" (a range, shown as $2-3K, pinned at $2,500)
   $5,000 angel 83.38-86.50 "I'm hoping it reaches maybe five grand, hopefully"
@@ -46,4 +46,4 @@ SOURCES (internal, don't post)
 
 ON CAMERA: the twelve golfers who guess, the interviewers, and people in the background, at the 2025 tournament, filmed by Tony. Release status: not checked. Ask the client whether their event sign-up covers social video.
 
-APPROVAL: Guess the 50-50 v1 9:16 · no calendar row yet · Approver: ________
+APPROVAL: Guess the 50-50 v2 9:16 · no calendar row yet · Approver: ________
