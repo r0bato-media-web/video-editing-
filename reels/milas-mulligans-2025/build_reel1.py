@@ -1,5 +1,7 @@
-"""Reel 1 v17: 'Is a hot dog a sandwich?' Cuts, static crops, hook, hot-dog scoreboard, FINAL card and captions,
+"""Reel 1 v19: 'Is a hot dog a sandwich?' Cuts, static crops, hook, hot-dog scoreboard, FINAL card and captions,
 and sound: a pop on every scoreboard change, a boom under the FINAL reveal (Rob, 14 Oct 2026).
+v19 (Rob, 15 Oct 2026: "you cut off people's answers too early", then "in a casing bro"): Darryl's answer runs on
+through "A hot dog is in a casing, bro." to just before the interviewer's "Alright" (43.07).
 
 Usage: python build_reel1.py <m25_dir> 916
 (The reel ships vertical only; Rob, 14 Oct 2026. Passing 169 still renders a horizontal body if one is ever asked for.)
@@ -9,25 +11,26 @@ import json, os, subprocess, sys
 M, SHAPE = sys.argv[1], sys.argv[2]
 RAW, TR, OUT, SFX = (os.path.join(M, d) for d in ('raw', 'transcripts', 'reel1', 'sfx'))
 W, H = (1080, 1920) if SHAPE == '916' else (1920, 1080)
+V = 'v19'
 
 # clip, in, out, 9:16 centre x, zoom, unused, hook?
 # v8 (Rob, 8 Oct 2026: "video froze at 5 seconds"): no frozen frames anywhere. The sunglasses answer is cut (it needed a
 # hold to hide a camera pan); the ending plays the driver's shot on live under FINAL with the interviewer's next words muted.
 CUTS = [
     ('int_darryl',      15.00, 17.85, 1360, 1.0, None, True),        # Ava: is a hot dog a sandwich or not? (steady, facing camera)
-    ('int_ant',         16.00, 16.56, 560, 1.0, None, False),        # Yes. (pink shirt, white cap: mic on him, mouth open on the word)
-    ('int_ant',         16.96, 17.50, 780, 1.0, None, False),        # No. (navy shirt, mic on him)
-    ('int_ant',         17.50, 17.93, 1060, 1.0, None, False),       # No. (floral shirt: his mouth on the word, a higher voice than navy's)
-    ('int_ant',         17.93, 18.40, 1390, 1.0, None, False),       # Yes. (white shirt, far right: his mouth on the word, a third voice)
+    ('int_ant',         16.00, 16.56, 560, 1.0, None, False),        # Yes. (pink shirt, white cap: mic on this golfer, mouth open on the word)
+    ('int_ant',         16.96, 17.50, 780, 1.0, None, False),        # No. (navy shirt, mic on this golfer)
+    ('int_ant',         17.50, 17.93, 1060, 1.0, None, False),       # No. (floral shirt: this golfer's mouth on the word, a higher voice than navy's)
+    ('int_ant',         17.93, 18.40, 1390, 1.0, None, False),       # Yes. (white shirt, far right: this golfer's mouth on the word, a third voice)
     ('int_darryl',      35.29, 37.59, 860, 1.0, None, False),        # A hot dog in my book is
-    ('int_darryl',      37.59, 39.22, 820, 1.15, None, False),       # NOT a sandwich. It's a hot dog. (punch-in)
-    ('int_hotdog',      43.60, 44.06, 1000, 1.0, None, False),       # No, (black-cap friend: her voice, ~188 Hz)
+    ('int_darryl',      37.59, 42.95, 820, 1.15, None, False),       # NOT a sandwich. A hot dog is in a casing, bro. (punch-in; out before "Alright" 43.07)
+    ('int_hotdog',      43.60, 44.06, 1000, 1.0, None, False),       # No, (black-cap friend: this voice, ~188 Hz)
     ('int_hotdog',      44.06, 45.16, 760, 1.0, None, False),        # not a sandwich (trucker cap, first cart: a lower voice)
-    ('int_hotdog',      56.64, 57.16, 660, 1.0, None, False),        # No, (trucker cap; her mouth, mic on her)
-    ('int_hotdog',      57.16, 57.72, 980, 1.0, None, False),        # it's (driver: mic moves to her, her mouth moves)
+    ('int_hotdog',      56.64, 57.16, 660, 1.0, None, False),        # No, (trucker cap; this golfer's mouth, mic on this golfer)
+    ('int_hotdog',      57.16, 57.72, 980, 1.0, None, False),        # it's (driver: mic moves to the driver, the driver's mouth moves)
     ('int_hotdog',      57.72, 60.45, 980, 1.15, None, False),       # DEFINITELY not a sandwich (driver punch-in), plays on live under FINAL, sound faded
 ]
-MUTE = {('int_hotdog', 57.72): 58.95}  # fade after the driver's closing "No" (her mouth, her voice); the interviewer's "all right" (58.98) is never heard
+MUTE = {('int_hotdog', 57.72): 58.95}  # fade after the driver's closing "No" (the driver's mouth and voice); the interviewer's "all right" (58.98) is never heard
 HOLD = 0.0
 
 
@@ -54,9 +57,20 @@ BREAK_BEFORE = {('int_darryl', 36.19), ('int_hotdog', 57.98)}
 YFRAC = {}
 
 
+# Where the transcript has the words wrong, these replace it inside (from, to). Darryl's line after "not a sandwich":
+# the transcript heard "A hot dog is in case."; Rob, 15 Oct 2026: "in a casing bro" (medium.en heard "in the casing, bruh",
+# small.en "encasing, bro"; Rob's wording is used). Word times from those re-transcriptions and the level of darryl.wav.
+WORD_FIX = {'int_darryl': (38.9, 43.0, [('A', 39.24, 39.42), ('hot', 39.42, 39.62), ('dog', 39.62, 39.92), ('is', 39.92, 41.86),
+                                        ('in', 41.86, 42.00), ('a', 42.00, 42.10), ('casing,', 42.10, 42.44), ('bro.', 42.58, 42.84)])}
+
+
 def words_for(clip, a, b):
-    return [w for s in json.load(open(os.path.join(TR, clip + '.json'))) for w in s['words']
-            if w['s'] >= a - 0.02 and w['s'] < b - 0.05]  # any word that starts inside the cut
+    ws = [w for s in json.load(open(os.path.join(TR, clip + '.json'))) for w in s['words']]
+    if clip in WORD_FIX:
+        f0, f1, fix = WORD_FIX[clip]
+        ws = sorted([w for w in ws if not f0 <= w['s'] < f1] + [{'w': ' ' + x, 's': s_, 'e': e_} for x, s_, e_ in fix],
+                    key=lambda w: w['s'])
+    return [w for w in ws if w['s'] >= a - 0.02 and w['s'] < b - 0.05]  # any word that starts inside the cut
 
 
 def ts(t):
@@ -209,7 +223,7 @@ def main():
                          'words': words_for(clip, a, b)})
         t += b - a
     total = t + HOLD
-    json.dump(timeline, open(os.path.join(OUT, 'timeline_v17.json'), 'w'), indent=1)
+    json.dump(timeline, open(os.path.join(OUT, f'timeline_{V}.json'), 'w'), indent=1)
     inputs, fl = [], []
     for i, seg in enumerate(timeline):
         inputs += ['-ss', f"{seg['in']:.3f}", '-to', f"{seg['out']:.3f}", '-i', os.path.join(RAW, seg['clip'] + '.mp4')]
@@ -249,12 +263,12 @@ def main():
         ms = round(at * 1000)
         fl.append(f"[{n + j}:a]volume={db}dB,adelay={ms}|{ms}[s{j}]")
     fl.append('[dry]' + ''.join(f'[s{j}]' for j in range(len(hits))) + f"amix=inputs={len(hits) + 1}:normalize=0:duration=first[ac]")
-    json.dump([{'t': round(a, 3), 'sound': s_, 'dB': d} for a, s_, d in hits], open(os.path.join(OUT, 'sfx_v17.json'), 'w'), indent=1)
-    ass = os.path.join(OUT, f'captions_v17_{SHAPE}.ass')
+    json.dump([{'t': round(a, 3), 'sound': s_, 'dB': d} for a, s_, d in hits], open(os.path.join(OUT, f'sfx_{V}.json'), 'w'), indent=1)
+    ass = os.path.join(OUT, f'captions_{V}_{SHAPE}.ass')
     open(ass, 'w').write(build_ass(timeline, total))
     fl.append(f"[vc]subtitles={ass}[vo]")
     fl.append("[ac]loudnorm=I=-14:TP=-1.5:LRA=11[ao]")
-    out = os.path.join(OUT, f'body_v17_{SHAPE}.mp4')
+    out = os.path.join(OUT, f'body_{V}_{SHAPE}.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y'] + inputs + ['-filter_complex', ';'.join(fl),
                     '-map', '[vo]', '-map', '[ao]', '-c:v', 'libx264', '-crf', '18', '-preset', 'medium',
                     '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', out], check=True)
