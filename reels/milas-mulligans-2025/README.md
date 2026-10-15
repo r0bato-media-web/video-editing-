@@ -78,7 +78,7 @@ Camera motion: `camera_speed.py <m25> <clip> <in> <out>` measures camera speed o
 
 Internal final v3, approved by Rob 15 Oct 2026 ("Ok this cut is good"). Not approved for posting: that needs the client's OK and Rob's go per post. Filed in Drive MilasMulligans_FINALS_14Oct2026 / 04_MayoOrSand_v3.
 
-v4, 15 Oct 2026 (Rob: "you cut off people's answers too early"), needs Rob's look before it replaces v3: the floral-shirt golfer's answer runs on through "I ain't doing that." (150 Hz, the golfer's voice; the interviewer is 229 Hz) to just before the interviewer's "Mayo all the way" (out 20.09, was 19.40). Every other cut was checked at both ends: the rest end on the last word of the turn and start on its first word. Two lines stay out on purpose: the blue polo's "Best condiment in the world" (the camera swings away at 300-376 px/s as it's said) and Darryl's "wash it out with more booze" (muted under FINAL since v1). v4 checks: 27.6 s, -14.1 LUFS, true peak -2.0 dBFS, sync within 1 ms, no black frames, no freeze before the end card, 111 frames every 0.25 s.
+v4, 15 Oct 2026 (Rob: "you cut off people's answers too early"), the internal final (Rob, 15 Oct 2026: "Ok to the videos approved"), replaces v3: the floral-shirt golfer's answer runs on through "I ain't doing that." (150 Hz, the golfer's voice; the interviewer is 229 Hz) to just before the interviewer's "Mayo all the way" (out 20.09, was 19.40). Every other cut was checked at both ends: the rest end on the last word of the turn and start on its first word. Two lines stay out on purpose: the blue polo's "Best condiment in the world" (the camera swings away at 300-376 px/s as it's said) and Darryl's "wash it out with more booze" (muted under FINAL since v1). v4 checks: 27.6 s, -14.1 LUFS, true peak -2.0 dBFS, sync within 1 ms, no black frames, no freeze before the end card, 111 frames every 0.25 s.
 
 A 26.9 s vertical reel (22.8 s body + the same 4.5 s end card): ten golfers from Mila's Mulligans 2025 answer "would you rather eat a jar full of mayonnaise or a handful of sand?", a two-pill scoreboard (MAYO, SAND) counts the votes, and the FINAL card calls it: IT'S A TIE, 5-5. Darryl's "handful of sand all day every day" casts the tying vote and plays on live under FINAL, with the sound faded before "wash it out with more booze".
 
@@ -116,11 +116,11 @@ Votes, checked by mic position and mouth on the word: Mayo, frankie 42.22 (blue 
 - [x] 1080x1920, 30 fps, H.264 + AAC 48 kHz stereo; metadata read back with "INTERNAL TEST v3 - not for posting" and no copyright tag.
 - [x] Sidecar updated to v3, unslop check 0 strong; copy in Drive 02 INTERNAL / MilasMulligans_MayoOrSand_v3_INTERNALTEST_14Oct2026.
 - [ ] Swap in `cute_pop.wav` / `vine_boom.wav`.
-- [ ] Rob's review of the v3 preview.
+- [x] Rob approved v4 (Rob, 15 Oct 2026: "Ok to the videos approved").
 
 # Reel 3: "Guess the 50-50"
 
-Internal test v3, 15 Oct 2026. Not approved for posting.
+Internal final v3, 15 Oct 2026 (Rob, 15 Oct 2026: "Ok to the videos approved"). Not approved for posting: needs the client's OK and Rob's go per post.
 
 A 60.2 s vertical reel (56.1 s body + the same end card). The interviewer asks how much the 50-50 will reach, then twelve golfers from Mila's Mulligans 2025 answer, lowest to highest: $575, $675, $700, $725, $855, $1,150, $2,000, $2,300, $2-3K, $5,000, $7,000, $11,000. A drawn raffle ticket at the top shows "GUESS #n" and "$ ?", and the number pops in on the first word of the guess, with a pin on a log-scale number line ($500 to $10K) that stays for the rest of the reel. The real 2025 total isn't on file, so there is no reveal (Rob, 15 Oct 2026: "Make a third video now"). It ends on the last golfer's live shot, dimmed and muted after the laugh, with "12 GUESSES", "$575 TO $11,000", "WHAT DID IT HIT?" and "COMMENT YOUR GUESS", then the end card.
 
@@ -157,5 +157,5 @@ Clip names are the list.tsv names; random_guy, interview2, jasmin_dad, angel and
 - [x] 1080x1920, 30 fps, H.264 + AAC 48 kHz stereo; metadata read back with "INTERNAL TEST v1 - not for posting" and no copyright tag.
 - [x] Sidecar with every guess's source and timecode, unslop check 0 strong.
 - [ ] Swap in `cute_pop.wav` / `vine_boom.wav`.
-- [ ] Rob's review of the v3 preview.
+- [x] Rob approved v3 (Rob, 15 Oct 2026: "Ok to the videos approved").
 - [ ] A reveal ending, once the client gives the 2025 total in writing.

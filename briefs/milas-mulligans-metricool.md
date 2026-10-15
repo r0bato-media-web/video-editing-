@@ -58,8 +58,8 @@ None of these are scheduled. Each needs Rob's OK for that post, and the client's
 |---|---|---|
 | Wed 21 Oct, 10 am | Hot dog reel v19 | Strongest finished piece. Talking reel, so it gets the Instagram music bed |
 | Fri 23 Oct, 10 am | Where your mulligan goes, one style, 9:16 | Silent explainer. The other style goes to Facebook once it's connected |
-| Wed 28 Oct, 10 am | Mayo or sand? v3 | Internal final, approved by Rob 15 Oct. Talking reel, so it gets the Instagram music bed. SFX kit swap still to do |
-| After Mayo or sand? | Guess the 50-50 v1 | Built 15 Oct with no reveal, so it can go before the total is known. Rob's review first. Don't answer "what did it hit?" in the comments without the client's written number |
+| Wed 28 Oct, 10 am | Mayo or sand? v4 | Internal final, approved by Rob 15 Oct. Talking reel, so it gets the Instagram music bed. SFX kit swap still to do |
+| After Mayo or sand? | Guess the 50-50 v3 | Internal final, approved by Rob 15 Oct. No reveal, so it can go before the total is known. Don't answer "what did it hit?" in the comments without the client's written number |
 
 One post a week after that, on Wednesday or Friday at 10 am, keeps the account alive until next year's date is out.
 
@@ -67,7 +67,7 @@ One post a week after that, on Wednesday or Friday at 10 am, keeps the account a
 
 - Talking reels on Instagram get an instrumental from Instagram's library in `instagramData.audioConfiguration`, `audioVolume` 10, `videoVolume` 100 (the r0bato-video rule from 28 Sep 2026). Search a term first, then set the numeric id of an instrumental. After it posts, check the sound label on the live Reel and have Rob listen.
 - The silent explainers can take a music bed too. That's Rob's call per post.
-- Captions come from each piece's `_SOCIAL_COPY.txt`. All four sidecars are in Drive, MilasMulligans_FINALS_14Oct2026 (Mayo or sand? in `04_MayoOrSand_v3`), and the Mayo or sand? one is also in `reels/milas-mulligans-2025/copy/`.
+- Captions come from each piece's `_SOCIAL_COPY.txt`. The sidecars are in Drive, MilasMulligans_FINALS_14Oct2026, and all three reels' copy is in `reels/milas-mulligans-2025/copy/`; the review page shows the same captions.
 - Facebook can't take music through Metricool.
 
 ## What Rob needs to do
