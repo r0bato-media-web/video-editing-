@@ -1,0 +1,38 @@
+ANGLE: Every foursome has one argument that never ends. Nine golfers at Mila's Mulligans 2025 got this one, and one of them explained the ruling: "A hot dog is in a casing, bro." The reader is the person who's about to argue about it in the comments.
+HATER TEST: "We asked golfers if a hot dog is a sandwich" only says what the clip shows. The opening leads with the question and the golfer's ruling, and the final score stays in the video so the comments do the arguing.
+VERSION: v19, 15 Oct 2026 (body 17.9 s + end card, 22.0 s, 9:16). Internal final (Rob, 15 Oct 2026: "v19 is good"). v19 = v18 plus Darryl's line after "not a sandwich", "A hot dog is in a casing, bro." (Rob: "in a casing bro"). The v18 sidecar wasn't reachable, so this one is written fresh from the v19 video (Rob, 15 Oct 2026: write it "if its something i approved in the video"). Not approved for posting: needs the client's OK and Rob's go per post.
+
+INSTAGRAM
+Is a hot dog a sandwich? Nine golfers voted, and one explained the ruling: "A hot dog is in a casing, bro." 🌭⛳️
+
+Watch to the end for the final score.
+
+Every dollar from this charity golf tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship. 💚
+
+Sandwich or not? Vote in the comments, then send this to your foursome ⬇️ milasmulligans.com (link in bio)
+
+#MilasMulligans #GolfForACause #GolfFundraiser #LehighValley #BathPA
+Pinned comment: Sandwich or not a sandwich? Cast your vote.
+
+FACEBOOK (not connected to Metricool, posts by hand)
+Is a hot dog a sandwich? We asked nine golfers at Mila's Mulligans 2025, and one explained the ruling: "A hot dog is in a casing, bro."
+
+Every dollar from the tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship. Vote in the comments. milasmulligans.com
+
+SOURCES (internal, don't post)
+- "IS A HOT DOG A SANDWICH?" hook card and the opening question: transcripts/darryl.json 15.02-17.46, the interviewer, "is a hot dog a sandwich or not?"
+- "THROWBACK · MILA'S MULLIGANS 2025" tag and "Mila's Mulligans 2025": footage from Drive "2025 Milas Mulls" / TONY CONTENT, 2025 camera clips.
+- Nine golfers, one vote each (VOTES in build_reel1.py; each answer checked by mouth and mic position, and by voice pitch where two people share a shot, 14 Oct 2026):
+  ant 16.16 "Yes." (pink shirt), 17.02 "No." (navy shirt), 17.58 "No." (floral shirt), 18.08 "Yes." (white shirt)
+  darryl 37.61 "not a sandwich" (35.33-38.16 "A hot dog in my book is not a sandwich.")
+  hotdog 43.64 "No," (black-cap friend), 44.12 "not a sandwich" (trucker cap), first cart
+  hotdog 56.68 "No," (trucker cap), 57.98 "definitely not a sandwich" (driver), second cart
+- "A hot dog is in a casing, bro.": darryl 39.24-42.84. The transcript heard "in case"; faster-whisper medium.en heard "in the casing, bruh" and small.en "encasing, bro"; Rob's wording is used, as captioned in the video (Rob, 15 Oct 2026).
+- Final score (7-2, NOT A SANDWICH): the VOTES above, on the FINAL card in the video. Not repeated in the caption.
+- Every dollar funds the Arian Walker Hannon-Kohler Memorial Scholarship: milas-mulligans-captions skill, Event facts; the same line is on the approved end card.
+- milasmulligans.com: approved flyer; the end card's link.
+- Left out on purpose: names (none on screen), the interviewer's "all right, four for four" (muted under FINAL), the navy-jacket and sunglasses answers (the camera swings through them), any amount raised, player count or next year's date.
+
+ON CAMERA: the nine golfers who answer, the interviewer, and people in the background, at the 2025 tournament, filmed by Tony. Release status: not checked. Ask the client whether their event sign-up covers social video.
+
+APPROVAL: Hot dog reel v19 9:16 · internal final (Rob, 15 Oct 2026) · proposed slot Wed 21 Oct 10 am, not scheduled · client OK: ________
