@@ -1,0 +1,303 @@
+<title>Mila's Mulligans Reel Review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Public+Sans:wght@400;600;700&display=swap">
+<style>
+/* Layout: one row per reel, phone-shaped video on the left like the post itself, the copy and the review on the right; stacks at phone width. */
+:root {
+  --navy: #043375;           /* Mila's navy, from the flyer */
+  --mustard: #FFD23F;        /* the reels' caption and scoreboard yellow */
+  --bg: #F3F5F9;
+  --surface: #FFFFFF;
+  --fg: #14213A;
+  --muted: #56627A;
+  --line: #D7DEEA;
+  --chip-ok: #1F7A4D;
+  --chip-ok-bg: #E2F3EA;
+  --chip-mid: #8A5A00;
+  --chip-mid-bg: #FFF1CC;
+  --chip-no: #A12F22;
+  --chip-no-bg: #FBE4E0;
+  --head-fg: #FFFFFF;
+  --head-bg: var(--navy);
+  --display: "Archivo Black", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --body: "Public Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C1424; --surface: #142038; --fg: #E8EDF6; --muted: #9AA8C2; --line: #26355A;
+    --chip-ok: #7FD8A8; --chip-ok-bg: #133526; --chip-mid: #FFD97A; --chip-mid-bg: #3A2E0E;
+    --chip-no: #FF9C8C; --chip-no-bg: #3D1A15; --head-bg: #06265A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C1424; --surface: #142038; --fg: #E8EDF6; --muted: #9AA8C2; --line: #26355A;
+  --chip-ok: #7FD8A8; --chip-ok-bg: #133526; --chip-mid: #FFD97A; --chip-mid-bg: #3A2E0E;
+  --chip-no: #FF9C8C; --chip-no-bg: #3D1A15; --head-bg: #06265A; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header.top { background: var(--head-bg); color: var(--head-fg); }
+header.top .wrap { padding-block: 28px 30px; display: grid; gap: 10px; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mustard); }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(28px, 5vw, 44px); line-height: 1.05; margin: 0; text-transform: uppercase; text-wrap: balance; }
+h1 .hl { color: var(--mustard); }
+.lede { margin: 0; max-width: 62ch; color: #D9E2F2; }
+nav.jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+nav.jump a { color: var(--head-fg); text-decoration: none; font-weight: 600; font-size: 13px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; padding: 5px 12px; }
+nav.jump a:hover, nav.jump a:focus-visible { background: var(--mustard); color: var(--navy); border-color: var(--mustard); outline: none; }
+main .wrap { padding-block: 24px 48px; display: grid; gap: 28px; }
+.notice { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; font-size: 14px; color: var(--muted); }
+.notice strong { color: var(--fg); }
+.reel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 24px; scroll-margin-top: 16px; }
+@media (max-width: 760px) { .reel { grid-template-columns: minmax(0, 1fr); } .player { max-width: 320px; margin: 0 auto; width: 100%; } }
+.player { display: grid; gap: 10px; align-content: start; }
+.frame { aspect-ratio: 9 / 16; max-width: 100%; width: 100%; background: #000; border-radius: 12px; overflow: hidden; display: grid; place-items: center; }
+.frame video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.frame .pending { color: #C9D2E3; font-size: 13px; padding: 16px; text-align: center; }
+.facts { display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.facts span { border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; }
+.side { display: grid; gap: 18px; min-width: 0; align-content: start; }
+h2 { font-family: var(--display); font-weight: 400; font-size: 26px; line-height: 1.1; margin: 0; text-transform: uppercase; }
+h2 .hl { background: var(--mustard); color: var(--navy); padding: 0 6px; border-radius: 4px; }
+.sub { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+h3 { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; margin: 0; color: var(--muted); font-weight: 700; }
+.copyblock { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.copyhead { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--line); }
+.copytext { margin: 0; padding: 12px; white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--body); font-size: 14px; }
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+button, .btn { font: inherit; font-weight: 700; font-size: 13px; border-radius: 8px; padding: 7px 12px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+button:hover { border-color: var(--navy); }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--mustard); outline-offset: 1px; }
+button.primary { background: var(--navy); border-color: var(--navy); color: #fff; }
+:root[data-theme="dark"] button.primary { background: var(--mustard); border-color: var(--mustard); color: var(--navy); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) button.primary { background: var(--mustard); border-color: var(--mustard); color: var(--navy); } }
+button:disabled { opacity: .55; cursor: not-allowed; }
+.review { border-top: 2px solid var(--line); padding-top: 16px; display: grid; gap: 12px; }
+form.rv { display: grid; gap: 10px; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 520px) { .row2 { grid-template-columns: minmax(0, 1fr); } }
+label { display: grid; gap: 4px; font-size: 13px; font-weight: 600; }
+input[type=text], textarea { font: inherit; font-weight: 400; font-size: 14px; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; width: 100%; }
+textarea { min-height: 84px; resize: vertical; }
+fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+legend { font-size: 13px; font-weight: 600; margin-bottom: 6px; padding: 0; }
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice span { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.choice input:focus-visible + span { outline: 3px solid var(--mustard); outline-offset: 1px; }
+.choice input[value=approved]:checked + span { background: var(--chip-ok-bg); color: var(--chip-ok); border-color: var(--chip-ok); }
+.choice input[value=small]:checked + span { background: var(--chip-mid-bg); color: var(--chip-mid); border-color: var(--chip-mid); }
+.choice input[value=changes]:checked + span { background: var(--chip-no-bg); color: var(--chip-no); border-color: var(--chip-no); }
+.status { font-size: 13px; min-height: 1.2em; margin: 0; }
+.status.err { color: var(--chip-no); }
+.status.ok { color: var(--chip-ok); }
+.list { display: grid; gap: 8px; }
+.entry { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 4px; }
+.entry .who { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-weight: 700; }
+.entry .when { font-weight: 400; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.entry p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
+.chip { font-size: 12px; font-weight: 700; border-radius: 999px; padding: 1px 9px; }
+.chip.approved { background: var(--chip-ok-bg); color: var(--chip-ok); }
+.chip.small { background: var(--chip-mid-bg); color: var(--chip-mid); }
+.chip.changes { background: var(--chip-no-bg); color: var(--chip-no); }
+.empty { font-size: 13px; color: var(--muted); margin: 0; }
+footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">Throwback · Mila's Mulligans 2025</div>
+    <h1>Reel review: <span class="hl">three reels</span>, ready for your notes</h1>
+    <p class="lede">Watch each reel, read the caption that goes with it, then leave your name, your call and any notes. Nothing posts until it's approved.</p>
+    <nav class="jump" aria-label="Reels" id="jump"></nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="notice" id="access"><strong>To leave a review</strong> you need to be signed in to Claude with Contributor access to this page. Anyone else can watch and read.</p>
+    <div id="reels"></div>
+  </div>
+</main>
+
+<footer><div class="wrap">Prepared by R0BATO Media for Mila's Mulligans. The videos here are review copies, compressed to load fast. Every dollar from the tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship.</div></footer>
+
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(function () {
+  var REELS = JSON.parse(document.getElementById('data').textContent);
+  var LABEL = { approved: 'Approved', small: 'Approved with small changes', changes: 'Needs changes' };
+  var reelsEl = document.getElementById('reels');
+  var jump = document.getElementById('jump');
+  var refs = {};
+  var me = { db: null, uid: null };
+
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      if (k === 'text') n.textContent = attrs[k];
+      else if (k === 'html') n.innerHTML = attrs[k];
+      else n.setAttribute(k, attrs[k]);
+    }
+    (kids || []).forEach(function (c) { if (c) n.appendChild(c); });
+    return n;
+  }
+  function savedName() { try { return JSON.parse(localStorage.getItem('mm-reviewer') || '{}'); } catch (e) { return {}; } }
+  function rememberName(o) { try { localStorage.setItem('mm-reviewer', JSON.stringify(o)); } catch (e) {} }
+
+  function copyBlock(title, text) {
+    var pre = el('pre', { class: 'copytext', text: text });
+    var btn = el('button', { type: 'button', text: 'Copy' });
+    btn.addEventListener('click', function () {
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
+      var fallback = function () {
+        var r = document.createRange(); r.selectNodeContents(pre);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Selected, press copy';
+      };
+      try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+    });
+    return el('div', { class: 'copyblock' }, [el('div', { class: 'copyhead' }, [el('h3', { text: title }), btn]), pre]);
+  }
+
+  REELS.forEach(function (r) {
+    jump.appendChild(el('a', { href: '#' + r.id, text: r.title }));
+    var frame = el('div', { class: 'frame' });
+    if (r.video) {
+      var v = el('video', { controls: '', playsinline: '', preload: 'metadata', src: r.video, 'aria-label': r.title + ' reel' });
+      frame.appendChild(v);
+    } else {
+      frame.appendChild(el('div', { class: 'pending', text: 'Video loading soon' }));
+    }
+    var saveBtn = el('button', { type: 'button', text: 'Save video', hidden: '' });
+    var saveMsg = el('p', { class: 'status' });
+    saveBtn.addEventListener('click', function () { saveVideo(r, saveBtn, saveMsg); });
+    var player = el('div', { class: 'player' }, [
+      frame,
+      el('div', { class: 'facts' }, r.facts.map(function (f) { return el('span', { text: f }); })),
+      saveBtn, saveMsg
+    ]);
+
+    var form = el('form', { class: 'rv', novalidate: '' });
+    var nm = savedName();
+    var nameIn = el('input', { type: 'text', id: r.id + '-name', autocomplete: 'name', required: '' });
+    nameIn.value = nm.name || '';
+    var orgIn = el('input', { type: 'text', id: r.id + '-org', autocomplete: 'organization' });
+    orgIn.value = nm.org || '';
+    var fs = el('fieldset', null, [el('legend', { text: 'Your call' })]);
+    ['approved', 'small', 'changes'].forEach(function (k) {
+      var inp = el('input', { type: 'radio', name: r.id + '-decision', value: k, id: r.id + '-' + k });
+      fs.appendChild(el('label', { class: 'choice', for: r.id + '-' + k }, [inp, el('span', { text: LABEL[k] })]));
+    });
+    var notes = el('textarea', { id: r.id + '-notes', placeholder: 'What should change? Times help, like "at 0:12, the caption..."' });
+    var submit = el('button', { type: 'submit', class: 'primary', text: 'Submit review' });
+    var status = el('p', { class: 'status', role: 'status' });
+    form.appendChild(el('div', { class: 'row2' }, [
+      el('label', { for: r.id + '-name' }, [document.createTextNode('Your name'), nameIn]),
+      el('label', { for: r.id + '-org' }, [document.createTextNode('Role or organization (optional)'), orgIn])
+    ]));
+    form.appendChild(fs);
+    form.appendChild(el('label', { for: r.id + '-notes' }, [document.createTextNode('Notes'), notes]));
+    form.appendChild(el('div', null, [submit]));
+    form.appendChild(status);
+    form.addEventListener('submit', function (e) { e.preventDefault(); submitReview(r, form, nameIn, orgIn, notes, submit, status); });
+
+    var list = el('div', { class: 'list' }, [el('p', { class: 'empty', text: 'No reviews yet. Be the first.' })]);
+    var side = el('div', { class: 'side' }, [
+      el('div', null, [el('h2', { html: r.titleHtml }), el('p', { class: 'sub', text: r.sub })]),
+      copyBlock('Instagram caption', r.instagram),
+      copyBlock('Pinned comment', r.pinned),
+      copyBlock('Facebook', r.facebook),
+      r.note ? el('p', { class: 'note', text: r.note }) : null,
+      el('section', { class: 'review', 'aria-label': 'Review ' + r.title }, [el('h3', { text: 'Leave your review' }), form, el('h3', { text: 'Reviews so far' }), list])
+    ]);
+    reelsEl.appendChild(el('article', { class: 'reel', id: r.id }, [player, side]));
+    refs[r.id] = { submit: submit, status: status, list: list, saveBtn: saveBtn };
+  });
+  reelsEl.style.display = 'grid'; reelsEl.style.gap = '28px';
+
+  function fmt(ts) {
+    try { return new Date(ts).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; }
+  }
+
+  function render(docs) {
+    REELS.forEach(function (r) {
+      var rows = [];
+      docs.forEach(function (d) {
+        var x = d.reels && d.reels[r.id];
+        if (x && x.decision) rows.push({ name: d.name, org: d.org, decision: x.decision, notes: x.notes, at: x.at });
+      });
+      rows.sort(function (a, b) { return (b.at || 0) - (a.at || 0); });
+      var list = refs[r.id].list; list.textContent = '';
+      if (!rows.length) { list.appendChild(el('p', { class: 'empty', text: 'No reviews yet. Be the first.' })); return; }
+      rows.forEach(function (x) {
+        var who = el('div', { class: 'who' }, [
+          el('span', { text: (x.name || 'Someone') + (x.org ? ', ' + x.org : '') }),
+          el('span', { class: 'chip ' + x.decision, text: LABEL[x.decision] || x.decision }),
+          el('span', { class: 'when', text: fmt(x.at) })
+        ]);
+        list.appendChild(el('div', { class: 'entry' }, [who, x.notes ? el('p', { text: x.notes }) : null]));
+      });
+    });
+  }
+
+  function submitReview(r, form, nameIn, orgIn, notes, submit, status) {
+    status.className = 'status'; status.textContent = '';
+    var name = nameIn.value.trim(), org = orgIn.value.trim();
+    var pick = form.querySelector('input[type=radio]:checked');
+    if (!name) { status.className = 'status err'; status.textContent = 'Add your name so we know who signed off.'; nameIn.focus(); return; }
+    if (!pick) { status.className = 'status err'; status.textContent = 'Pick Approved, Approved with small changes, or Needs changes.'; return; }
+    if (!me.db || !me.uid) { status.className = 'status err'; status.textContent = 'Reviews can only be saved by signed-in people with Contributor access. Ask Rob to share it with you as a Contributor.'; return; }
+    rememberName({ name: name, org: org });
+    submit.disabled = true; submit.textContent = 'Saving';
+    var ref = me.db.doc('reviews/' + me.uid);
+    ref.get().then(function (snap) {
+      var cur = (snap.exists && snap.data()) ? JSON.parse(JSON.stringify(snap.data())) : {};
+      var reels = cur.reels || {};
+      reels[r.id] = { decision: pick.value, notes: notes.value.trim(), at: Date.now() };
+      return ref.set({ name: name, org: org, reels: reels, updatedAt: Date.now() });
+    }).then(function () {
+      status.className = 'status ok'; status.textContent = 'Saved. Thank you. Submitting again replaces your review for this reel.';
+    }, function (e) {
+      status.className = 'status err';
+      status.textContent = (e && ['invalid_argument', 'not_granted', 'revoked', 'capability_disabled'].indexOf(e.code) >= 0)
+        ? 'This page only lets Contributors save reviews. Ask Rob to share it with you as a Contributor.'
+        : 'That did not save. Check your connection and submit again.';
+    }).then(function () { submit.disabled = false; submit.textContent = 'Submit review'; });
+  }
+
+  var downloads = null;
+  function saveVideo(r, btn, msg) {
+    if (!downloads || !r.video) return;
+    btn.disabled = true; msg.className = 'status'; msg.textContent = 'Getting the file';
+    fetch(r.video).then(function (res) { if (!res.ok) throw new Error('fetch'); return res.blob(); })
+      .then(function (b) { return downloads.save({ filename: r.file, data: b }); })
+      .then(function (res) { msg.textContent = res && res.status === 'saved' ? 'Saved.' : ''; },
+            function (e) { msg.className = 'status err'; msg.textContent = (e && e.code === 'declined') ? '' : 'The video could not be saved here. Ask Rob for the file.'; })
+      .then(function () { btn.disabled = false; });
+  }
+
+  if (window.claude && window.claude.use) {
+    window.claude.use('downloads').then(function (d) {
+      downloads = d;
+      if (d) REELS.forEach(function (r) { if (r.video) refs[r.id].saveBtn.hidden = false; });
+    });
+    Promise.all([window.claude.use('db'), window.claude.use('user')]).then(function (res) {
+      var db = res[0], user = res[1];
+      if (!db) return;
+      me.db = db;
+      db.collection('reviews').onSnapshot(function (snap) {
+        render(snap.docs.map(function (d) { return d.data() || {}; }));
+      }, function () {});
+      return user ? user.id() : null;
+    }).then(function (uid) {
+      if (!uid) return;
+      me.uid = uid;
+    });
+  }
+})();
+</script>
