@@ -49,7 +49,7 @@ CUTS = [
     ('evan_darien_int', 38.40, 42.28, 1000, False, (7000, '$7,000', 41.52)),   # white top, sunglasses: I hope it gets up to, I don't know, $7,000.
     ('evan_darien_int', 43.55, 49.40,  700, False, (11000, '$11,000', 45.90)), # navy jacket: And I'm going to go with $11,000.
 ]
-# The last shot plays on live under the question; its sound fades after her laugh, before the interviewer's "Show me the money."
+# The last shot plays on live under the question; its sound fades after the laugh, before the interviewer's "Show me the money."
 MUTE = {('evan_darien_int', 43.55): 47.30}
 # caption text for numbers as whisper wrote them, so the caption reads like the ticket
 SAY = {'5-75.': '575', '7.25.': '725'}

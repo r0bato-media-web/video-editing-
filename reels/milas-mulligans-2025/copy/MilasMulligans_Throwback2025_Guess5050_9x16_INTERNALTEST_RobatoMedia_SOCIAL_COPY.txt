@@ -42,7 +42,7 @@ SOURCES (internal, don't post)
 - Raffle ticket and number line: drawn for this reel in build_reel3.py, in the reel's colors, no clip art, no brand.
 - Every dollar funds the Arian Walker Hannon-Kohler Memorial Scholarship: milas-mulligans-captions skill, Event facts; the same line is on the approved end card.
 - milasmulligans.com: approved flyer.
-- Left out on purpose: the real 2025 total and any winner (no written source), Angel's "There's about 80 golfers" (no source for the field size), the interviewer's repeats of guesses and her "Show me the money" (muted under the question), and two guesses where the camera swings through the answer ("21-50" and "I say 1,500", jasmin_dad).
+- Left out on purpose: the real 2025 total and any winner (no written source), Angel's "There's about 80 golfers" (no source for the field size), the interviewer's repeats of guesses and the interviewer's "Show me the money" (muted under the question), and two guesses where the camera swings through the answer ("21-50" and "I say 1,500", jasmin_dad).
 
 ON CAMERA: the twelve golfers who guess, the interviewers, and people in the background, at the 2025 tournament, filmed by Tony. Release status: not checked. Ask the client whether their event sign-up covers social video.
 
