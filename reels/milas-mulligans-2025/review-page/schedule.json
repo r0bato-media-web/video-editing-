@@ -1,0 +1,6 @@
+{"note": "Proposed dates from the posting plan. Nothing posts until it's approved. Posts without a date yet:",
+ "items": [
+  {"date": "2026-10-21", "type": "reel", "reel": "hot-dog", "title": "Is a hot dog a sandwich?", "when": "Wed 21 Oct, 10 am · proposed"},
+  {"date": "2026-10-28", "type": "reel", "reel": "mayo-or-sand", "title": "Mayo or sand?", "when": "Wed 28 Oct, 10 am · proposed"},
+  {"date": null, "type": "reel", "reel": "guess-the-50-50", "title": "Guess the 50-50", "when": "Goes after Mayo or sand?, date not set"}
+ ]}

@@ -108,6 +108,43 @@ legend { font-size: 13px; font-weight: 600; margin-bottom: 6px; padding: 0; }
 .empty { font-size: 13px; color: var(--muted); margin: 0; }
 footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+
+/* calendar: what's posting, month grid with a dot per post */
+.cal { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.cal-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px 16px; padding: 16px 18px 10px; }
+.cal-head h2 { font-size: 13px; letter-spacing: .14em; color: var(--navy); }
+:root[data-theme="dark"] .cal-head h2 { color: var(--mustard); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cal-head h2 { color: var(--mustard); } }
+.cal-month { display: flex; align-items: center; gap: 8px; }
+.cal-month strong { font-family: var(--display); font-weight: 400; font-size: 22px; text-transform: uppercase; min-width: 9ch; text-align: center; font-variant-numeric: tabular-nums; }
+.cal-month button { padding: 4px 10px; }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; padding: 0 18px 12px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; }
+.dot.t-reel { background: var(--chip-no); }
+.dot.t-carousel { background: var(--navy); }
+:root[data-theme="dark"] .dot.t-carousel { background: var(--mustard); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .dot.t-carousel { background: var(--mustard); } }
+.dot.tbd { background: transparent; border: 2px solid var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+.dow { text-align: center; font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--muted); padding: 8px 0; border-bottom: 1px solid var(--line); }
+.day { min-height: 64px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 6px 7px; display: grid; align-content: start; gap: 6px; font-size: 13px; font-variant-numeric: tabular-nums; background: none; border-top: 0; border-left: 0; border-radius: 0; text-align: left; font-weight: 600; color: var(--fg); cursor: default; }
+.day:nth-child(7n) { border-right: 0; }
+.day.out { color: transparent; }
+.day.past { color: var(--muted); font-weight: 400; }
+.day.has { cursor: pointer; }
+.day.has:hover { background: var(--bg); }
+.day.sel { outline: 2px solid var(--mustard); outline-offset: -2px; }
+.day .n { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; }
+.day.today .n { background: var(--mustard); color: var(--navy); font-weight: 800; }
+.day .dots { display: flex; gap: 4px; flex-wrap: wrap; }
+@media (max-width: 520px) { .day { min-height: 48px; padding: 4px; } }
+.cal-detail { padding: 12px 18px; display: grid; gap: 8px; border-bottom: 1px solid var(--line); }
+.cal-item { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 14px; }
+.cal-item a { color: inherit; font-weight: 700; }
+.cal-item .when { color: var(--muted); font-size: 13px; }
+.cal-foot { padding: 12px 18px 14px; font-size: 13px; color: var(--muted); display: grid; gap: 8px; }
+.cal-foot .cal-item { color: var(--fg); }
 </style>
 
 <header class="top">
@@ -122,6 +159,16 @@ footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; }
 <main>
   <div class="wrap">
     <p class="notice" id="access"><strong>To leave a review</strong> you need to be signed in to Claude with Contributor access to this page. Anyone else can watch and read.</p>
+    <section class="cal" id="cal" aria-label="What's posting">
+      <div class="cal-head">
+        <h2>What's posting</h2>
+        <div class="cal-month"><button type="button" id="cal-prev" aria-label="Previous month">&#8592;</button><strong id="cal-title"></strong><button type="button" id="cal-next" aria-label="Next month">&#8594;</button></div>
+      </div>
+      <div class="legend"><span><i class="dot t-reel"></i>Reel</span><span><i class="dot t-carousel"></i>Carousel</span><span>Tap a date to see what goes out</span></div>
+      <div class="grid" id="cal-grid"></div>
+      <div class="cal-detail" id="cal-detail" hidden></div>
+      <div class="cal-foot" id="cal-foot"></div>
+    </section>
     <div id="reels"></div>
   </div>
 </main>
@@ -129,6 +176,7 @@ footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; }
 <footer><div class="wrap">Prepared by R0BATO Media for Mila's Mulligans. The videos here are review copies, compressed to load fast. Every dollar from the tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship.</div></footer>
 
 <script type="application/json" id="data">__DATA__</script>
+<script type="application/json" id="schedule">__SCHEDULE__</script>
 <script>
 (function () {
   var REELS = JSON.parse(document.getElementById('data').textContent);
@@ -233,6 +281,59 @@ footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; }
   function fmt(ts) {
     try { return new Date(ts).toLocaleString([], { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; }
   }
+
+
+  // Calendar: proposed dates from the posting plan. Nothing is scheduled until it's approved.
+  (function () {
+    var S = JSON.parse(document.getElementById('schedule').textContent);
+    var grid = document.getElementById('cal-grid'), title = document.getElementById('cal-title');
+    var detail = document.getElementById('cal-detail'), foot = document.getElementById('cal-foot');
+    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var dated = S.items.filter(function (x) { return x.date; });
+    var first = dated.length ? dated[0].date.split('-').map(Number) : [new Date().getFullYear(), new Date().getMonth() + 1];
+    var view = { y: first[0], m: first[1] - 1 }, sel = null;
+    var now = new Date(), todayKey = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+    function key(y, m, d) { return y + '-' + ('0' + (m + 1)).slice(-2) + '-' + ('0' + d).slice(-2); }
+    function itemRow(x) {
+      var label = REELS.filter(function (r) { return r.id === x.reel; })[0];
+      var a = el('a', { href: '#' + x.reel, text: x.title || (label && label.title) || x.reel });
+      return el('div', { class: 'cal-item' }, [el('i', { class: 'dot t-' + x.type }), a, el('span', { class: 'when', text: x.when })]);
+    }
+    function show(k) {
+      sel = k; detail.textContent = '';
+      var list = dated.filter(function (x) { return x.date === k; });
+      detail.hidden = !list.length;
+      list.forEach(function (x) { detail.appendChild(itemRow(x)); });
+      draw();
+    }
+    function draw() {
+      title.textContent = MONTHS[view.m].slice(0, 3) + ' ' + view.y;
+      grid.textContent = '';
+      ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(function (d) { grid.appendChild(el('div', { class: 'dow', text: d })); });
+      var start = new Date(view.y, view.m, 1).getDay(), days = new Date(view.y, view.m + 1, 0).getDate();
+      var cells = Math.ceil((start + days) / 7) * 7;
+      for (var i = 0; i < cells; i++) {
+        var d = i - start + 1;
+        if (d < 1 || d > days) { grid.appendChild(el('div', { class: 'day out', 'aria-hidden': 'true' })); continue; }
+        var k = key(view.y, view.m, d), list = dated.filter(function (x) { return x.date === k; });
+        var cls = 'day' + (k === todayKey ? ' today' : '') + (k < todayKey ? ' past' : '') + (list.length ? ' has' : '') + (k === sel ? ' sel' : '');
+        var dots = el('span', { class: 'dots' }, list.map(function (x) { return el('i', { class: 'dot t-' + x.type }); }));
+        var cell = el(list.length ? 'button' : 'div', { class: cls }, [el('span', { class: 'n', text: String(d) }), dots]);
+        if (list.length) {
+          cell.type = 'button';
+          cell.setAttribute('aria-label', MONTHS[view.m] + ' ' + d + ': ' + list.map(function (x) { return x.title; }).join(', '));
+          cell.addEventListener('click', (function (kk) { return function () { show(kk === sel ? null : kk); }; })(k));
+        }
+        grid.appendChild(cell);
+      }
+    }
+    document.getElementById('cal-prev').addEventListener('click', function () { view.m--; if (view.m < 0) { view.m = 11; view.y--; } draw(); });
+    document.getElementById('cal-next').addEventListener('click', function () { view.m++; if (view.m > 11) { view.m = 0; view.y++; } draw(); });
+    var undated = S.items.filter(function (x) { return !x.date; });
+    foot.appendChild(el('p', { style: 'margin:0', text: S.note }));
+    undated.forEach(function (x) { foot.appendChild(itemRow(x)); });
+    draw();
+  })();
 
   function mmss(t) { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + ('0' + (t % 60)).slice(-2); }
 
