@@ -89,6 +89,7 @@ Say plainly that the cut and render happen on the Mac, in the toolkit.
 
 ## Working with Rob on a cut
 - **Show, don't describe.** Every round, send small previews into the chat (540x960 or 960x540, about 3 MB). Full files go to the job folder; the bridge can't carry them.
+- **4:2:0 for anything someone watches; 4:4:4 only for masters** (Rob, 16 Oct 2026: "From now on, export every review or delivery copy as yuv420p. Keep 4:4:4 only for masters."). Every review, preview, phone or delivery copy is H.264 High, level 4.1, yuv420p, faststart, audio copied: `-c:v libx264 -profile:v high -level 4.1 -pix_fmt yuv420p -crf 18 -preset slow -c:a copy -movflags +faststart`. iPhones and Safari can't play 4:4:4 (yuv444p), and the Mila's review page went out that way. When a copy has to fit a size cap, use a two-pass bitrate instead of the CRF. Check each copy with ffprobe (High, yuv420p), match its frame count and duration to the master, and compare the audio stream md5.
 - **Shapes come from Step 1, not a default.** Build only the shapes Rob names for the job (Rob, 14 Oct 2026, on the Mila's hot dog reel: "why is there a horizontal version?"). Reels are 9:16 only unless he asks for more. When a job does need 16:9 too, no 16:9 frame over a blurred copy in a vertical unless there is truly no other way.
 - **Frame tight and keep the talker in frame.** Faces or the object fill the frame, eyes near the upper third. Never move away from someone as they start the line that sets the moment up.
 - **Crops on street interviews and run-and-gun footage** (Rob, 7 Oct 2026, Mila's Mulligans "Is a hot dog a sandwich?" reel: "the camera track is rather aggressive" and "not focused on the woman answering the question"):
@@ -120,7 +121,7 @@ From a Beyond Intelligence carousel of 10 editing prompts (12 Oct 2026). The oth
 - **Audio:** the voice level stays even across cuts and cameras, SFX sit at the kit levels above, and any music stays under the voice.
 - **Captions:** every word against the transcript, every name against the name list, timing against the spoken words, and no caption under the platform's buttons in 9:16.
 - **Visual consistency:** colour and exposure match between cameras, logos follow the logo rule, framing follows the rules above.
-- **Export:** shape, resolution, frame rate, codec and audio match the platform spec in the toolkit README. Metadata is in the file and the `_SOCIAL_COPY.txt` is beside it.
+- **Export:** shape, resolution, frame rate, codec and audio match the platform spec in the toolkit README. Any copy that leaves the masters folder is yuv420p (see the 4:2:0 rule above). Metadata is in the file and the `_SOCIAL_COPY.txt` is beside it.
 
 ## Research: TubeAI connector (optional)
 When it's connected, use the `tubeai-mcp` skill for YouTube video ideas, outliers in a niche, competitor channels, title patterns, transcripts of public videos and thumbnail styles. It has a daily request budget: make few, well-aimed calls. `thumbnail_generate`, `thumbnail_edit` and board data sources cost credits, so ask Rob before spending any. Saved ideas are private drafts; never call them published. Thumbnails for client work use real photos (rule 5).
