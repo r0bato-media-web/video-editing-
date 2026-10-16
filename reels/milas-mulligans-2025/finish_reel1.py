@@ -33,6 +33,7 @@ for sh, tag, pw, ph in (('916', '9x16', 540, 960),):  # vertical only (Rob, 14 O
                     '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart'] + md + [final], check=True)
     prev = os.path.join(D, 'previews', f'{name}_{V}_preview.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', final, '-vf', f'scale={pw}:{ph}:flags=lanczos', '-c:v', 'libx264',
-                    '-crf', '23', '-preset', 'medium', '-c:a', 'copy', '-movflags', '+faststart'] + md + [prev], check=True)
+                    '-profile:v', 'high', '-level', '4.1', '-pix_fmt', 'yuv420p',  # delivery copy: 4:2:0 so iPhones and Safari play it (Rob, 16 Oct 2026); 4:4:4 is for masters only
+                '-crf', '23', '-preset', 'medium', '-c:a', 'copy', '-movflags', '+faststart'] + md + [prev], check=True)
     os.remove(joined)
     print(final); print(prev)

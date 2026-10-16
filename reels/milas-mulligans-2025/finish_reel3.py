@@ -1,0 +1,37 @@
+"""Reel 3: join body + end card, two-pass loudnorm to -14 LUFS, write R0BATO metadata, make a chat preview.
+Same steps as finish_reel1.py (see there for why each one is done this way).
+Usage: python finish_reel3.py <m25_dir> <version>      (expects <m25>/reel3/body_<v>_916.mp4 and <m25>/reel3/end_9x16.mp4)"""
+import json, os, subprocess, sys
+D, V = os.path.join(sys.argv[1], 'reel3'), sys.argv[2]
+META = {'title': 'Guess the 50-50', 'artist': 'Rob Lopez / Robato Media',
+        'comment': f'INTERNAL TEST {V} - not for posting. robatomedia.com | r0bato@robatomedia.com | (570) 664-0550',
+        'description': "Throwback to Mila's Mulligans 2025: twelve golfers guess what the 50-50 will reach, from $575 to $11,000. What did it hit? Every dollar goes to the Arian Walker Hannon-Kohler Memorial Scholarship.",
+        'keywords': "Mila's Mulligans, charity golf tournament, golf fundraiser, Whitetail Golf Club, Bath PA, Lehigh Valley, throwback, 50-50 raffle, MilasMulligans, CharityGolf, GolfFundraiser, LehighValley, BathPA"}
+os.makedirs(os.path.join(D, 'finals'), exist_ok=True); os.makedirs(os.path.join(D, 'previews'), exist_ok=True)
+body, end = os.path.join(D, f'body_{V}_916.mp4'), os.path.join(D, 'end_9x16.mp4')
+name = 'MilasMulligans_Throwback2025_Guess5050_9x16_INTERNALTEST_RobatoMedia'
+joined = os.path.join(D, f'joined_{V}_916.mov')
+bd = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', body],
+                          capture_output=True, text=True).stdout)
+XF, SKIP = 0.35, 4 / 30
+fc = (f"[0:v]setsar=1,format=yuv420p,settb=1/30[b];[1:v]trim=start={SKIP:.4f},setpts=PTS-STARTPTS,fps=30,setsar=1,format=yuv420p,settb=1/30[e];"
+      f"[b][e]xfade=transition=fade:duration={XF}:offset={bd - XF:.4f}[v];"
+      f"anullsrc=r=48000:cl=stereo,atrim=end={4.5 - SKIP:.4f}[s];[0:a]aformat=sample_rates=48000:channel_layouts=stereo[ba];"
+      f"[ba][s]acrossfade=d={XF}[a]")
+subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', body, '-i', end, '-filter_complex', fc, '-map', '[v]', '-map', '[a]',
+                '-c:v', 'libx264', '-crf', '18', '-preset', 'medium', '-c:a', 'pcm_s16le', joined], check=True)
+r = subprocess.run(['ffmpeg', '-nostdin', '-i', joined, '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-'],
+                   capture_output=True, text=True).stderr
+m = json.loads(r[r.rindex('{'):r.rindex('}') + 1])
+ln = (f"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}"
+      f":measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
+md = sum((['-metadata', f'{k}={v}'] for k, v in META.items()), []) + ['-metadata', 'copyright=']  # blank: Mila's contract terms not on file
+final = os.path.join(D, 'finals', name + '.mp4')
+subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', joined, '-af', ln + ',aresample=192000,alimiter=limit=0.79:attack=1:release=50:level=false,aresample=48000',
+                '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart'] + md + [final], check=True)
+prev = os.path.join(D, 'previews', f'{name}_{V}_preview.mp4')
+subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', final, '-vf', 'scale=540:960:flags=lanczos', '-c:v', 'libx264',
+                '-profile:v', 'high', '-level', '4.1', '-pix_fmt', 'yuv420p',  # delivery copy: 4:2:0 so iPhones and Safari play it (Rob, 16 Oct 2026); 4:4:4 is for masters only
+                '-crf', '23', '-preset', 'medium', '-c:a', 'copy', '-movflags', '+faststart'] + md + [prev], check=True)
+os.remove(joined)
+print(final); print(prev)
