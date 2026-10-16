@@ -35,6 +35,10 @@ Frozen frames: `ffmpeg -i <file>.mp4 -vf freezedetect=n=0.002:d=0.2 -an -f null 
 
 Camera motion: `camera_speed.py <m25> <clip> <in> <out>` measures camera speed on the background before a cut is chosen (keep 9:16 cuts under about 75 source px/s). `output_motion.py <video> <timeline.json>` measures apparent motion per cut in a rendered file.
 
+## Export rule (Rob, 16 Oct 2026)
+
+The finals are H.264 High 4:4:4 (yuv444p). Treat them as masters only. Every review, preview, phone or delivery copy is made 4:2:0: `-profile:v high -level 4.1 -pix_fmt yuv420p -movflags +faststart`, audio copied. iPhones and Safari can't play 4:4:4. The finish scripts' previews follow this from 16 Oct; previews and phone copies made before that are 4:4:4.
+
 ## Brief
 
 - **Cuts:** in `CUTS` at the top of `build_reel1.py`, each with its source clip, in and out, crop centre on the person talking, and zoom. No cut holds a frame. Wherever the speaker changes, the cut is split and the new speaker gets their own static crop. Every cut is snapped to whole frames. `YFRAC` lowers the crop where a speaker sits low in frame.

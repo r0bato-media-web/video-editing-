@@ -31,6 +31,7 @@ subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', joined, '-af', 
                 '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart'] + md + [final], check=True)
 prev = os.path.join(D, 'previews', f'{name}_{V}_preview.mp4')
 subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', final, '-vf', 'scale=540:960:flags=lanczos', '-c:v', 'libx264',
+                '-profile:v', 'high', '-level', '4.1', '-pix_fmt', 'yuv420p',  # delivery copy: 4:2:0 so iPhones and Safari play it (Rob, 16 Oct 2026); 4:4:4 is for masters only
                 '-crf', '23', '-preset', 'medium', '-c:a', 'copy', '-movflags', '+faststart'] + md + [prev], check=True)
 os.remove(joined)
 print(final); print(prev)
