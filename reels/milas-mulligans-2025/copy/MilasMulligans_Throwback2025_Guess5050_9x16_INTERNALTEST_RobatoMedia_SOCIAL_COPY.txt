@@ -7,7 +7,7 @@ $575 or $11,000? Twelve golfers guessed the 2025 50-50 and nobody landed in the 
 
 One went "a little bit north of that just to be safe." Another went straight to eleven grand.
 
-Every dollar from this charity golf tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship. 💚
+Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. 💚
 
 What do you think it hit? Comment your guess, then send this to your foursome ⬇️ milasmulligans.com (link in bio)
 
@@ -17,7 +17,7 @@ Pinned comment: Guesses go here. How much did the 2025 50-50 hit?
 FACEBOOK (not connected to Metricool, posts by hand)
 How much did the 2025 50-50 hit? We asked twelve golfers at Mila's Mulligans and got everything from $575 to $11,000.
 
-Every dollar from the tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship. Put your guess in the comments. milasmulligans.com
+Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. Put your guess in the comments. milasmulligans.com
 
 REPLYING TO COMMENTS: don't post the real total, or say who came closest, until the client gives the number in writing (their own post, a sign or an email). Then it goes in a reply or a follow-up post, with that source added below.
 
@@ -40,7 +40,7 @@ SOURCES (internal, don't post)
 - "12 GUESSES" and "$575 TO $11,000" on the end question: the list above.
 - Every burned-in caption word: the transcripts above, clipped to each cut. "5-75" and "7.25" are captioned 575 and 725, the way the ticket shows them. No names on screen.
 - Raffle ticket and number line: drawn for this reel in build_reel3.py, in the reel's colors, no clip art, no brand.
-- Every dollar funds the Arian Walker Hannon-Kohler Memorial Scholarship: milas-mulligans-captions skill, Event facts; the same line is on the approved end card.
+- Proceeds line: the milasmulligans.com wording, used exactly (Rob, 21 Oct 2026; client brief, Notion ledger synced 4 Nov 2026). The end card in the video still reads "Every dollar goes to the Arian Walker Hannon-Kohler Memorial Scholarship" and has not been re-rendered.
 - milasmulligans.com: approved flyer.
 - Left out on purpose: the real 2025 total and any winner (no written source), Angel's "There's about 80 golfers" (no source for the field size), the interviewer's repeats of guesses and the interviewer's "Show me the money" (muted under the question), and two guesses where the camera swings through the answer ("21-50" and "I say 1,500", jasmin_dad).
 

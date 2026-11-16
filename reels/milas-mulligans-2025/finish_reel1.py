@@ -4,7 +4,7 @@ import json, os, subprocess, sys
 D, V = sys.argv[1], sys.argv[2]
 META = {'title': 'Is a hot dog a sandwich?', 'artist': 'Rob Lopez / Robato Media',
         'comment': f'INTERNAL TEST {V} - not for posting. robatomedia.com | r0bato@robatomedia.com | (570) 664-0550',
-        'description': "Throwback to Mila's Mulligans 2025: golfers vote on whether a hot dog is a sandwich. Every dollar goes to the Arian Walker Hannon-Kohler Memorial Scholarship.",
+        'description': "Throwback to Mila's Mulligans 2025: golfers vote on whether a hot dog is a sandwich. Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives.",
         'keywords': "Mila's Mulligans, charity golf tournament, golf fundraiser, Whitetail Golf Club, Bath PA, Lehigh Valley, throwback, hot dog sandwich, MilasMulligans, CharityGolf, GolfFundraiser, LehighValley, BathPA"}
 for sh, tag, pw, ph in (('916', '9x16', 540, 960),):  # vertical only (Rob, 14 Oct 2026)
     body, end = os.path.join(D, f'body_{V}_{sh}.mp4'), os.path.join(D, f'end_{tag}.mp4')

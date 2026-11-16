@@ -23,7 +23,7 @@ Write social captions for Mila's Mulligans, a charity golf tournament in memory 
 ## Event facts
 - Saturday, August 22, 2026. Whitetail Golf Club, Bath PA. Check-in 7, shotgun 8, lunch 1:30.
 - Foursome $500, Duo $250, $125/player all-in, Lunch only $30.
-- Every dollar funds the Arian Walker Hannon-Kohler Memorial Scholarship.
+- Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives.
 
 ## Example of the right length and tone
 
@@ -31,7 +31,7 @@ Take a mulligan. The charity golf tournament where do-overs do good. ⛳️
 
 Sat, Aug 22 at Whitetail Golf Club, Bath PA. Swipe for pricing 👉 grab your foursome, or just come for lunch.
 
-Every dollar funds the Arian Walker Hannon-Kohler Memorial Scholarship. 💚
+Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. 💚
 
 🔗 milasmulligans.com (link in bio). Save this and send it to your foursome.
 

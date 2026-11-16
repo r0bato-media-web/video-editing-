@@ -56,7 +56,7 @@ Caption draft. Fill in the blank only from the client's source:
 >
 > The real number was $____. Watch to the end to see who came closest.
 >
-> Every dollar from this charity golf tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship. 💚
+> Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. 💚
 >
 > What's your guess for next year? Send this to your foursome ⬇️ milasmulligans.com (link in bio)
 >
@@ -74,7 +74,7 @@ Caption draft:
 >
 > One golfer at Mila's Mulligans 2025, Whitetail Golf Club in Bath PA. We're already missing days like this one.
 >
-> Every dollar funds the Arian Walker Hannon-Kohler Memorial Scholarship. 💚
+> Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. 💚
 >
 > Follow along for next year's date, and send this to your foursome ⬇️
 >
@@ -90,7 +90,7 @@ Caption draft:
 >
 > Swipe through the day at Whitetail Golf Club in Bath PA. Tag yourself if you spot your foursome.
 >
-> Every dollar went to the Arian Walker Hannon-Kohler Memorial Scholarship. 💚
+> Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. 💚
 >
 > Next year's date is coming. Save this so you're first to know ⬇️
 >
@@ -101,5 +101,5 @@ Sponsors stay out of this caption until the client sends the sponsor list. The b
 ## Sources for the caption facts
 
 - Sat 22 Aug 2026, Whitetail Golf Club, Bath PA, milasmulligans.com: the approved "one week out" flyer, Drive 02 INTERNAL.
-- Every dollar funds the Arian Walker Hannon-Kohler Memorial Scholarship: milas-mulligans-captions skill, Event facts.
+- Proceeds line: the milasmulligans.com wording, used exactly (Rob, 21 Oct 2026; client brief, Notion ledger synced 4 Nov 2026).
 - Quoted lines: the 2025 transcripts (faster-whisper small.en, word timestamps, 14 Oct 2026), clip names as in reels/milas-mulligans-2025/README.md.

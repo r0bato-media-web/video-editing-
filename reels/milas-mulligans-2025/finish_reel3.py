@@ -5,7 +5,7 @@ import json, os, subprocess, sys
 D, V = os.path.join(sys.argv[1], 'reel3'), sys.argv[2]
 META = {'title': 'Guess the 50-50', 'artist': 'Rob Lopez / Robato Media',
         'comment': f'INTERNAL TEST {V} - not for posting. robatomedia.com | r0bato@robatomedia.com | (570) 664-0550',
-        'description': "Throwback to Mila's Mulligans 2025: twelve golfers guess what the 50-50 will reach, from $575 to $11,000. What did it hit? Every dollar goes to the Arian Walker Hannon-Kohler Memorial Scholarship.",
+        'description': "Throwback to Mila's Mulligans 2025: twelve golfers guess what the 50-50 will reach, from $575 to $11,000. What did it hit? Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives.",
         'keywords': "Mila's Mulligans, charity golf tournament, golf fundraiser, Whitetail Golf Club, Bath PA, Lehigh Valley, throwback, 50-50 raffle, MilasMulligans, CharityGolf, GolfFundraiser, LehighValley, BathPA"}
 os.makedirs(os.path.join(D, 'finals'), exist_ok=True); os.makedirs(os.path.join(D, 'previews'), exist_ok=True)
 body, end = os.path.join(D, f'body_{V}_916.mp4'), os.path.join(D, 'end_9x16.mp4')

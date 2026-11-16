@@ -7,7 +7,7 @@ Is a hot dog a sandwich? Nine golfers voted, and one explained the ruling: "A ho
 
 Watch to the end for the final score.
 
-Every dollar from this charity golf tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship. 💚
+Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. 💚
 
 Sandwich or not? Vote in the comments, then send this to your foursome ⬇️ milasmulligans.com (link in bio)
 
@@ -17,7 +17,7 @@ Pinned comment: Sandwich or not a sandwich? Cast your vote.
 FACEBOOK (not connected to Metricool, posts by hand)
 Is a hot dog a sandwich? We asked nine golfers at Mila's Mulligans 2025, and one explained the ruling: "A hot dog is in a casing, bro."
 
-Every dollar from the tournament funds the Arian Walker Hannon-Kohler Memorial Scholarship. Vote in the comments. milasmulligans.com
+Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. Vote in the comments. milasmulligans.com
 
 SOURCES (internal, don't post)
 - "IS A HOT DOG A SANDWICH?" hook card and the opening question: transcripts/darryl.json 15.02-17.46, the interviewer, "is a hot dog a sandwich or not?"
@@ -29,7 +29,7 @@ SOURCES (internal, don't post)
   hotdog 56.68 "No," (trucker cap), 57.98 "definitely not a sandwich" (driver), second cart
 - "A hot dog is in a casing, bro.": darryl 39.24-42.84. The transcript heard "in case"; faster-whisper medium.en heard "in the casing, bruh" and small.en "encasing, bro"; Rob's wording is used, as captioned in the video (Rob, 15 Oct 2026).
 - Final score (7-2, NOT A SANDWICH): the VOTES above, on the FINAL card in the video. Not repeated in the caption.
-- Every dollar funds the Arian Walker Hannon-Kohler Memorial Scholarship: milas-mulligans-captions skill, Event facts; the same line is on the approved end card.
+- Proceeds line: the milasmulligans.com wording, used exactly (Rob, 21 Oct 2026; client brief, Notion ledger synced 4 Nov 2026). The end card in the video still reads "Every dollar goes to the Arian Walker Hannon-Kohler Memorial Scholarship" and has not been re-rendered.
 - milasmulligans.com: approved flyer; the end card's link.
 - Left out on purpose: names (none on screen), the interviewer's "all right, four for four" (muted under FINAL), the navy-jacket and sunglasses answers (the camera swings through them), any amount raised, player count or next year's date.
 
