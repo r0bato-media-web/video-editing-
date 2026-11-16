@@ -28,7 +28,7 @@ SOURCES (internal, don't post)
 - Mayo jar, sand castle and elote graphics: drawn for this reel in build_reel2.py (make_icons), flat shapes in the reel's colors, no clip art, no brand. The jar's label reads MAYO. The elote illustrates transcripts/frankie.json 11.74-12.98, "I love elotes", and is on screen from that word to the end of the sentence (15.78).
 - Every burned-in caption word: the transcripts above, clipped to each cut. "Elotes" is spelled as the dish is spelled. No names on screen.
 - Whitetail Golf Club, Bath PA: approved "one week out" flyer (Drive, 02 INTERNAL).
-- Proceeds line: the milasmulligans.com wording, used exactly (Rob, 21 Oct 2026; client brief, Notion ledger synced 4 Nov 2026). The end card carries the same line since the 15 Nov 2026 end-card re-render (hot dog v20, Mayo or sand? v5, Guess the 50-50 v4).
+- Proceeds line: the milasmulligans.com wording, used exactly (Rob, 21 Oct 2026; client brief, Notion ledger synced 4 Nov 2026). The video no longer shows a proceeds line: since 16 Nov 2026 it ends on a 2025 tournament photo with the logo and the link (hot dog v21, Mayo or sand? v6, Guess the 50-50 v5), and the line lives in the caption only.
 - milasmulligans.com: approved flyer.
 - Left out on purpose: Darryl's "wash it out with more booze" (the sound fades before it), any amount raised, player count, next year's date.
 

@@ -3,6 +3,7 @@ import {Composition, registerRoot} from 'remotion';
 import {Isometric} from './Isometric';
 import {Whiteboard} from './Whiteboard';
 import {EndBeat} from './EndBeat';
+import {EndPhoto} from './EndPhoto';
 import {DURATION, FPS} from './brand';
 
 const Root: React.FC = () => (
@@ -12,6 +13,7 @@ const Root: React.FC = () => (
     <Composition id="WB-9x16" component={Whiteboard} width={1080} height={1920} fps={FPS} durationInFrames={DURATION} />
     <Composition id="WB-16x9" component={Whiteboard} width={1920} height={1080} fps={FPS} durationInFrames={DURATION} />
     <Composition id="End-9x16" component={EndBeat} width={1080} height={1920} fps={FPS} durationInFrames={135} />
+    <Composition id="EndPhoto-9x16" component={EndPhoto} width={1080} height={1920} fps={FPS} durationInFrames={90} defaultProps={{photo: 'photo_3.jpg', dim: 0.55}} />
     <Composition id="End-16x9" component={EndBeat} width={1920} height={1080} fps={FPS} durationInFrames={135} />
   </>
 );
