@@ -40,7 +40,7 @@ SOURCES (internal, don't post)
 - "12 GUESSES" and "$575 TO $11,000" on the end question: the list above.
 - Every burned-in caption word: the transcripts above, clipped to each cut. "5-75" and "7.25" are captioned 575 and 725, the way the ticket shows them. No names on screen.
 - Raffle ticket and number line: drawn for this reel in build_reel3.py, in the reel's colors, no clip art, no brand.
-- Proceeds line: the milasmulligans.com wording, used exactly (Rob, 21 Oct 2026; client brief, Notion ledger synced 4 Nov 2026). The end card in the video still reads "Every dollar goes to the Arian Walker Hannon-Kohler Memorial Scholarship" and has not been re-rendered.
+- Proceeds line: the milasmulligans.com wording, used exactly (Rob, 21 Oct 2026; client brief, Notion ledger synced 4 Nov 2026). The end card carries the same line since the 15 Nov 2026 end-card re-render (hot dog v20, Mayo or sand? v5, Guess the 50-50 v4).
 - milasmulligans.com: approved flyer.
 - Left out on purpose: the real 2025 total and any winner (no written source), Angel's "There's about 80 golfers" (no source for the field size), the interviewer's repeats of guesses and the interviewer's "Show me the money" (muted under the question), and two guesses where the camera swings through the answer ("21-50" and "I say 1,500", jasmin_dad).
 

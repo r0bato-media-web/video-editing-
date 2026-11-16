@@ -163,3 +163,13 @@ Clip names are the list.tsv names; random_guy, interview2, jasmin_dad, angel and
 - [ ] Swap in `cute_pop.wav` / `vine_boom.wav`.
 - [x] Rob approved v3 (Rob, 15 Oct 2026: "Ok to the videos approved").
 - [ ] A reveal ending, once the client gives the 2025 total in writing.
+
+# End card re-render, 15 Nov 2026 (hot dog v20, Mayo or sand? v5, Guess the 50-50 v4)
+
+The end card's line is now the milasmulligans.com wording, used exactly: "Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives." (Rob ruled on 21 Oct 2026: never "every dollar".) Only the end card changed. Internal test, not approved for posting.
+
+- **Source.** The 4:4:4 finals from October were not found on the T7 Shield, the Elements drive or Drive (searched 15 Nov 2026), so each reel was made from its CRF 18 4:2:0 copy (`MilasMulligans_<reel>_<v>_review.mp4`, on Elements in `MILAS MULLS '25/EDITS/THROWBACK REELS 2026`). There is no 4:4:4 master of v20 / v5 / v4.
+- **Method.** `End-9x16` re-rendered with the new line (`explainers/milas-mulligans/src/EndBeat.tsx`; Inter now loads with the render, and the cap stays on the same pixels as before). Each reel keeps its own frames up to card frame 18 (the dissolve is over by card frame 15 and the text starts at 24), and takes the new card from frame 19 on. The card's first frame sits at source frame N - 135. The card is converted from full to limited range and raised one level in Y and V so the background is the same value on both sides of the join. Picture re-encoded once (libx264 CRF 14, High, level 4.1, yuv420p, bt709); audio stream copied.
+- **Checks on the three new files.** Same frame count and length as before (658 / 829 / 1807 frames). Audio stream MD5 identical to the source file. Frames before the join against the source: 50.1 / 50.5 / 51.0 dB PSNR on average (lowest frame 46.8 / 45.5 / 46.0). Background YUV 223, 127, 129 on the three frames each side of the join. No black frames; every freeze starts inside the end card. -14.5 / -14.1 / -14.0 LUFS, true peak -1.4 / -2.0 / -1.9 dBFS (unchanged). Every third frame from 12 frames before the join to the end viewed, plus the last frame at full size. Metadata read back: comment "INTERNAL TEST v20 / v5 / v4 - not for posting", description with the proceeds line.
+- **Not checked.** The text is on screen for about 3.4 s (17 words). Nobody has watched it at speed to judge whether that is long enough to read.
+- **Review page.** 19 MB two-pass copies of the three files are on the review page, and the version chips are off it.
