@@ -1,0 +1,41 @@
+ANGLE: Everyone who has run or played a charity outing knows the one thing nobody controls is the weather. Four golfers at Mila's Mulligans 2025 said what the day felt like, and one of them said what they were there for. The reader is someone who was there, or wishes they had been.
+HATER TEST: "Throwback to a great day" says nothing. The opening is a golfer's own line, and the line worth sending is the one who expects to lose and plans to "keep the vibes up the whole entire time".
+VERSION: v4, 16 Nov 2026 (25.5 s body + 3 s photo ending, 28.5 s, 9:16). v4 = v3 with one change: the "Fantastic" and floral-shirt shots get light smoothing in place of v3's tripod lock (Rob, 16 Nov 2026: "you're adding hard stabilization?", then "light smoothing"). Before that, v3: v3 = v2 with new pictures only, same voices and timing (Rob, 16 Nov 2026: "we can use different b roll than the stuff i already used in another video", "no drone shots over them talking?"): drone shots from the 2026 tournament sit over parts of the talking, and the sizzle no longer uses the swing clips from the Countdown and Grab Your Foursome reels. The on-screen tag is now "THROWBACK · MILA'S MULLIGANS" with no year, because the pictures are from two years. History: v1 was one golfer, 10.6 s; Rob, 16 Nov 2026: "its only 10 seconds", "more sizzle reel after it", and yes to more voices. v2 = four golfers on the day, then a 7 s sizzle of swings, a putt and the carts rolling out with the course's own sound, then the photo ending. No music in the file: Rob chose an instrumental from Instagram's library added at posting. v4 is the internal final (Rob, 16 Nov 2026: "Looks good"). Not approved for posting: needs the client's OK and Rob's go per post.
+
+INSTAGRAM
+"I couldn't ask for a better day." ⛳️
+
+We asked the 2025 field at Whitetail Golf Club in Bath PA how the day was going. One golfer didn't expect to win and planned to "keep the vibes up the whole entire time."
+
+Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. 💚
+
+Were you out there? Tell us your best memory from the day, then send this to your foursome ⬇️ milasmulligans.com (link in bio)
+
+#MilasMulligans #CharityGolf #GolfFundraiser #BathPA #LehighValley
+Pinned comment: What's your best memory from the 2025 tournament?
+
+FACEBOOK (not connected to Metricool, posts by hand; no music on this version)
+"I couldn't ask for a better day." We asked the 2025 field at Whitetail Golf Club how the day was going. One golfer didn't expect to win and planned to "keep the vibes up the whole entire time."
+
+Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. Tell us your best memory from the day in the comments. milasmulligans.com
+
+MUSIC AT POSTING (Instagram only, through Metricool): an instrumental from Instagram's commercial library, audioVolume 10, videoVolume 100. The track is not picked; Rob picks or approves it.
+
+SOURCES (internal, don't post)
+The voices and the ground-level shots are Tony's and the second camera's 2025 files on Elements, MILAS MULLS '25/VIDS. The drone shots are from the 2026 tournament (Elements, MILAS MULLS '26/TOURNEY/VIDS/DRONE), the only drone footage on file; that day was overcast, so only shots that look down at the course are used. Every burned-in caption word is from these lines; faster-whisper small.en and medium.en agree on the words (16 Nov 2026).
+- "I couldn't ask for a better day. You know, I think it's supposed to be rainy tomorrow, so it's been pleasant, you know. Can't ask for better weather.": "Jasmin bf interview.MP4" 5.4 to 12.5 s, the golfer in the grey polo.
+- "Fantastic.": "Interview 2.MP4" 6.9 to 7.5 s, the golfer in the navy polo, answering "how are you feeling today".
+- "It's a beautiful day. I'm feeling actually very good, very loose.": "Angel interview.MP4" 53.6 to 57.0 s, the golfer in the floral shirt.
+- "Do you think we're going to be the winners here today?" (the interviewer) and "No, but we'll keep the vibes up the whole entire time. That's all we're here for, really." (the golfer in the white polo; the mic is at his mouth for the whole answer): "Mito Interview.MP4" 30.6 to 37.0 s.
+- "We asked the 2025 field ... how the day was going": the interviewers' questions in those clips ("how are the conditions here today", "how are you feeling today").
+- Drone shots over the talking (2026): under the first golfer, DJI_0359 6.0 s (the carts lined up by the pavilion), DJI_0363 8.5 s (a tee box), DJI_0370 104 s (the ponds); under "It's a beautiful day", DJI_0370 226 s (a fairway and pond); under the interviewer's question, DJI_0362 60 s (the carts and the field).
+- Sizzle: "Cart Driving.MP4" 88.0 s (2025); second-camera clips 00077, 00032, 00089, 00074, 00092, 00019 (.MTS, 2025), each cut around the moment the club meets the ball; drone DJI_0361 23 s and DJI_0368 5 s (2026). Not used because the earlier reels show them or a lookalike: 00057, 00069, 00021, 00101, 00044, 00100, 00061, 00103.
+- "THROWBACK · MILA'S MULLIGANS" tag: no year, because the voices are 2025 and the drone shots are 2026.
+- Whitetail Golf Club, Bath PA: approved "one week out" flyer. The interviewers say "Whitetail Golf Course"; those words are not in the reel.
+- Proceeds line: the milasmulligans.com wording, used exactly (Rob, 21 Oct 2026).
+- Ending photo: "mila golf 2025-5.jpg" (the course at sunrise, nobody in it), with the client's logo file, scaled and placed only.
+- Left out on purpose: every name (file names are not a source for a name; an interviewer says a first name in a part that is not in this cut), the cart interview ("Feeling good", camera too shaky), any amount raised, player count, next year's date, any "register" line.
+
+ON CAMERA: four golfers who speak (adults), the interviewer's arm and microphone and part of her back, two more golfers and a man by a cart in the group shot, people in carts, six golfers hitting or putting, and people in the background, at the 2025 tournament, filmed by Tony and the second camera; and, seen from the drone at the 2026 tournament, people by the carts, golfers on a tee box and one golfer on a fairway, too small to recognise in most shots. One of the event's own signs shows in the background of the last sizzle shot. No children seen in the ground-level frames checked; the drone shots are too far away to tell ages. Release status: not checked. Ask the client whether their event sign-up covers social video.
+
+APPROVAL: Couldn't ask for a better day v4 9:16 · internal final (Rob, 16 Nov 2026: "Looks good") · no calendar slot (the next open slot after 30 Dec 2026 is Wed 13 Jan 2027) · client OK: ________

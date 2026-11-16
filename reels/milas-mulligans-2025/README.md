@@ -183,3 +183,88 @@ Rob, 16 Nov 2026, on the white end card: "far too long and like ... not good? sh
 - **Method.** Built from the same CRF 18 4:2:0 copies as v20 / v5 / v4 (hot dog v19, Mayo v4, Guess v3), not from v20 / v5 / v4. Each reel keeps its frames up to N - 132, the last frame with none of the old white card in it, and dissolves into the ending over the 6 frames before that (0.2 s). So the last live shot is about 0.2 s shorter than before, and the reels are 47 frames (1.57 s) shorter: 20.4 s, 26.1 s, 58.7 s. Picture re-encoded once (CRF 14); audio stream copied and cut to the new length.
 - **Checks on the three new files.** 611 / 782 / 1760 frames as planned. Decoded audio identical to the source over the kept length. Frames before the ending against the source: 50.0 / 50.3 / 50.6 dB PSNR on average. No black frames and no freeze anywhere (the push-in keeps the ending moving). Silence starts at 17.65 / 23.42 / 55.26 s as before. -14.5 / -14.1 / -14.0 LUFS, true peak -1.4 / -2.0 / -1.9 dBFS. Every second frame from 10 frames before the ending to the end viewed on each reel. Metadata read back: "INTERNAL TEST v21 / v6 / v5 - not for posting".
 - **Not checked.** Nobody has watched the three at speed yet. Release status for the two golfers in photo 47 is not checked.
+
+# Reel 4: "Couldn't ask for a better day"
+
+Internal test v1, 16 Nov 2026. Not approved by Rob yet. Not approved for posting: needs the client's OK and Rob's go per post. Rob's go on the job sheet, 16 Nov 2026; music "decide later", so v1 has none.
+
+A 10.6 s vertical reel (7.6 s body + the 3 s photo ending). One golfer answers the weather question: on camera for "I couldn't ask for a better day", three steady course shots while he goes on ("You know, I think it's supposed to be rainy tomorrow, so it's been pleasant"), and back on him for "you know. Can't ask for better weather." His voice runs through all of it. House captions and the throwback tag, no scoreboard, no sound effects.
+
+- **Voice.** `Jasmin bf interview.MP4` 5.12 to 12.70 s. The in point is the level dip before "I couldn't" (5.10 s); the out point is in the quiet after "weather" (the word's tail ends about 12.55, the interviewer's next word is at 13.14). The interviewer's question and replies are not used. small.en and medium.en agree on every word.
+- **Course shots** (camera speed measured by phase correlation at 10 fps, source px/s): `Action shots.MP4` 23.6 s, empty cart path and a tree (15); `Action shots 2.MP4` 10.0 s, one golfer hitting in the distance (6); `Action shots.MP4` 9.0 s, a cart on the fairway (14), cropped right of a golfer who stands at the frame's left edge. His two on-camera shots measure 16 and 13.
+- **Left out.** The pavilion clips (`DJI_...`): children are in them. Any name on screen.
+- **Ending.** `EndPhoto-9x16` with `mila golf 2025-5.jpg` (the course at sunrise, nobody in it), dim 0.5.
+
+## Build
+
+```
+# in a work folder with fonts/InterDisplay-Black.ttf and fonts/InterDisplay-Bold.ttf (Inter 4.1, OFL; converted from the inter-ui npm package's woff2 with fontTools)
+python build_reel4.py <work> v1      # -> body_v1_916.mov, timeline_v1.json, captions_v1.ass
+npx remotion render src/index.tsx EndPhoto-9x16 <work>/end_D.mp4 --crf=12 --props='{"photo":"photo_5.jpg","dim":0.5}'
+python finish_reel4.py <work> v1     # -> MilasMulligans_BetterDay_v1_review.mp4 (H.264 High 4:2:0), -14 LUFS, metadata, copyright blank
+```
+
+## Done means (v1)
+
+- [x] 317 frames, 10.57 s, 1080x1920, 30 fps, H.264 High yuv420p + AAC 48 kHz.
+- [x] Frames every 1/6 s across the whole file viewed (64 frames): the speaker's whole face in frame on both of his shots, every caption on the word it names, no caption or tag over a face, the ending's logo and link clear.
+- [x] No black frames, no frozen stretch of 0.2 s or more anywhere. Silence of 0.4 s or more starts at 7.58 s, the ending.
+- [x] -14.2 LUFS integrated, true peak -1.9 dBFS.
+- [x] Metadata read back: comment "INTERNAL TEST v1 - not for posting", description with the proceeds line, no copyright tag.
+- [x] Sidecar written: `copy/MilasMulligans_Throwback2025_BetterDay_9x16_INTERNALTEST_RobatoMedia_SOCIAL_COPY.txt`.
+- [ ] Lip sync on his second shot is not measured. Picture and voice come from the same file at the same source time, so any offset is under one 60 fps frame.
+- [ ] Nobody has watched it at speed. Rob to say music or no music.
+- [ ] Release status of the people on camera is not checked.
+
+## Reel 4 v2, 16 Nov 2026 (replaces v1)
+
+Rob on v1, 16 Nov 2026: "cool but its only 10 seconds", "more sizzle reel after it", and yes to two or three more voices. Sound under the sizzle: the course's own sound in the file, an Instagram-library instrumental added at posting (his pick from three options).
+
+28.5 s: the grey-polo golfer's line as in v1 (7.6 s); "Fantastic." (0.8 s); "It's a beautiful day. I'm feeling actually very good, very loose." (3.5 s); the interviewer's "Do you think we're going to be the winners here today?" and "No, but we'll keep the vibes up the whole entire time. That's all we're here for, really." (6.4 s); a 7.2 s sizzle of nine 0.8 s shots; the 3 s photo ending. Captions on every spoken word, the interviewer's question included. The tag shows over the first shot only.
+
+- **Who speaks.** `Interview 2.MP4`: the golfer in the navy polo, mic at his mouth. `Angel interview.MP4`: the golfer in the floral shirt; he bends to the mic on "It's a beautiful day", so his cap covers his eyes for that sentence. `Mito Interview.MP4`: the golfer in the white polo; the interviewer holds the mic at his mouth through the whole answer (full-resolution frames at 33.7 to 36.8 s).
+- **In and out points** from the level at the start and end of each turn, with a medium.en transcription for word times. The interviewer's question starts at "Do" (30.60); her previous sentence ends at 30.56 with no real gap, so the first 25 ms fades in.
+- **Stabilized** (vidstab tripod mode, 6% punch-in, as in reel 2): the "Fantastic" cut (camera 114 px/s) and the floral-shirt cut (one bump of 184 px/s). The group shot is 19 px/s and is left as shot.
+- **Dropped.** `Hot Dog Interview.MP4` 51 to 53 s ("Great. Feeling good."): camera 137 px/s on average.
+- **Sizzle.** One shot of the carts rolling out (`Cart Driving.MP4` 88.0 s, tripod, 15 px/s) and eight second-camera clips (00057, 00069, 00021, 00077, 00032, 00101, 00074, 00019; 1080i, deinterlaced with yadif), each from 0.45 s before the club meets the ball to 0.35 s after. That moment is the sharpest peak in the clip's own sound; frames at -0.5 to +0.3 s around it were viewed for each. Camera 2 to 20 px/s on all eight. Clips looked at and not used for camera speed: 00033, 00041, 00044, 00072, 00027, 00085.
+- **Sound.** Each voice's louder half is set to -20 dBFS and each sizzle shot's loudest 50 ms to -23 dBFS (never lifted more than 6 dB) before the two-pass -14 LUFS step. The first pass at -18 dBFS put the true peak at -0.3 dBFS on the club hits; the limiter is at -4 dBFS for this reel.
+
+Done means (v2):
+- [x] 854 frames, 28.47 s, 1080x1920, 30 fps, H.264 High yuv420p (CRF 18, 61 MB) + AAC 48 kHz.
+- [x] Frames every 0.25 s across the whole file viewed (114 frames), plus one frame per voice and per sizzle shot at 360x640: every speaker in frame on their words, captions on the right words and clear of faces, each sizzle shot shows the swing or putt it was cut for.
+- [x] No black frames, no frozen stretch of 0.2 s or more. Silence of 0.4 s or more starts at 25.50 s, the ending.
+- [x] -14.5 LUFS integrated, true peak -3.2 dBFS.
+- [x] Metadata read back: "INTERNAL TEST v2 - not for posting", no copyright tag.
+- [x] Sidecar rewritten for v2.
+- [ ] Nobody has watched or listened at speed: the sizzle's pacing, the level of the club hits against the voices, and lip sync are unjudged. The frame check above was made on the render before the last two sound-only changes; the picture cuts did not change.
+- [ ] The Instagram track is not picked.
+- [ ] Release status of the people on camera is not checked.
+
+## Reel 4 v3, 16 Nov 2026 (replaces v2)
+
+Rob said "Looks good" to v2, then: "we can use different b roll than the stuff i already used in another video" and "no drone shots over them talking?". v3 changes pictures only; the voices, captions and timing are v2's. Not yet approved by Rob.
+
+- **Drone.** The only drone footage on file is from the 2026 tournament (`MILAS MULLS '26/TOURNEY/VIDS/DRONE`, DJI_0358 to 0379, 4K and 2.7K, no sound). That day was overcast and 2025 was blue sky, so only shots that look down at the course are used: DJI_0359 6.0 s, DJI_0363 8.5 s and DJI_0370 104 s under the first golfer; DJI_0370 226 s under "It's a beautiful day" (it also covers the stretch where his cap hides his eyes); DJI_0362 60 s under the interviewer's question; DJI_0361 23 s and DJI_0368 5 s in the sizzle. Not used: every drone shot with sky in it (0364, 0365, 0367, 0371, 0374), the pavilion crowd shots (0375 to 0379: sponsor banners and faces), and DJI_0372 (small figures on a green who may be children).
+- **Year.** The voices and ground shots are 2025 and the drone shots are 2026, so the tag reads "THROWBACK · MILA'S MULLIGANS" with no year. The caption still says the 2025 field was asked, which is true of the voices.
+- **Already used.** Rob's Countdown and Grab Your Foursome reels (`_R0BATO Footage Index` on Elements) show the white-shorts swing (00057), a navy golfer with the ball in the foreground (00069), swings in blue and light blue, a group on a green and the blue flag. The sizzle no longer uses 00057, 00069, 00021 or 00101; it uses 00077, 00032, 00089, 00074, 00092 and 00019, the cart shot and the two drone shots. The three ground course shots under the first golfer in v1 and v2 (`Action shots`, `Action shots 2`) are replaced by drone shots.
+- **Sound under the drone sizzle shots:** the drone has no sound, so those two shots carry crowd sound from `Cart Driving.MP4` (94 s and 97 s) at the cart shot's level.
+- `crop_for` in `build_reel4.py` makes the 9:16 crop for any source size; crop centres for the drone files are fractions of the width.
+
+Done means (v3):
+- [x] 854 frames, 28.47 s, 1080x1920, 30 fps, H.264 High yuv420p (CRF 18, 68 MB) + AAC 48 kHz.
+- [x] Frames every 0.25 s across the whole file viewed (114 frames): speakers in frame on their on-camera words, captions on the right words, no sky in any drone shot, every sizzle shot shows what it was cut for.
+- [x] No black frames, no frozen stretch of 0.2 s or more. Silence of 0.4 s or more starts at 25.49 s, the ending.
+- [x] -14.4 LUFS integrated, true peak -3.9 dBFS.
+- [ ] Nobody has watched or listened at speed.
+- [ ] Sidecar updated for v3; the Instagram track is not picked; release status is not checked.
+
+## Reel 4 v4, 16 Nov 2026 (replaces v3)
+
+Internal final: Rob, 16 Nov 2026, "Looks good" on v4. Not approved for posting. On the review page as the fourth reel, with no date.
+
+Rob on v3: "you're adding hard stabilization?", then "light smoothing". One change: the two stabilized cuts ("Fantastic" and the floral-shirt answer) no longer lock to their first frame. `stabilize` now runs vidstab without tripod mode, `smoothing=20` (about a third of a second each side at 60 fps), with a 4% punch-in (was 6%). The handheld movement stays; only the jitter and the bump are taken down. Everything else is v3.
+
+- [x] 854 frames, 28.47 s; no black frames, no frozen stretch; -14.4 LUFS, true peak -3.9 dBFS.
+- [x] Frames at 6 per second through both smoothed cuts viewed: the speaker stays in frame, no black edge shows, the background drifts the way the camera did.
+- [ ] How the smoothing feels in motion is not judged: nobody has watched it at speed. A motion measurement on the finished file was tried and thrown out (captions and cut points made the numbers meaningless).
+- Lesson: on Rob's handheld interview footage, do not lock a shot to a tripod. Use light smoothing or leave it as shot.
