@@ -1,0 +1,39 @@
+ANGLE: People who played have only seen the day from the cart path. This is the same day from the air: the carts lined up, the first tee shots, the course laid out. The reader is someone who was there and wants to spot their cart.
+HATER TEST: "Check out our drone footage" describes the camera, not the day. The caption opens on what people will look for in it, and the title on screen is only the event and the date.
+VERSION: v7, 16 Nov 2026 (28 s of drone shots + 3 s logo ending, 31.0 s, 9:16). Twelve shots from the 2026 tournament drone. Rob's notes on the way here, all 16 Nov 2026: no "FROM ABOVE" in the title; add sound (the drone records none); "why bagpipes in the background" (v2's sound bed had them); "dont include me looking at the drone controller", "15 seconds in literally holding it in the middle" (DJI_0374, now out); "fade out of the cart sounds and just go to the sounds of the course"; "at least 30 seconds"; "did you HEAR the sounds? there's a beep and a hammer" (v4's course sound), then "i can hear myself breathing" (v5's sound, from his own handheld clip), "sounds like the ocean" (a synthesized bed), and "A GOLF COURSE. FIND SOUNDS. FROM OUTSIDE." v6 = the same picture with a real golf course field recording from Freesound, the stretch Rob picked by ear. v7 puts the carts driving away back under the first three shots, fading into that recording (Rob on v6, which had dropped them: "the golf carts driving away was good to start it i told you"). v7 is the internal final (Rob, 16 Nov 2026: "Looks good"). Not approved for posting: needs the client's OK and Rob's go per post.
+
+INSTAGRAM
+Find your cart. ⛳️
+
+Mila's Mulligans 2026 at Whitetail Golf Club in Bath PA, on August 22.
+
+Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. 💚
+
+Spot yourself? Tag your foursome, then send this to them ⬇️ milasmulligans.com (link in bio)
+
+Sound: klankbeeld / freesound.org
+
+#MilasMulligans #CharityGolf #GolfFundraiser #BathPA #LehighValley
+Pinned comment: Who can spot their cart?
+
+FACEBOOK (not connected to Metricool, posts by hand; plays with the quiet crowd sound only)
+Find your cart. Mila's Mulligans 2026 at Whitetail Golf Club, on August 22.
+
+Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives. Tag your foursome if you spot yourself. milasmulligans.com
+
+Sound: klankbeeld / freesound.org
+
+MUSIC AT POSTING: the file carries a quiet real course ambience (about -28 LUFS). On Instagram, an instrumental from Instagram's commercial library can still go on top through Metricool; the track is not picked, Rob picks or approves it. The "Sound: klankbeeld / freesound.org" credit line stays in the caption on every platform: the recording's licence requires it.
+
+SOURCES (internal, don't post)
+- Every shot: the 2026 tournament drone files on Elements, MILAS MULLS '26/TOURNEY/VIDS/DRONE. In order: DJI_0360 9.0 s, DJI_0365 9.9 s, DJI_0366 84.0 s, DJI_0363 51.0 s, DJI_0367 5.0 s, DJI_0370 167.0 s, DJI_0371 4.0 s, DJI_0370 76.0 s, DJI_0367 22.0 s, DJI_0370 46.0 s, DJI_0371 15.2 s, DJI_0360 17.0 s (build_above.py says what each shows). The ending is a still from DJI_0360 19.6 s with the client's logo file, scaled and placed only.
+- Sound, first 7 s: the carts driving away, Sony clip C0154.MP4 20 to 28 s (Elements, MILAS MULLS '26/TOURNEY/VIDS/SONY), 22 Aug 2026, with a 1.5 s crossfade into the course recording.
+- Sound, the rest: "Golf course NL Oct 191019_0079" by klankbeeld, https://freesound.org/people/klankbeeld/sounds/488938/ , Creative Commons Attribution 4.0 (credit to klankbeeld and freesound.org required; not to be resold as stock). A field recording of a golf course in the Netherlands, not of Whitetail. Used: 10:28 to 10:59, the stretch Rob picked by ear on 16 Nov 2026 from two samples. Rob downloaded the file himself; it is on Elements at MILA'S MULLIGANS/488938__klankbeeld__golf-course-nl-oct-191019_0079.ogg. Whole reel -27.7 LUFS, true peak -13.2 dBFS.
+- "AUG 22, 2026 · WHITETAIL GOLF CLUB" on screen, and "August 22", "Whitetail Golf Club in Bath PA" in the caption: the approved "one week out" flyer.
+- The date: the drone files carry 22 Aug 2026 as their recorded date (DJI_0360 11:43, DJI_0371 15:46, time zone not stated), so the caption gives the date and no time of day.
+- Proceeds line: the milasmulligans.com wording, used exactly (Rob, 21 Oct 2026).
+- Left out on purpose: DJI_0374 (Rob is in the middle of it with the drone controller), DJI_0370 at 198 s (a man in a cap right under the drone), DJI_0371 at 28 s (two young women and a man on a green, ages unknown), the pavilion fly-through clips (sponsor banners and faces close up), DJI_0372 and DJI_0373 (small figures on a green who may be children), any amount raised, player count, next year's date, any "register" line.
+
+ON CAMERA: people by the carts and the pavilion, a man drinking from a red can beside the cart line (shot 2, bottom edge), two men in a cart close enough to recognise (shot 3), a golfer on a tee box, a group of four on a fairway, a golfer by a hole marker with two people at a cart, a golfer swinging, at the 2026 tournament, from the drone. Children: none seen close up; the wide shots are too far away to tell ages. Rob (the drone pilot) should be in none of them; only the DJI_0374 sighting is confirmed removed. Release status: not checked.
+
+APPROVAL: Mila's Mulligans 2026 drone reel v7 9:16 · internal final (Rob, 16 Nov 2026: "Looks good") · no calendar slot · client OK: ________

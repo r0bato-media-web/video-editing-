@@ -1,5 +1,5 @@
 {
- "note": "Proposed dates from the posting plan. Nothing posts until it's approved.",
+ "note": "Proposed dates from the posting plan. Nothing posts until it's approved. Posts without a date yet:",
  "items": [
   {
    "date": "2026-12-02",
@@ -28,6 +28,13 @@
    "reel": "better-day",
    "title": "Couldn't ask for a better day",
    "when": "Wed 13 Jan, 10 am · proposed"
+  },
+  {
+   "date": null,
+   "type": "reel",
+   "reel": "from-the-drone",
+   "title": "Mila's Mulligans 2026",
+   "when": "Date not set"
   }
  ]
 }

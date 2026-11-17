@@ -268,3 +268,80 @@ Rob on v3: "you're adding hard stabilization?", then "light smoothing". One chan
 - [x] Frames at 6 per second through both smoothed cuts viewed: the speaker stays in frame, no black edge shows, the background drifts the way the camera did.
 - [ ] How the smoothing feels in motion is not judged: nobody has watched it at speed. A motion measurement on the finished file was tried and thrown out (captions and cut points made the numbers meaningless).
 - Lesson: on Rob's handheld interview footage, do not lock a shot to a tripod. Use light smoothing or leave it as shot.
+
+# Drone reel, Mila's Mulligans 2026 (v1, 16 Nov 2026)
+
+Rob picked four more builds on 16 Nov 2026 (through the years, 2026 foursomes carousel, a drone reel, a 2022 reel). This is the drone reel. Internal test, not approved by Rob yet.
+
+21.7 s, 9:16: eight 2.33 s shots from the 2026 drone files (`build_above.py` lists each with what it shows), a title on the first shot ("MILA'S MULLIGANS 2026" with the date and course above it), then `EndPhoto-9x16` over a still from DJI_0371. No sound in the file; the drone records none.
+
+- Rob on the first title, "MILA'S MULLIGANS / FROM ABOVE": "dont need to say FROM ABOVE", "THEY CAN SEE ITS FROM ABOVE". Lesson: do not caption what the picture already shows.
+- The first render's title ran off both edges at 124 px; it is 94 px. The second shot first used DJI_0365 at 3.0 s, where the drone swings fast; it now uses 8.6 s.
+- Not used: DJI_0372 and 0373 (small figures who may be children), 0375 to 0379 (sponsor banners, faces), 0359 and 0370 (already in reel 4).
+- Checks: 650 frames, H.264 High yuv420p; no black frames, no frozen stretch; frames at 3 per second across the whole file viewed, plus the title frame at 405x720 after each title change. Not checked: nobody has watched it at speed; "the morning" in the caption is not confirmed from the clips' recorded times.
+
+Build: `python build_above.py <work> v1` in a folder with `fonts/` and `end_above.mp4` (`npx remotion render src/index.tsx EndPhoto-9x16 end_above.mp4 --crf=12 --props='{"photo":"photo_above.jpg","dim":0.55}'`).
+
+## Drone reel v2, 16 Nov 2026 (replaces v1): sound added
+
+The research run of 16 Nov 2026 confirmed Instagram's own ranking post (31 May 2023): reels published without audio are made less visible. Rob said yes to adding course sound. v2 lays a crowd bed under the whole reel; the picture is v1's.
+
+- **Source.** Sony clip `C0176.MP4` (2026, under the pavilion at the raffle tables), 0.6 to 22.3 s. Of the 2026 ground clips checked (five Osmo, six Sony), it is the only stretch of 20 s or more with steady sound and no speech picked up by faster-whisper small.en. Several Osmo clips have swearing close to the mic and were not used.
+- **Level.** The stretch measures -34.7 LUFS; +8.7 dB puts it at -26.1 LUFS, true peak -5.9 dBFS, with a 0.4 s fade in and a 1 s fade out. Two wrong tries first: +14 dB from a misread loudness figure (-15 LUFS), then `alimiter` with its default auto-level on, which lifted the bed to -20 LUFS. `level=false` is set now.
+- [x] 650 frames, 21.67 s; no black frames, no frozen stretch, no silent stretch of 0.4 s or more.
+- [ ] Nobody has listened to it. The check for speech is a transcription model, not ears: quiet words under the murmur could be there.
+- Found in that clip: the tournament polo is embroidered "MILA'S MULLIGANS GOLF TOURNAMENT · EST. 2022". That is a source for 2022 as the first year.
+
+## Drone reel v3, 16 Nov 2026 (replaces v2)
+
+Rob on v2: "why bagpipes in the background as your pick?" and "dont include me looking at the drone controller".
+
+- **Bagpipes.** v2's bed (Sony C0176, the pavilion) has bagpipes in it. The speech check found no words and I took that as clean; a transcription model does not hear music. A tone check afterwards agrees with Rob (spectral flatness 0.12 against 0.26 to 0.29 for the cart clip). New bed: Sony C0154 12.0 to 33.7 s, carts rolling out, +12.5 dB to -26.3 LUFS, true peak -11.6 dBFS. Lesson: check a sound bed for music as well as speech, and say plainly when nobody has listened.
+- **Rob in frame.** Not resolved. Shot 2 now starts at 9.9 s of DJI_0365 (a man stood at the bottom right before that) and shot 3 uses DJI_0366 at 84 s (the old stretch also had a child by a pavilion post). Full-resolution zooms of the people in shot 2 show nobody holding a controller, so which person is Rob, and in which shot, is still unknown. Ask Rob for the time.
+- [x] 650 frames; no black, frozen or silent stretch.
+- [ ] Nobody has listened to the new bed.
+
+## Drone reel v4, 16 Nov 2026 (replaces v3)
+
+Rob on v3: "15 seconds in literally holding it in the middle" (he is in DJI_0374 with the drone controller; v3 had cut the wrong shot on a guess), "we can also fade out of the cart sounds and just go to the sounds of the course", "we can also make this at least 30 secvonds?".
+
+- 31.0 s: twelve 2.33 s shots (list in `build_above.py`) and the 3 s ending over a still from DJI_0360. DJI_0374 is out entirely. Also kept out: DJI_0370 at 198 s (a man in a cap right under the drone) and DJI_0371 at 28 s (two young women and a man on a green; it was v1 to v3's last shot and ending still).
+- Sound: `make_bed` builds carts (Sony C0154) under the first three shots, a 1.5 s crossfade, then a putting green (Osmo 0020, two word-free stretches joined with a 1 s crossfade). Measured in the finished file: 0 to 7 s -24.7 LUFS, 9 to 30 s -28.5 LUFS, whole file -27.0 LUFS, true peak -4.5 dBFS.
+- [x] 930 frames; no black, frozen or silent stretch; frames at 2 per second across the file viewed, the ending viewed again after the last-shot swap.
+- [ ] Nobody has listened. The spectral "tone check" used on v2 is not a music detector (the Osmo stretches score lower than the bagpipe clip, probably from wind), so the course sound is unverified for music.
+- Lesson: when Rob says he is in a shot, ask which second before cutting. The pilot shows up where the drone flies low near its take-off point.
+
+## Drone reel v5, 16 Nov 2026 (replaces v4): sound picked by Rob's ear
+
+Rob on v4: "dude did you HEAR the sounds? there's a beep and a hammer wtf lol thats not a golf course calm". Claude cannot hear audio. v2's bed had bagpipes and v4's had a beep and a hammer; both were picked from a speech check and level numbers.
+
+- **How the sound was picked this time.** Every 2026 ground clip was scanned in 50 ms slices for hits (8 dB over the local level) and single-tone bursts (38 dB over the rest of the spectrum; the first threshold, 22 dB, flagged nearly everything). Six stretches of 6 s or more passed. Four were exported as mp3 files (`DRONE REEL 2026/sound options`) and sent to Rob, who picked B.
+- **Bed.** `make_bed`: Sony C0154 20 to 28 s (carts, candidate D) under the first three shots, a 1.5 s crossfade, then Osmo 0039 5.6 to 13.3 s (a tee, candidate B) four times with 1 s crossfades. -28.0 LUFS, true peak -10.5 dBFS.
+- **A build that silently did nothing.** The first v5 render had v4's sound: an earlier patch had left a second, older `make_bed` lower in the file, and Python used that one. Caught because the loudness numbers matched v4 to the decimal; confirmed with an audio MD5 (identical) and fixed. The check now used: cross-correlate the source clip against the finished file (B found at 7.91 s, match 0.99; D at 1.01 s, match 0.97).
+- [x] 930 frames; no black, frozen or silent stretch. Picture is v4's.
+- [ ] Nobody has heard the loop joins or clip D under the carts.
+- Lesson: never choose a sound bed without a person listening. Send candidates first.
+
+## Drone reel v6, 16 Nov 2026 (replaces v5): a real golf course recording from outside
+
+Rob on v5: "i can hear myself breathing" (the Osmo clip he had picked from an 8 s sample, boosted 19 dB and looped). Then on a synthesized breeze: "sounds like the ocean" (its slow gusts read as surf); on steady noise with chirps: "we're at a golf course"; on two stretches of Tony's 2025 clip: "Neither"; and "A GOLF COURSE. FIND SOUNDS. FROM OUTSIDE."
+
+- **Source.** "Golf course NL Oct 191019_0079" by klankbeeld on Freesound (https://freesound.org/people/klankbeeld/sounds/488938/), 37 min, CC BY 4.0, credit required. Rob downloaded it (the site needs a login). All 37 minutes were scanned in 50 ms slices; every 32 s window was ranked by hits, single-tone slices and level wobble; the six best were checked for speech (none). Rob heard two and picked 10:28.
+- **Bed.** One unbroken stretch, 628 to 659 s, +6.4 dB, under the whole reel. No cart sound at the start. -27.8 LUFS, true peak -14.5 dBFS.
+- **Verified in the file:** the source at 10:38 cross-correlates with the reel at 10.01 s (match 0.99), and the reel's sound no longer correlates with v5's.
+- **Caption.** "Sound: klankbeeld / freesound.org" is in the Instagram and Facebook copy. The licence requires it.
+- Ruled out: Higgsfield generation (0 credits on the account), Splice (musical loops only), the Trzciana binaural set (BY-NC-ND), ElevenLabs free clips (non-commercial on the free plan).
+- Lesson: for ambience, go to a purpose-made field recording first. Camera audio from handheld clips carries the operator, and Claude cannot hear what it picks, so Rob listens to every candidate before it is built in.
+- [ ] Rob has heard the 32 s sample, not the finished reel.
+
+## Drone reel v7, 16 Nov 2026 (replaces v6): the carts are back
+
+Rob on v6: "no you fucked it up now", "the golf carts driving away was good to start it i told you". v6 had dropped the cart sound on Claude's own assumption that every handheld clip was unusable; Rob had asked for carts first, then a fade to the course, and had never objected to the carts.
+
+- Bed: Sony C0154 20 to 28 s (+13.6 dB, as in v5) under the first three shots, a 1.5 s crossfade, then the Freesound recording from 10:28 (+6.4 dB) unbroken to the end. -27.7 LUFS, true peak -13.2 dBFS.
+- Verified in the file: carts source 21 s found at 1.01 s (match 0.97); course source 10:36 found at 14.51 s (match 0.99). Video stream identical to v6 (MD5).
+- A check run on v6 before Rob said what was wrong: the reel's sound matched the approved sample in timing, level shape and tone balance, about 2 dB quieter. So the fault was the missing carts, not the course sound.
+- The carts are quiet for their first two seconds (-38 dBFS per second against -30 for the course).
+- Lesson: when swapping one part of something Rob approved, keep every other part he asked for. Do not drop an element on an untested assumption.
+
+Drone reel v7 is the internal final: Rob, 16 Nov 2026, "Looks good". Not approved for posting.
