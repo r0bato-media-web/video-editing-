@@ -345,3 +345,12 @@ Rob on v6: "no you fucked it up now", "the golf carts driving away was good to s
 - Lesson: when swapping one part of something Rob approved, keep every other part he asked for. Do not drop an element on an untested assumption.
 
 Drone reel v7 is the internal final: Rob, 16 Nov 2026, "Looks good". Not approved for posting.
+
+# Candids 2026 carousel (v1, 16 Nov 2026)
+
+Rob picked a "2026 foursomes carousel". The live Instagram check stopped it: the 30 Aug 2026 Thank You carousel (instagram.com/p/DcrNAeqkW0O) already shows the posed foursomes from the GOLFERS folder. He agreed to unposted candids instead, said "we can re-treat the pictures", took all 18 candidates, and approved the navy two-photo look ("Looks good").
+
+- Ten slides, 1080x1350: nine with two photos on the flyer navy (#043375), one with the logo and the link. Photo numbers per slide and the full repeat check are in the copy file.
+- Repeat check: Recap carousel (30 photos, matched by image hash), all 15 slides of the live Thank You post, the posted 2026 Tournament reel. Not checked: Facebook, Metricool's queue.
+- Lesson: check the live account before building a photo carousel. The handoff said nothing had been posted; the account had posted twice since the event.
+- Files: Elements `MILAS MULLS '26/TOURNEY/EDITS/CANDIDS CAROUSEL 2026/02_Candids2026_v1`, copied to `READY TO POST - 2026 Tournament` and Drive `'26 MILAS MULLIGANS/CAROUSELS`.
