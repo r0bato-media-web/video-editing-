@@ -3,3 +3,6 @@ out/
 *.mp4
 *.mov
 __pycache__/
+
+# client photos and logo for the end card render (kept on the drive, not in git)
+explainers/milas-mulligans/public/

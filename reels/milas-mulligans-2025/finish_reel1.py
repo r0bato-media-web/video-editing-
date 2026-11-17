@@ -4,7 +4,7 @@ import json, os, subprocess, sys
 D, V = sys.argv[1], sys.argv[2]
 META = {'title': 'Is a hot dog a sandwich?', 'artist': 'Rob Lopez / Robato Media',
         'comment': f'INTERNAL TEST {V} - not for posting. robatomedia.com | r0bato@robatomedia.com | (570) 664-0550',
-        'description': "Throwback to Mila's Mulligans 2025: golfers vote on whether a hot dog is a sandwich. Every dollar goes to the Arian Walker Hannon-Kohler Memorial Scholarship.",
+        'description': "Throwback to Mila's Mulligans 2025: golfers vote on whether a hot dog is a sandwich. Proceeds from the tournament help fund the Arian Walker Hannon-Kohler Memorial Scholarship and other charitable initiatives.",
         'keywords': "Mila's Mulligans, charity golf tournament, golf fundraiser, Whitetail Golf Club, Bath PA, Lehigh Valley, throwback, hot dog sandwich, MilasMulligans, CharityGolf, GolfFundraiser, LehighValley, BathPA"}
 for sh, tag, pw, ph in (('916', '9x16', 540, 960),):  # vertical only (Rob, 14 Oct 2026)
     body, end = os.path.join(D, f'body_{V}_{sh}.mp4'), os.path.join(D, f'end_{tag}.mp4')
@@ -33,6 +33,7 @@ for sh, tag, pw, ph in (('916', '9x16', 540, 960),):  # vertical only (Rob, 14 O
                     '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart'] + md + [final], check=True)
     prev = os.path.join(D, 'previews', f'{name}_{V}_preview.mp4')
     subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', final, '-vf', f'scale={pw}:{ph}:flags=lanczos', '-c:v', 'libx264',
-                    '-crf', '23', '-preset', 'medium', '-c:a', 'copy', '-movflags', '+faststart'] + md + [prev], check=True)
+                    '-profile:v', 'high', '-level', '4.1', '-pix_fmt', 'yuv420p',  # delivery copy: 4:2:0 so iPhones and Safari play it (Rob, 16 Oct 2026); 4:4:4 is for masters only
+                '-crf', '23', '-preset', 'medium', '-c:a', 'copy', '-movflags', '+faststart'] + md + [prev], check=True)
     os.remove(joined)
     print(final); print(prev)

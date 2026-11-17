@@ -1,0 +1,40 @@
+{
+ "note": "Proposed dates from the posting plan. Nothing posts until it's approved. Posts without a date yet:",
+ "items": [
+  {
+   "date": "2026-12-02",
+   "type": "reel",
+   "reel": "hot-dog",
+   "title": "Is a hot dog a sandwich?",
+   "when": "Wed 2 Dec, 10 am · proposed"
+  },
+  {
+   "date": "2026-12-16",
+   "type": "reel",
+   "reel": "mayo-or-sand",
+   "title": "Mayo or sand?",
+   "when": "Wed 16 Dec, 10 am · proposed"
+  },
+  {
+   "date": "2026-12-30",
+   "type": "reel",
+   "reel": "guess-the-50-50",
+   "title": "Guess the 50-50",
+   "when": "Wed 30 Dec, 10 am · proposed"
+  },
+  {
+   "date": "2027-01-13",
+   "type": "reel",
+   "reel": "better-day",
+   "title": "Couldn't ask for a better day",
+   "when": "Wed 13 Jan, 10 am · proposed"
+  },
+  {
+   "date": null,
+   "type": "reel",
+   "reel": "from-the-drone",
+   "title": "Mila's Mulligans 2026",
+   "when": "Date not set"
+  }
+ ]
+}
